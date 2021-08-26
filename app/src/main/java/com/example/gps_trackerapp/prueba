@@ -1,0 +1,106 @@
+package com.example.imhere;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnEnviar;
+    TextView tvUbicacion;
+    TextView numero2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        tvUbicacion = (TextView) findViewById(R.id.tvUbicacion);
+        numero2 = (TextView) findViewById(R.id.numero2);
+        btnEnviar = (Button) findViewById(R.id.button);
+        if (ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                MainActivity.this, Manifest
+                        .permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]
+                    {Manifest.permission.SEND_SMS,}, 1000);
+        } else {
+        }
+        ;
+
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            String mensajeUbicacion = "";
+            @Override
+
+            public void onClick(View view) {
+                enviarMensaje("");
+                LocationManager locationManager = (LocationManager) MainActivity.this.getSystemService(Context.LOCATION_SERVICE);
+
+
+                LocationListener locationListener = new LocationListener() {
+                    public void onLocationChanged(Location location) {
+                        mensajeUbicacion = "Latitud: " + location.getLatitude() + "\nLongitud: " + location.getLongitude();
+                        tvUbicacion.setText("" + location.getLatitude() + "" + location.getLongitude());
+                    }
+
+                    public void onStatusChanged(String provider, int status, Bundle extras) {
+                    }
+
+                    public void onProviderEnabled(String provider) {
+                    }
+
+                    public void onProviderDisabled(String provider) {
+                    }
+                };
+
+                int permissionCheck = ContextCompat.checkSelfPermission(MainActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            }
+
+            public void enviarMensaje (String view) {
+                String numero = numero2.getText().toString();
+                try {
+                    SmsManager sms = SmsManager.getDefault();
+                    sms.sendTextMessage(numero, null, mensajeUbicacion, null, null);
+                    Toast.makeText(getApplicationContext(), "Mensaje Enviado.", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Mensaje no enviado, datos incorrectos.", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+
+
+            }
+
+        }
+
+    }
+
+}
