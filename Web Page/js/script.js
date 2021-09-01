@@ -6,13 +6,6 @@ async function obtenerInformacion() {
     // (latitud, longitud, fecha, hora) 
 } 
 */
-/*
-document.getElementById("latitud_text").innerText = "Enrique";
-document.getElementById("longitud_text").innerText = "Alberto";
-document.getElementById("fecha_text").innerText = "Niebles";
-document.getElementById("hora_text").innerText = "Saco";
-*/
-
   
 import { createSocket } from 'dgram';
 

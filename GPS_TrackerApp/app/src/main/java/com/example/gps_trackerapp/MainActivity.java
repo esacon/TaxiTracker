@@ -20,11 +20,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView longitudeText;
     private Handler handler;
     private String destIP;
+    private MessageSenderUDP msg_udp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        handler = new Handler();
 
         // Grant permissions.
         requestPermissions();
@@ -36,55 +38,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void iniciar(View view) {
+        // Success notification.
+        Toast.makeText(getApplicationContext(), "La aplicación ha iniciado.", Toast.LENGTH_LONG).show();
         runnable.run();
     }
 
     public void detener(View view) {
+        // Success notification.
+        Toast.makeText(getApplicationContext(), "La aplicación se ha detenido.", Toast.LENGTH_LONG).show();
         handler.removeCallbacks(runnable);
     }
 
     public Runnable runnable = new Runnable() {
         public void run() {
-            sendMsg();
-            handler.postDelayed(runnable, 3000); // 3 seconds.
+            destIP = ipEditText.getText().toString().trim();
+
+            if (!destIP.equals("")) {
+                sendMsg();
+                handler.postDelayed(runnable, 5000); // 5 seconds.
+            } else {
+                Toast.makeText(getApplicationContext(), "Ha ocurrido un error, por favor revise los datos.", Toast.LENGTH_LONG).show();
+            }
         }
     };
 
     public void sendMsg() {
 
-        destIP = ipEditText.getText().toString().trim();
-
         // Grant permissions.
         requestPermissions();
 
         if (checkPermissions()) {
-            if (!destIP.equals("")) {
+            // Initialize UDP protocols.
+            msg_udp = new MessageSenderUDP(destIP, 8888);
+            // Initialize GPS.
+            GpsTracker gpsTracker = new GpsTracker(MainActivity.this);
 
-                GpsTracker gpsTracker = new GpsTracker(MainActivity.this);
-                // Initialize both protocols.
-                MessageSenderUDP msg_udp = new MessageSenderUDP(destIP, 8888);
+            if (gpsTracker.canGetLocation()) {
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
+                double timeStamp = gpsTracker.getTimeStamp();
 
-                if (gpsTracker.canGetLocation()) {
-                    double latitude = gpsTracker.getLatitude();
-                    double longitude = gpsTracker.getLongitude();
-                    double timeStamp = gpsTracker.getTimeStamp();
+                // Send Message.
+                @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s", latitude, longitude, timeStamp);
+                latitudeText.setText(String.format("Latitud:\t%s", latitude));
+                longitudeText.setText(String.format("Longitud:\t%s", longitude));
 
-                    // Send Message.
-                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s", latitude, longitude, timeStamp);
-                    latitudeText.setText(String.format("Latitud:\t%s", latitude));
-                    longitudeText.setText(String.format("Longitud:\t%s", longitude));
-
-                    // Send the message.
-                    msg_udp.execute(message);
-
-                    // Success notification.
-                    Toast.makeText(getApplicationContext(), "Mensaje enviado con éxito.", Toast.LENGTH_LONG).show();
-                } else {
-                    gpsTracker.showSettingsAlert();
-                }
+                // Send the message.
+                msg_udp.execute(message);
             } else {
-                Toast.makeText(getApplicationContext(), "Ha ocurrido un error, por favor revise los datos.", Toast.LENGTH_LONG).show();
+                gpsTracker.showSettingsAlert();
             }
+
         } else {
             Toast.makeText(getApplicationContext(), "Por favor acepte todos los permisos.", Toast.LENGTH_LONG).show();
             requestPermissions();
