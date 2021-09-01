@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,10 +16,10 @@ import androidx.core.app.ActivityCompat;
 public class MainActivity extends AppCompatActivity {
 
     private EditText ipEditText;
-    private EditText portUDPEditText;
-    private EditText portTCPEditText;
     private TextView latitudeText;
     private TextView longitudeText;
+    private Handler handler;
+    private String destIP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,40 +31,52 @@ public class MainActivity extends AppCompatActivity {
 
         // Get information for sending the message.
         ipEditText = findViewById(R.id.ipEditText);
-        portUDPEditText = findViewById(R.id.portUDPEditText);
-        portTCPEditText = findViewById(R.id.portTCPEditText);
         latitudeText = findViewById(R.id.latitudeText);
         longitudeText = findViewById(R.id.longitudeText);
     }
 
-    public void sendMsg(View view) {
+    public void iniciar(View view) {
+        runnable.run();
+    }
 
-        String destIP = ipEditText.getText().toString().trim();
-        int port_UDP = Integer.parseInt(portUDPEditText.getText().toString().trim());
-        int port_TCP = Integer.parseInt(portTCPEditText.getText().toString().trim());
+    public void detener(View view) {
+        handler.removeCallbacks(runnable);
+    }
+
+    public Runnable runnable = new Runnable() {
+        public void run() {
+            sendMsg();
+            handler.postDelayed(runnable, 3000); // 3 seconds.
+        }
+    };
+
+    public void sendMsg() {
+
+        destIP = ipEditText.getText().toString().trim();
 
         // Grant permissions.
         requestPermissions();
 
         if (checkPermissions()) {
-            if (!destIP.equals("") && port_UDP != 0 && port_TCP != 0) {
+            if (!destIP.equals("")) {
 
                 GpsTracker gpsTracker = new GpsTracker(MainActivity.this);
                 // Initialize both protocols.
-                MessageSenderTCP msg_tcp = new MessageSenderTCP(destIP, port_TCP);
-                MessageSenderUDP msg_udp = new MessageSenderUDP(destIP, port_UDP);
+                MessageSenderUDP msg_udp = new MessageSenderUDP(destIP, 8888);
 
                 if (gpsTracker.canGetLocation()) {
                     double latitude = gpsTracker.getLatitude();
                     double longitude = gpsTracker.getLongitude();
+                    double timeStamp = gpsTracker.getTimeStamp();
+
                     // Send Message.
-                    @SuppressLint("DefaultLocale") String url = String.format("https://www.google.com/maps/search/%f,%f", latitude, longitude);
-                    @SuppressLint("DefaultLocale") String message = String.format("¡Hola! Mis coordenadas son:\n\nLatitud: %.8f \nLongitud: %.8f \nGoogle Maps: %s", latitude, longitude, url);
+                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s", latitude, longitude, timeStamp);
                     latitudeText.setText(String.format("Latitud:\t%s", latitude));
                     longitudeText.setText(String.format("Longitud:\t%s", longitude));
+
                     // Send the message.
                     msg_udp.execute(message);
-                    msg_tcp.execute(message);
+
                     // Success notification.
                     Toast.makeText(getApplicationContext(), "Mensaje enviado con éxito.", Toast.LENGTH_LONG).show();
                 } else {

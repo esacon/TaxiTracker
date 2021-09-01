@@ -70,7 +70,7 @@ class GpsTracker extends Service implements LocationListener {
                         this.latitude = location.getLatitude();
                         this.longitude = location.getLongitude();
                         this.canGetLocation = true;
-                        this.timeStamp = location.getElapsedRealtimeNanos()/1e09;
+                        this.timeStamp = location.getTime();
                     }
                 }
             }

@@ -1,22 +1,12 @@
 <resources>
-    <string name="app_name">GPS_Tracker App</string>
+    <string name="app_name">Taxi Tracker App</string>
     <string name="button">Button</string>
     <string name="name">Name</string>
-    <string name="n_mero_de_tel_fono">Número de teléfono</string>
-    <string name="mensaje_a_enviar">Mensaje a enviar</string>
-    <string name="textview">TextView</string>
-    <string name="digite_el_mensaje_que_desea_enviar">Digite el mensaje que desea enviar:</string>
-    <string name="digite_su_n_mero_telef_nico">Digite su número telefónico:</string>
-    <string name="enviar">Enviar</string>
     <string name="sus_coordenadas_son">Sus coordenadas son:</string>
     <string name="n_mero_de_ip">Número de IP</string>
     <string name="n_mero_de_puerto">Número de puerto:</string>
-    <string name="puerto_7800">Puerto: 7800</string>
     <string name="ip_190_84_119_158">IP: 190.84.119.158</string>
     <string name="digite_su_direcci_n_ip_p_blica">Digite su dirección IP pública:</string>
-    <string name="tcp_udp">TCP/UDP</string>
-    <string name="enviar_tcp">Enviar TCP</string>
-    <string name="enviar_udp">Enviar UDP</string>
-    <string name="puerto_udp">Puerto UDP</string>
-    <string name="puerto_tcp">Puerto TCP</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="detener">Detener</string>
 </resources>
