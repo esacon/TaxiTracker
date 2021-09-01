@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView longitudeText;
     private Handler handler;
     private String destIP;
+    private GpsTracker gpsTracker;
     private MessageSenderUDP msg_udp;
 
     @Override
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void iniciar(View view) {
+        // Initialize GPS.
+        gpsTracker = new GpsTracker(MainActivity.this);
         // Success notification.
         Toast.makeText(getApplicationContext(), "La aplicación ha iniciado.", Toast.LENGTH_LONG).show();
         runnable.run();
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             destIP = ipEditText.getText().toString().trim();
 
             if (!destIP.equals("")) {
+                // Initialize UDP protocols.
+                msg_udp = new MessageSenderUDP(destIP, 8888);
                 sendMsg();
                 handler.postDelayed(runnable, 5000); // 5 seconds.
             } else {
@@ -68,10 +73,9 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions();
 
         if (checkPermissions()) {
-            // Initialize UDP protocols.
-            msg_udp = new MessageSenderUDP(destIP, 8888);
-            // Initialize GPS.
-            GpsTracker gpsTracker = new GpsTracker(MainActivity.this);
+
+            // Get GPS Location.
+            gpsTracker.getLocation();
 
             if (gpsTracker.canGetLocation()) {
                 double latitude = gpsTracker.getLatitude();
