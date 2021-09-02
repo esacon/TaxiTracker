@@ -29,7 +29,7 @@ class GpsTracker extends Service implements LocationListener {
 
     private double latitude; // latitude
     private double longitude; // longitude
-    private double timeStamp; // elapsed time
+    private long timeStamp; // elapsed time
 
     // The minimum distance to change Updates in meters
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -66,9 +66,9 @@ class GpsTracker extends Service implements LocationListener {
                     Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                     if (location != null) {
+                        this.canGetLocation = true;
                         this.latitude = location.getLatitude();
                         this.longitude = location.getLongitude();
-                        this.canGetLocation = true;
                         this.timeStamp = location.getTime();
                     }
                 }
@@ -105,7 +105,7 @@ class GpsTracker extends Service implements LocationListener {
     /**
      * Function to get elapsed time.
      */
-    public double getTimeStamp() { return this.timeStamp; }
+    public long getTimeStamp() { return this.timeStamp; }
 
     /**
      * Function to check GPS/wifi enabled

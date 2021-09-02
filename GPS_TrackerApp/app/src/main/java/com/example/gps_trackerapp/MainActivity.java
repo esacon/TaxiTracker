@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             if (gpsTracker.canGetLocation()) {
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
-                double timeStamp = gpsTracker.getTimeStamp();
+                long timeStamp = gpsTracker.getTimeStamp();
 
                 // Send Message.
                 @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s", latitude, longitude, timeStamp);

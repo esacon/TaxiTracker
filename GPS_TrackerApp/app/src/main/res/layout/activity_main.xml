@@ -41,7 +41,6 @@
         android:autofillHints="190.84.119.158"
         android:ems="10"
         android:hint="@string/ip_190_84_119_158"
-        android:inputType="number"
         android:minHeight="48dp"
         android:textSize="16sp"
         android:visibility="visible"

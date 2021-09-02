@@ -1,27 +1,25 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const socket = require('socket.io');
 
 const server = http.createServer(app);
-
+var io = socket(server);
+var moment = require('moment');
+const { timeStamp } = require('console');
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
 
 server.listen(app.get('port'), "localhost", () => {
     console.log('Servidor web escuchando en el puerto 3000');
 
-    function format_time(UNIX_timestamp) {
-        const dtFormat = new Intl.DateTimeFormat('es-CO', {
-            timeStyle: 'medium',
-            dateStyle: 'full',
-            timeZoneName: "GMT-5"
-        });
-        
-        return dtFormat.format(new Date(UNIX_timestamp * 1000));
+    function getDate(UNIX_timestamp) {        
+        return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');
     }
 
-    /*
-
+    function getHour(UNIX_timestamp) {  
+        return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO');
+    }
     // Base de datos.
     const mysql = require('mysql');
 
@@ -30,68 +28,64 @@ server.listen(app.get('port'), "localhost", () => {
         user: 'root',
         password: '12345',
         database: 'app'
-    }); 
-    
-    */
+    });
 
     // Conexión a la base de datos.
     connection.connect((err) => {
-        if (err) {
-            console.log("No se pudo conectar a la base de datos.");
-            throw err
-        };
-        console.log('Base de datos conectada.');
+    if (err) {
+        console.log("No se pudo conectar a la base de datos.");
+        throw err
+    };
+    console.log('Base de datos conectada');
     });
 
     // Recibir datos del router.
     const udp = require('dgram');
     const udp_server = udp.createSocket('udp4');
-
     udp_server.on('message', (msg, rinfo) => {
 
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
-        let arr = msg.toString.split(";");
+        let arr = msg.toString().split(";");
         let latitud = arr[0];
         let longitud = arr[1];
         let timeStamp = arr[2];
-
-        let fecha = format_time(timeStamp);
+        console.log(timeStamp);
+        let fecha = getDate(timeStamp);
+        let hora = getHour(timeStamp);
 
         console.log(latitud);
         console.log(longitud);
         console.log(timeStamp);
         console.log(fecha);
+        console.log(hora);
 
-        document.getElementById(latitud_text).innerText = latitud;
-        document.getElementById(longitud_text).innerText = longitud;
-        document.getElementById(fecha_text).innerText = fecha;
-        document.getElementById(hora_text).innerText = timeStamp;
-
-        /*
-
-        // Obtener el último dato.
-        connection.query('SELECT MAX(ID) FROM datos', (err, rows) => {
-            if(err) {
-                console.log("No se pudo hacer la consulta.");
-                throw err
-            };
-            console.log(rows);
+        io.emit('change', {
+            latitud_text: latitud,
+            longitud_text: longitud,
+            fecha_text: fecha,
+            hora_text: hora
         });
 
+        io.on('connection', function(socket) {
+            socket.emit('change', {
+                latitud_text: latitud,
+                longitud_text: longitud,
+                fecha_text: fecha,
+                hora_text: hora
+            });
+        });
         // Insertar datos en la db.
-        let id = 1;
-        const insert_query = `INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES(${id}, ${latitud}, ${longitud}, ${fecha}, ${hora})`;
-        connection.query(insert_query, (err, rows) => {
+        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
+        let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
+
+        connection.query(insert_query, [values], (err, rows) => {
             if(err) {
                 console.log("No se pudo subir a la base de datos.");
                 throw err
             };
             console.log('Datos insertados en la base de datos.');
         });
-
-        */
-
     });
 
     udp_server.on('error', (err) => {
