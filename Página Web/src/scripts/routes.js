@@ -1,11 +1,10 @@
 import express from 'express';
 import path from 'path';
 
-const routes = express.Router();
+const router = express.Router();
 
-routes.get('/', function(req, res) {
+router.get('/', function(req, res, next) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
-    require('./udp_server');
 });
 
-module.exports.routes = routes;
+export const routes = router;

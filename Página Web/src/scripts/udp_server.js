@@ -50,7 +50,7 @@ server.on('listening', function() {
     console.log(`Server listening ${address.address}:${address.port}`.yellow);
 });
 
-udp_server.bind({
+server.bind({
     addres: 'localhost',
     port:8888
 });

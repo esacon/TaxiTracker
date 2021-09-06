@@ -61,19 +61,19 @@ server.listen(
             console.log(fecha);
             console.log(hora);
 
-            io.emit('change', {
-                latitud_text: latitud,
-                longitud_text: longitud,
-                fecha_text: fecha,
-                hora_text: hora
+            io.emit('update', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
             });
 
             io.on('connection', function(socket) {
-                socket.emit('change', {
-                    latitud_text: latitud,
-                    longitud_text: longitud,
-                    fecha_text: fecha,
-                    hora_text: hora
+                socket.emit('update', {
+                    latitud: latitud,
+                    longitud: longitud,
+                    fecha: fecha,
+                    hora: hora
                 });
             });
 

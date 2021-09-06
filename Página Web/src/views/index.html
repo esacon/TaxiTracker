@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi App Tracker</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <header class="taxi_app">
-        <div class="taxi_info">
-            <h1>Taxi Tracker App</h1>
-            <p id="descripcion">Coordenadas.</p>
-        </div>
-    </header>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Taxi App Tracker</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <header class="taxi_app">
+            <div class="taxi_info">
+                <h1>Taxi Tracker App</h1>
+                <p id="descripcion">Coordenadas:</p>
+            </div>
+        </header>
 
-    <main class="main">
-        <section class="coordenadas info">
-            <p class="coord latitud">Latitud: <span id="latitud"></span></p>
-            <p class="coord longitud">Longitud: <span id="longitud"></span></p>
-            <p class="coord fecha">Fecha: <span id="fecha"></span></p>
-            <p class="coord hora">Hora: <span id="hora"></span></p>
-        </section>
-        <script src="./socket.io/socket.io.js" charset="utf-8"></script>
-        <!-- Script used for updating text fields. -->
-        <script src="../scripts/update.js"></script>
-    </main>
-    
-    <footer class="footer">
-        <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles.
-        </p>
-    </footer>
-</body>
+        <main class="main">
+            <section class="coordenadas info">
+                <p class="coord latitud">Latitud: <span id="latitud"></span></p>
+                <p class="coord longitud">Longitud: <span id="longitud"></span></p>
+                <p class="coord fecha">Fecha: <span id="fecha"></span></p>
+                <p class="coord hora">Hora: <span id="hora"></span></p>
+            </section>
+            <script src="./socket.io/socket.io.js" charset="utf-8"></script>
+            <!-- Script used for updating text fields. -->
+            <script src="../scripts/update.js"></script>
+        </main>
+        
+        <footer class="footer">
+            <p class="footer_copyright">
+                Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles.
+            </p>
+        </footer>
+    </body>
 </html>
