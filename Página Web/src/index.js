@@ -99,4 +99,9 @@ server.listen(
             addres: 'localhost',
             port:8888
         });
-});
+    },
+    
+    app.get('/gps'), () => {
+
+    }
+);
