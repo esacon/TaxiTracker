@@ -1,9 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
-    var socket = io();
-    socket.on('change', info => {
-        document.getElementById('latitud_text').innerText = info.latitud_text;
-        document.getElementById('longitud_text').innerText = info.longitud_text;
-        document.getElementById('fecha_text').innerText = info.fecha_text;
-        document.getElementById('hora_text').innerText = info.hora_text;
+const socket = io();
+
+document.addEventListener('DOMContentLoaded', function() {
+    socket.on('update', function(info) {
+        console.log("\nDatos recibidos:");
+        
+        document.getElementById('latitud').innerText = info.latitud;
+        document.getElementById('longitud').innerText = info.longitud;
+        document.getElementById('fecha').innerText = info.fecha;
+        document.getElementById('hora').innerText = info.hora;
+
+        console.log(info);
     });
 });
