@@ -3,8 +3,6 @@
   "version": "1.2.0",
   "description": "Página web que permite rastrear vehículos mediante su ubicación GPS.",
   "main": "new_index.js",
-  "type": "module",
-  "module": "es6",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/new_index.js",

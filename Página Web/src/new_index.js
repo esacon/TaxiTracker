@@ -1,7 +1,6 @@
-import express from 'express';
+const express = require('express');
 const socket = require('socket.io');
-import colors from 'colors';
-import {routes} from './scripts/routes.js';
+const colors = require('colors');
 
 const app = express();
 
@@ -10,7 +9,7 @@ app.set('port', 3000);
 app.set('view engine', 'ejs');
 
 // Routes
-app.use(router);
+app.use(require('./scripts/routes.js'));
 
 // Files
 app.use(require("./scripts/udp_server"));

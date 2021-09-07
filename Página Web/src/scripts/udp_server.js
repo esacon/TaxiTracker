@@ -1,5 +1,5 @@
-import dgram from 'dgram';
-import color from 'colors';
+const dgram = require('dgram');
+const colors = require('colors');
 
 const server = dgram.createSocket('udp4');
 const socket = io();

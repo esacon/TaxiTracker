@@ -1,7 +1,8 @@
-import { createConnection } from 'mysql';
-import color from 'colors';
+const mysql = require('mysql');
+const colors = require('colors');
 
-const database = createConnection({
+
+const database = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '12345',
