@@ -35,7 +35,7 @@ class GpsTracker extends Service implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 5 s
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
@@ -56,19 +56,11 @@ class GpsTracker extends Service implements LocationListener {
                 if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions((Activity) mContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
                 }
-                locationManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER,
-                        MIN_TIME_BW_UPDATES,
-                        MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
                 Log.d("GPS Enabled", "GPS Enabled");
                 if (locationManager != null) {
-                    Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                    if (location != null) {
-                        this.canGetLocation = true;
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, 10, this);
-                    }
+                    this.canGetLocation = true;
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, 10, this);
                 }
             }
         } catch (Exception e) {
@@ -103,7 +95,9 @@ class GpsTracker extends Service implements LocationListener {
     /**
      * Function to get elapsed time.
      */
-    public long getTimeStamp() { return this.timeStamp; }
+    public long getTimeStamp() {
+        return this.timeStamp;
+    }
 
     /**
      * Function to check GPS/wifi enabled
