@@ -5,31 +5,21 @@ const socket = require('socket.io');
 
 const server = http.createServer(app);
 var io = socket(server);
-var moment = require('moment');
+
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
 
+
+function getDate(UNIX_timestamp) {        
+    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');
+}
+
+function getHour(UNIX_timestamp) {  
+    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO');
+}
+
 server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
-/*
-    function getDate(UNIX_timestamp) {        
-        moment.locale('es-mx'); 
-        return moment(UNIX_timestamp*1000).format('L');
-    }
-
-    function getHour(UNIX_timestamp) {  
-        moment.locale('es-mx');      
-        return moment(UNIX_timestamp*1000).format('LTS');
-    }*/
-
-    function getDate(UNIX_timestamp) {        
-        return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');
-    }
-
-    function getHour(UNIX_timestamp) {  
-        return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO');
-    }
-
 
     // Base de datos.
     const mysql = require('mysql');
