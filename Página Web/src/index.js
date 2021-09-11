@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const socket = require('socket.io');
-
+const env_var = require('dotenv').config()
 const server = http.createServer(app);
 var io = socket(server);
 
@@ -25,10 +25,10 @@ server.listen(app.get('port'), () => {
     const mysql = require('mysql');
 
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '12345',
-        database: 'app'
+        host: process.env.DB_HOST,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: 'taxiApp'
     });
 
     // Conexión a la base de datos.
