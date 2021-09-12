@@ -54,7 +54,7 @@ server.on('listening', function() {
 });
 
 server.bind({
-    addres: 'localhost',
+    addres: process.env.HOST,
     port:8888
 });
 
