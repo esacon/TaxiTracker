@@ -100,7 +100,7 @@ server.listen(app.get('port'), () => {
     });
 
     udp_server.bind({
-        addres: 'localhost',
+        addres: process.env.HOST,
         port:8888
     });
 });
