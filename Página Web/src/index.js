@@ -1,9 +1,17 @@
 const express = require('express');
 const app = express();
 const http = require('http');
-const socket = require('socket.io');
-const env_var = require('dotenv').config()
 const server = http.createServer(app);
+
+
+const socket = require('socket.io');
+const env_var = require('dotenv').config();
+
+const mysql = require('mysql2');
+
+const udp = require('dgram');
+const udp_server = udp.createSocket('udp4');
+
 var io = socket(server);
 
 app.use(express.static(__dirname + '/public/'));
@@ -22,7 +30,6 @@ server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
 
     // Base de datos.
-    const mysql = require('mysql');
 
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
@@ -41,8 +48,6 @@ server.listen(app.get('port'), () => {
     });
 
     // Recibir datos del router.
-    const udp = require('dgram');
-    const udp_server = udp.createSocket('udp4');
     udp_server.on('message', (msg, rinfo) => {
 
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
@@ -95,7 +100,7 @@ server.listen(app.get('port'), () => {
     });
 
     udp_server.bind({
-        addres: 'localhost',
+        addres: process.env.HOST,
         port:8888
     });
 });
