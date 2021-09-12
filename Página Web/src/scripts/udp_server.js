@@ -3,7 +3,7 @@ const colors = require('colors');
 
 const server = dgram.createSocket('udp4');
 
-const socket = require('socket.io');
+const socket = io();
 
 const env_var = require('dotenv').config();
 

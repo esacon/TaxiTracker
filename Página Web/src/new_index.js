@@ -29,7 +29,7 @@ const database = require("../src/scripts/database.js");
 
 io.on("conection", function() { 
     socket.on('update', function(info) { 
-        socket.broadcast.emit(info);
+        io.broadcast.emit(info);
         database(info.latitud, info.longitud, info.fecha, info.hora);
     });
 });
