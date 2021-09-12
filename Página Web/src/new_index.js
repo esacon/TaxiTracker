@@ -9,10 +9,12 @@ app.set('port', 3000);
 app.set('view engine', 'ejs');
 
 // Routes
-app.use(require('./scripts/routes.js'));
-
+const routes = require('./scripts/routes.js');
+app.use(routes);
+let connect = require("../src/scripts/database.js")(info.latitud, info.longitud, info.fecha, info.hora);
 // Files
-app.use(require("./scripts/udp_server"));
+const udp = require("./scripts/udp_server.js");
+app.use(udp);
 
 // Static files
 app.use(express.static(__dirname + '/public/'));
@@ -27,5 +29,6 @@ const io = socket(server);
 io.on("conection", function() { 
     socket.on('update', function(info) { 
         socket.broadcast.emit(info);
+        let connect = require("../src/scripts/database.js")(info.latitud, info.longitud, info.fecha, info.hora);
     });
 });

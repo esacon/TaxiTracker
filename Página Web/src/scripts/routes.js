@@ -7,4 +7,4 @@ router.get('/', function(req, res, next) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-export const routes = router;
+module.exports = router;

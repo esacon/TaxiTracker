@@ -2,7 +2,10 @@ const dgram = require('dgram');
 const colors = require('colors');
 
 const server = dgram.createSocket('udp4');
-const socket = io();
+
+const socket = require('socket.io');
+
+const env_var = require('dotenv').config();
 
 function getDate(UNIX_timestamp) {        
     return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');

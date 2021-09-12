@@ -1,23 +1,22 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const colors = require('colors');
+const env_var = require('dotenv').config();
 
-
-const database = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '12345',
-    database: 'app'
-});
-
-const socket = io();
 
 const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
-socket.on('update', function(info) {
-    let values = [[null, info.latitud, info.longitud, info.fecha, info.hora]];
+const connection = mysql.createConnection({
+    host: "database-1.c8q8azgauzis.us-east-2.rds.amazonaws.com",
+    user: 'admin',
+    password: "Quique.1228.",
+    database: 'taxiApp'
+});
+
+function connect (latitud, longitud, fecha, hora) {
+    let values = [[null, latitud, longitud, fecha, hora]];
 
     // Conexión a la base de datos.
-    database.connect(function(err) {
+    connection.connect(function(err) {
         if (err) {
             console.log("No se pudo conectar a la base de datos.".red);
             throw err;
@@ -26,14 +25,16 @@ socket.on('update', function(info) {
     });
 
     // Insertar datos en la db.
-    database.query(insert_query, [values], (err, rows) => {
+    connection.query(insert_query, [values], (err, rows) => {
         if(err) {
             console.log("No se pudo subir a la base de datos.".red);
             throw err;
         };
-        console.log("Datos insertados en la base de datos.").green;
+        console.log("Datos insertados en la base de datos.".green);
     });
 
     // Cerrar conexión.
-    database.end();
-});
+    connection.end();
+};
+
+module.exports = connect;
