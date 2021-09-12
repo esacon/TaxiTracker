@@ -6,13 +6,13 @@ const env_var = require('dotenv').config();
 const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
 const connection = mysql.createConnection({
-    host: "database-1.c8q8azgauzis.us-east-2.rds.amazonaws.com",
-    user: 'admin',
-    password: "Quique.1228.",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: 'taxiApp'
 });
 
-function connect (latitud, longitud, fecha, hora) {
+module.exports = function connect (latitud, longitud, fecha, hora) {
     let values = [[null, latitud, longitud, fecha, hora]];
 
     // Conexión a la base de datos.
@@ -36,5 +36,3 @@ function connect (latitud, longitud, fecha, hora) {
     // Cerrar conexión.
     connection.end();
 };
-
-module.exports = connect;

@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Taxi App Tracker</title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>    
+        <script src="./socket.io/socket.io.js" charset="utf-8"></script>
     </head>
     <body>
         <header class="taxi_app">
@@ -21,7 +24,10 @@
                 <p class="coord fecha">Fecha: <span id="fecha"></span></p>
                 <p class="coord hora">Hora: <span id="hora"></span></p>
             </section>
-            <script src="./socket.io/socket.io.js" charset="utf-8"></script>
+            <!-- Map section -->
+            <section class="map">
+                <div id ="mapid"></div>
+            </section>
             <!-- Script used for updating text fields. -->
             <script src="../scripts/update.js"></script>
         </main>
