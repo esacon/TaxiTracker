@@ -32,10 +32,10 @@ class GpsTracker extends Service implements LocationListener {
     private long timeStamp; // elapsed time
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 200; // 200 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 5; // 5 s
+    private static final long MIN_TIME_BW_UPDATES = 5000; // 5 s
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
@@ -56,12 +56,10 @@ class GpsTracker extends Service implements LocationListener {
                 if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions((Activity) mContext, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
                 }
+                this.canGetLocation = true;
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 
                 Log.d("GPS Enabled", "GPS Enabled");
-                if (locationManager != null) {
-                    this.canGetLocation = true;
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, 10, this);
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
