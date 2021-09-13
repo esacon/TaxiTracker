@@ -29,7 +29,7 @@ const udp_server = require("./scripts/udp_server.js");
 
 io.on("conection", function(socket) { 
     socket.on('update', function(info) { 
-        socket.broadcast.emit(info);
+        socket.broadcast.emit(a);
         database(info.latitud, info.longitud, info.fecha, info.hora);
     });
 });
