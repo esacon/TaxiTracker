@@ -3,16 +3,16 @@ const colors = require('colors');
 
 const server = dgram.createSocket('udp4');
 
-const socket = io();
+const socket = require('socket.io');
 
 const env_var = require('dotenv').config();
 
 function getDate(UNIX_timestamp) {        
-    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');
+    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
 }
 
 function getHour(UNIX_timestamp) {  
-    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO');
+    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
 }
 
 server.on('error', function(err) {
@@ -40,12 +40,14 @@ server.on('message', function(msg, rinfo) {
     }.toString().green);
 
     // Update changes to server.
-    socket.emit('update', {
-        latitud: latitud,
-        longitud: longitud,
-        fecha: fecha,
-        hora: hora
-    });
+    if (parseFloat(longitud) != '0') {
+        socket.emit('update', {
+            latitud: latitud,
+            longitud: longitud,
+            fecha: fecha,
+            hora: hora
+        }); 
+    }
 });
 
 server.on('listening', function() {

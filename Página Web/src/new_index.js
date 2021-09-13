@@ -12,9 +12,6 @@ app.set('view engine', 'ejs');
 const routes = require('./scripts/routes.js');
 app.use(routes);
 
-// Files
-const udp_server = require("./scripts/udp_server.js");
-
 // Static files
 app.use(express.static(__dirname + '/public/'));
 
@@ -27,9 +24,12 @@ const server = app.listen(app.get('port'), function() {
 const io = socket(server);
 const database = require("../src/scripts/database.js");
 
-io.on("conection", function() { 
+// Files
+const udp_server = require("./scripts/udp_server.js");
+
+io.on("conection", function(socket) { 
     socket.on('update', function(info) { 
-        io.broadcast.emit(info);
+        socket.broadcast.emit(info);
         database(info.latitud, info.longitud, info.fecha, info.hora);
     });
 });
