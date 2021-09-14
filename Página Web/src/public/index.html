@@ -35,7 +35,7 @@
             var map = L.map('mapid');
             var marker;
             var circle;
-            
+            map.setView([0,0], 18);
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
 
@@ -45,11 +45,12 @@
                     document.getElementById('hora_text').innerText = info.hora_text;
                     
                     // Initialize map.
-                    map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], 18);
+                    map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
                     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
                         attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                         maxZoom: 20,
+                        center: [parseFloat(info.latitud_text), parseFloat(info.longitud_text)],
                         tileSize: 512,
                         zoomOffset: -1,
                     }).addTo(map);
