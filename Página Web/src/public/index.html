@@ -70,9 +70,15 @@
                     if(!marker) {
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
                     }
+                    
+                    var polylinePoints = [
+                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 1
+                        //[parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 2.debo.sacarlo.de.database.
+                        // Y ASÍ, SE AGREGAN LOS DEMAS
+                    ];
 
                     if(!polyline) {
-                        polyline = L.polyline(polylinePoints {
+                        polyline = L.polyline([polylinePoints], {
                             color: 'red',
                             weight: 3,
                             opacity: 0.5,
