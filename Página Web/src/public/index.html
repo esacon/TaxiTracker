@@ -57,10 +57,12 @@
 
                     if(!circle) {
                         circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
-                            color: 'green',
+                            color: 'black',
+                            //color: 'green',
                             fillColor: '#00ff00',
                             fillOpacity: 0.3,
-                            radius: 50
+                            radius: 500
+                            //radius: 50
                         }).addTo(map);
                     }
                     
