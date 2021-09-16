@@ -36,6 +36,12 @@
             var marker;
             var circle;
             var polyline;
+            var polylinePoints = [
+                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 1
+                        //[parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 2.debo.sacarlo.de.database.
+                        // Y ASÍ, SE AGREGAN LOS DEMAS
+                        ];
+
             map.setView([0,0], 18);
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
@@ -71,11 +77,6 @@
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
                     }
                     
-                    var polylinePoints = [
-                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 1
-                        //[parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 2.debo.sacarlo.de.database.
-                        // Y ASÍ, SE AGREGAN LOS DEMAS
-                    ];
 
                     if(!polyline) {
                         polyline = L.polyline([polylinePoints], {
@@ -85,6 +86,8 @@
                             smoothFactor: 1
                         }).addTo(map);
                     }
+       
+
 
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
