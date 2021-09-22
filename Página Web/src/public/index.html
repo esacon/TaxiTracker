@@ -74,7 +74,37 @@
             });
         </script>
     </main>
-    
+    <script>
+        var geojsonFeature = {
+        "type":"Feature",
+        "properties":{
+        "name":"Coors field",
+        "amenity":"Baseball Stadium",
+        "popupContent":"This is where the Rocky play!"    
+        },
+        "geometry":{
+        "type":"Point",
+        "coordinates": ['mapid']  
+        }
+        }; 
+        L.geoJSON(geojsonFeature).addTo(map);
+        var myStyle ={
+        "color":"#ff7800",
+        "weight":5,
+        "opacity":0.65
+        };
+        var myLines=[{
+        "type":"LineString",
+        "coordinates":['mapid']    
+        },{
+        "type":"LineString",
+        "coordinates":['mapid']    
+        }];
+        L.geoJSON(myLines, {
+        style:myStyle
+        }).addTo(map);
+    </script>
+
     <footer class="footer">
         <p class="footer_copyright">
             Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Jesús Suárez.
