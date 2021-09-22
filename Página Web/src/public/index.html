@@ -66,6 +66,8 @@
                     
                     if(!marker) {
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
+                        var polyline = L.polyline([]).addTo(map)
+                        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)])
                     }
 
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
@@ -74,11 +76,6 @@
             });
         </script>
     </main>
-    <script>
-        var polyline = L.polyline([]).addTo(map)
-        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)])
-    </script>
-
     <footer class="footer">
         <p class="footer_copyright">
             Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Jesús Suárez.
