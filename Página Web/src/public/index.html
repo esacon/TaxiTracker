@@ -43,7 +43,14 @@
                     document.getElementById('longitud_text').innerText = info.longitud_text;
                     document.getElementById('fecha_text').innerText = info.fecha_text;
                     document.getElementById('hora_text').innerText = info.hora_text;
-                    
+                    document.getElementById('Lastlat').innerText = info.Lastlat;
+                    document.getElementById('Lastlon').innerText = info.Lastlon;
+                    var polylinePoints = [
+                        [Lastlat,Lastlon],
+                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)]
+                    ];
+                    var polyline = L.polyline(polylinePoints).addTo(map);  
+            
                     // Initialize map.
                     map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
@@ -54,6 +61,7 @@
                         tileSize: 512,
                         zoomOffset: -1,
                     }).addTo(map);
+
 
                     if(!circle) {
                         circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
@@ -67,17 +75,29 @@
                     if(!marker) {
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
                     }
+                    
+                    if(!polyline) {
+                        polyline = L.polyline([polylinePoints], {
+                            color: 'red',
+                            weight: 3,
+                            opacity: 0.5,
+                            smoothFactor: 1
+                        }).addTo(map);
+                    }
+                    
 
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                    polyline.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                 });
+
             });
         </script>
     </main>
     
     <footer class="footer">
         <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Sebastian Romero, Jesus Suarez.
+            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles.
         </p>
     </footer>
 </body>

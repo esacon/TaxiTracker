@@ -1,41 +1,33 @@
 const express = require('express');
 const app = express();
 const http = require('http');
-const server = http.createServer(app);
-
-
 const socket = require('socket.io');
-const env_var = require('dotenv').config();
 
-const mysql = require('mysql2');
-
-const udp = require('dgram');
-const udp_server = udp.createSocket('udp4');
-
+const server = http.createServer(app);
 var io = socket(server);
-
+var moment = require('moment');
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
-
-
-function getDate(UNIX_timestamp) {        
-    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
-    }
-    
-function getHour(UNIX_timestamp) {  
-    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
-    }
 
 server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
 
+    function getDate(UNIX_timestamp) {        
+        return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
+    }
+    
+    function getHour(UNIX_timestamp) {  
+        return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
+    }
+
     // Base de datos.
+    const mysql = require('mysql');
 
     const connection = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: 'taxiApp'
+        host: 'localhost',
+        user: 'root',
+        password: '12345',
+        database: 'app'
     });
 
     // Conexión a la base de datos.
@@ -48,6 +40,8 @@ server.listen(app.get('port'), () => {
     });
 
     // Recibir datos del router.
+    const udp = require('dgram');
+    const udp_server = udp.createSocket('udp4');
     udp_server.on('message', (msg, rinfo) => {
 
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
@@ -66,20 +60,32 @@ server.listen(app.get('port'), () => {
         console.log(fecha);
         console.log(hora);
 
+        Lastlat="0.0";
+        Lastlon="0.0";
+
         io.emit('change', {
             latitud_text: latitud,
             longitud_text: longitud,
             fecha_text: fecha,
-            hora_text: hora
+            hora_text: hora,
+            Lastlat: latitud,
+            Lastlon: longitud
         });
 
-        io.on('connection', function(socket) {
+        io.on('connection', function(socket) {            
             socket.emit('change', {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
                 hora_text: hora
             });
+            if (Lastlat != latitud) {
+                Lastlat = latitud;
+            }
+    
+            if (Lastlon != longitud) {
+                Lastlon = longitud;
+            }
         });
         // Insertar datos en la db.
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
@@ -100,7 +106,7 @@ server.listen(app.get('port'), () => {
     });
 
     udp_server.bind({
-        addres: process.env.HOST,
+        addres: 'localhost',
         port:8888
     });
 });
