@@ -59,11 +59,10 @@
                             zoomOffset: -1,
                         }).addTo(map);   
                 
-                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);             
+                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);       
                 });              
 
                 socket.on('change', function(info) {
-
                     document.getElementById('latitud_text').innerText = info.latitud_text;
                     document.getElementById('longitud_text').innerText = info.longitud_text;
                     document.getElementById('fecha_text').innerText = info.fecha_text;
