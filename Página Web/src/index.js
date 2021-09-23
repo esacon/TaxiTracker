@@ -88,8 +88,8 @@ server.listen(app.get('port'), () => {
         let hora = getHour(timeStamp);
 
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-        
-        if (longitud != 0) {  
+
+        if (Math.round(longitud) != 0) {  
             console.log(latitud);
             console.log(longitud);
             console.log(timeStamp);
