@@ -54,11 +54,10 @@ function database_upload(values) {
             console.log("No se pudo subir a la base de datos.".red);
             throw err
         };
-        console.log("Datos insertados en la base de datos.".green);        
-    });   
-
-    // Cerrar conexión.
-    connection.destroy();
+        console.log("Datos insertados en la base de datos.".green);     
+        // Cerrar conexión.
+        connection.destroy();   
+    });       
 }
 
 server.listen(app.get('port'), () => {
