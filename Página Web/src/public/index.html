@@ -38,10 +38,7 @@
             Lastlat="0";
             Lastlon="0";
             var polyline = L.polyline([]).addTo(map);
-            var polylinePoints = [
-                        [Lastlat,Lastlon],
-                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)]
-                    ];
+            
             map.setView([0,0], 18);
             
             document.addEventListener('DOMContentLoaded', function() {
@@ -52,6 +49,10 @@
                     document.getElementById('longitud_text').innerText = info.longitud_text;
                     document.getElementById('fecha_text').innerText = info.fecha_text;
                     document.getElementById('hora_text').innerText = info.hora_text;
+                    var polylinePoints = [
+                        [Lastlat,Lastlon],
+                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)]
+                    ];
                     Alat= info.latitud_text;
                     Alon= info.longitud_text;
                     if (Lastlat != Alat) {
