@@ -47,7 +47,9 @@
                 map.setView([info.latitud, info.longitud], 18);
                 polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });   
-                console.log(all_points);              
+            
+            console.log('Info papu: ')
+            console.log(all_points);              
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
