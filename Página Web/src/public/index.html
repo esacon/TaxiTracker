@@ -42,6 +42,7 @@
             var polyline = L.polyline([]).addTo(map);
 
             socket.on('getData', function(info) {
+                console.log([info.latitud, info.longitud]);
                 map.setView([info.latitud, info.longitud], 18);
                 polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });           

@@ -53,9 +53,7 @@ server.listen(app.get('port'), () => {
         if(err) {
             console.log("No se pudo ejecutar el query.");
             throw err
-        };
-        console.log(info);    
-        console.log('Último dato recopilado con éxito.');
+        };   
 
         let latitud = info[0]['latitud'];
         let longitud = info[0]['longitud'];
@@ -71,7 +69,10 @@ server.listen(app.get('port'), () => {
                 longitud: longitud
             });
         });
+        
+        console.log('Último dato recopilado con éxito.');
     });
+    
 
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
