@@ -35,8 +35,8 @@ let db_connection_info = {
 
 function database_upload(values) {
 
-    connection = mysql.createConnection(db_connection_info);
-    
+    let connection = mysql.createConnection(db_connection_info);
+
     // Conexión a la base de datos.
     connection.connect((err) => {
         if (err) {
