@@ -39,17 +39,16 @@
 
             // Polilínea.
             let all_points = []
-            var polyline = L.polyline([], {color: '#41b611', smoothFactor:0}).addTo(map);
 
             socket.on('getData', function(info) {
                 all_points.push([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });   
-            
-            map.setView(all_points[0], 18);
-            polyline.addLatLng(all_points[0]);
 
             console.log('últimos datos: ')
-            console.log(all_points);              
+            console.log(all_points[0]);      
+            
+            map.setView(all_points[0], 18);
+            let polyline = L.polyline(all_points, {color: '#41b611', smoothFactor:0}).addTo(map);      
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
