@@ -74,8 +74,6 @@ server.listen(app.get('port'), () => {
         console.log('Base de datos conectada'.green);
     });
 
-    connection.end();
-
     // Retrieve last coordinates.
     const last_data = "Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"
     connection.query(last_data, (err, info) => {
@@ -99,8 +97,9 @@ server.listen(app.get('port'), () => {
         });
         
         console.log('Último dato recopilado con éxito.'.green);
-    });
- 
+    }); 
+
+    connection.end();
 
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
