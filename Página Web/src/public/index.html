@@ -37,6 +37,7 @@
             var circle;
             var map = L.map('mapid');            
             let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            map.removeLayer(polyline);
 
             document.addEventListener('DOMContentLoaded', function() {
                 
@@ -59,8 +60,7 @@
                             zoomOffset: -1,
                         }).addTo(map);   
                 
-                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);   
-                    map.removeLayer(polyline);  
+                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);                         
                 });              
 
                 socket.on('change', function(info) {
