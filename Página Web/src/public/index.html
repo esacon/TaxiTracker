@@ -35,14 +35,16 @@
             var socket = io();
             var marker;
             var circle;
+            var map;
+            var = polyline;
 
             // Polilínea.
             var first_coords = [];
 
             socket.on('getData', function(info) {
                 first_coords.push(parseFloat(info.latitud), parseFloat(info.longitud));
-                var map = new L.Map('map', { center: [parseFloat(info.latitud), parseFloat(info.longitud)], zoom: 18});
-                let polyline = L.polyline([parseFloat(info.latitud), parseFloat(info.longitud)], {color: '#41b611', smoothFactor:0}).addTo(map)
+                map = new L.Map('map', { center: [parseFloat(info.latitud), parseFloat(info.longitud)], zoom: 18});
+                polyline = L.polyline([parseFloat(info.latitud), parseFloat(info.longitud)], {color: '#41b611', smoothFactor:0}).addTo(map)
             });   
 
             console.log('últimos datos: ')
