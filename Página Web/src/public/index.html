@@ -37,56 +37,54 @@
             var circle;
 
             // Polilínea.
-            var first_coords = [];
+            socket.on('getData', function(data) {
+                first_coords.push(parseFloat(data.latitud), parseFloat(data.longitud));
 
-            socket.on('getData', function(info) {
-                first_coords.push(parseFloat(info.latitud), parseFloat(info.longitud));
-            });   
+                console.log('últimos datos: ')
+                console.log([parseFloat(data.latitud), parseFloat(data.longitud)]);      
 
-            console.log('últimos datos: ')
-            console.log(first_coords);      
+                var map = new L.Map('mapid', { center: [parseFloat(data.latitud), parseFloat(data.longitud)], zoom: 18});
+                let polyline = L.polyline([parseFloat(data.latitud), parseFloat(data.longitud)], {color: '#41b611', smoothFactor:0}).addTo(map);      
+                
+                document.addEventListener('DOMContentLoaded', function() {
+                    socket.on('change', function(info) {
 
-            var map = new L.Map('mapid', { center: first_coords, zoom: 18});
-            let polyline = L.polyline(first_coords, {color: '#41b611', smoothFactor:0}).addTo(map);      
-            
-            document.addEventListener('DOMContentLoaded', function() {
-                socket.on('change', function(info) {
+                        document.getElementById('latitud_text').innerText = info.latitud_text;
+                        document.getElementById('longitud_text').innerText = info.longitud_text;
+                        document.getElementById('fecha_text').innerText = info.fecha_text;
+                        document.getElementById('hora_text').innerText = info.hora_text;
 
-                    document.getElementById('latitud_text').innerText = info.latitud_text;
-                    document.getElementById('longitud_text').innerText = info.longitud_text;
-                    document.getElementById('fecha_text').innerText = info.fecha_text;
-                    document.getElementById('hora_text').innerText = info.hora_text;
+                        // Initialize map.
+                        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
-                    // Initialize map.
-                    map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-
-                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
-                        attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-                        maxZoom: 20,
-                        center: [parseFloat(info.latitud_text), parseFloat(info.longitud_text)],
-                        tileSize: 512,
-                        zoomOffset: -1,
-                    }).addTo(map);
-
-                    if(!circle) {
-                        circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
-                            color: 'green',
-                            fillColor: '#00ff00',
-                            fillOpacity: 0.3,
-                            radius: 50
+                        L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
+                            attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+                            maxZoom: 20,
+                            center: [parseFloat(info.latitud_text), parseFloat(info.longitud_text)],
+                            tileSize: 512,
+                            zoomOffset: -1,
                         }).addTo(map);
-                    }
-                    
-                    if(!marker) {
-                        marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);                        
-                    }
-    
-                    all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                });
-            });
+
+                        if(!circle) {
+                            circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
+                                color: 'green',
+                                fillColor: '#00ff00',
+                                fillOpacity: 0.3,
+                                radius: 50
+                            }).addTo(map);
+                        }
+                        
+                        if(!marker) {
+                            marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);                        
+                        }
+        
+                        all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                        marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                        circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                    });
+                });                
+            });   
         </script>
     </main>
     <footer class="footer">
