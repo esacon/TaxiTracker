@@ -113,15 +113,6 @@ server.listen(app.get('port'), () => {
             });
 
 
-            // Conexión a la base de datos.
-            connection.connect((err) => {
-                if (err) {
-                    console.log("No se pudo conectar a la base de datos.");
-                    throw err
-                };
-                console.log('Base de datos conectada');               
-            });     
-            
             // Insertar datos en la db.
             let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
 
@@ -132,8 +123,10 @@ server.listen(app.get('port'), () => {
                 };
                 console.log('Datos insertados en la base de datos.');
                 // Cerrar conexión.
-                connection.destroy();
-            }); 
+               // connection.destroy();
+            });    
+
+            
         }
 
     });
