@@ -37,7 +37,7 @@
             var circle;
 
             // Polilínea.
-            let first_coords;
+            var first_coords;
 
             socket.on('getData', function(info) {
                 first_coords = [parseFloat(info.latitud), parseFloat(info.longitud)];
@@ -45,7 +45,7 @@
 
             console.log('últimos datos: ')
             console.log(first_coords);      
-            
+
             var map = new L.Map('map', { center: new L.LatLng(first_coords[0], first_coords[1]), zoom: 18});
             let polyline = L.polyline(first_coords, {color: '#41b611', smoothFactor:0}).addTo(map);      
             
