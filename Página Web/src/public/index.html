@@ -38,14 +38,16 @@
             var circle;
 
             // Polilínea.
-            
+            let all_points = []
             var polyline = L.polyline([], {color: '#41b611', smoothFactor:0}).addTo(map);
 
             socket.on('getData', function(info) {
-                console.log([info.latitud, info.longitud]);
+                all_points.push((info.latitud, info.longitud));
+                console.log(all_points);
                 map.setView([info.latitud, info.longitud], 18);
                 polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
-            });                 
+            });   
+                console.log(all_points);              
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
