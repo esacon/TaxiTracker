@@ -36,7 +36,7 @@
             var marker;
             var circle;
             var polyline = L.polyline([]).addTo(map)
-            map.setView([0,0], 18);
+            map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], 18);
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
 
