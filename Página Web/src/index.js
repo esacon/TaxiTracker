@@ -56,7 +56,8 @@ function database_upload(values) {
         };
         console.log("Datos insertados en la base de datos.".green);     
         // Cerrar conexión.
-        connection.end();   
+        connection.end(); 
+        console.log("Conexión cerrada".grey); 
     });       
 }
 
