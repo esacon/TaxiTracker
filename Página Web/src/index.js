@@ -89,7 +89,11 @@ server.listen(app.get('port'), () => {
 
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
-        if (Math.round(longitud) != 0) {  
+        console.log(Math.round(latitud) != 0);
+        console.log(latitud == 0);
+        console.log(Math.round(latitud));
+
+        if (Math.round(latitud) != 0) {  
             console.log(latitud);
             console.log(longitud);
             console.log(timeStamp);
