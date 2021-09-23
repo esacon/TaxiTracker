@@ -30,24 +30,23 @@
             <div id ="mapid"></div>
         </section>
 
-        <script>          
+        <script>         
+                        
+            var socket = io();
+            var map = L.map('mapid');
+            var marker;
+            var circle;
+
+            // Polilínea.
+            var polyline = L.polyline([]).addTo(map);
+
+            socket.on('getData', function(info) {
+                console.log([info.latitud, info.longitud]);
+                map.setView([info.latitud, info.longitud], 18);
+                polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
+            });                 
             
             document.addEventListener('DOMContentLoaded', function() {
-                
-                var socket = io();
-                var map = L.map('mapid');
-                var marker;
-                var circle;
-
-                // Polilínea.
-                var polyline = L.polyline([]).addTo(map);
-
-                socket.on('getData', function(info) {
-                    console.log([info.latitud, info.longitud]);
-                    map.setView([info.latitud, info.longitud], 18);
-                    polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
-                }); 
-                
                 socket.on('change', function(info) {
 
                     document.getElementById('latitud_text').innerText = info.latitud_text;
