@@ -130,10 +130,9 @@ server.listen(app.get('port'), () => {
                         throw err
                     };
                     console.log('Datos insertados en la base de datos.');
-                });
-
-                // Cerrar conexión.
-                connection.end();
+                    // Cerrar conexión.
+                    connection.destroy();
+                });                
             });     
         }
 
