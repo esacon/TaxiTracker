@@ -72,10 +72,7 @@ server.listen(app.get('port'), () => {
         
         console.log('Último dato recopilado con éxito.');
     });
-
-    // Cerrar conexión.
-    connection.end();
-    
+ 
 
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
