@@ -52,14 +52,14 @@
                         zoomOffset: -1,
                     }).addTo(map);   
 
-                circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
+                circle = L.circle([parseFloat(data.latitud), parseFloat(data.longitud)], {
                             color: 'green',
                             fillColor: '#00ff00',
                             fillOpacity: 0.3,
                             radius: 50
                         }).addTo(map);
 
-                marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);             
+                marker = L.marker([parseFloat(data.latitud), parseFloat(data.longitud)]).addTo(map);             
             });                
                 
             let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
