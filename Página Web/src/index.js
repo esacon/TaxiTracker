@@ -54,12 +54,12 @@ server.listen(app.get('port'), () => {
             console.log("No se pudo ejecutar el query.");
             throw err
         };
-        console.log(info);        
-        console.log(info[0]);
-        console.log(info[0]['latitud']);
-        console.log(info['latitud']);
+        console.log(info);    
         console.log('Último dato recopilado con éxito.');
 
+        let latitud = info[0]['latitud'];
+        let longitud = info[1]['longitud'];
+        
         io.emit('getData', {
             latitud: latitud,
             longitud: longitud
