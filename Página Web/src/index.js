@@ -20,11 +20,11 @@ app.set('port', 3000);
 
 function getDate(UNIX_timestamp) {        
     return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
-    }
+}
     
 function getHour(UNIX_timestamp) {  
     return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
-    }
+}
 
 server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
@@ -40,12 +40,45 @@ server.listen(app.get('port'), () => {
 
     // Conexión a la base de datos.
     connection.connect((err) => {
-    if (err) {
-        console.log("No se pudo conectar a la base de datos.");
-        throw err
-    };
-    console.log('Base de datos conectada');
+        if (err) {
+            console.log("No se pudo conectar a la base de datos.");
+            throw err
+        };
+        console.log('Base de datos conectada');
     });
+
+    // Retrieve last coordinates.
+    const last_data = "Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"
+    connection.query(last_data, (err, info) => {
+        if(err) {
+            console.log("No se pudo ejecutar el query.");
+            throw err
+        };   
+
+        let latitud = info[0]['latitud'];
+        let longitud = info[0]['longitud'];
+        let fecha = info[0]['fecha'];
+        let hora = info[0]['hora'];
+
+        io.emit('getData', {
+            latitud: latitud,
+            longitud: longitud,
+            fecha: fecha,
+            hora: hora
+        });
+
+        io.on('connection', function(socket) {
+            socket.emit('getData', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
+        });
+        
+        console.log('Último dato recopilado con éxito.');
+    });
+ 
 
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
@@ -53,45 +86,55 @@ server.listen(app.get('port'), () => {
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
         let arr = msg.toString().split(";");
-        let latitud = arr[0];
-        let longitud = arr[1];
+        let latitud = parseFloat(arr[0]).toFixed(4);
+        let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
 
         let fecha = getDate(timeStamp);
         let hora = getHour(timeStamp);
 
-        console.log(latitud);
-        console.log(longitud);
-        console.log(timeStamp);
-        console.log(fecha);
-        console.log(hora);
+        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
-        io.emit('change', {
-            latitud_text: latitud,
-            longitud_text: longitud,
-            fecha_text: fecha,
-            hora_text: hora
-        });
+        if (latitud != 0) {  
+            console.log(latitud);
+            console.log(longitud);
+            console.log(timeStamp);
+            console.log(fecha);
+            console.log(hora);
 
-        io.on('connection', function(socket) {
-            socket.emit('change', {
+            io.emit('change', {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
                 hora_text: hora
             });
-        });
-        // Insertar datos en la db.
-        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-        let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
 
-        connection.query(insert_query, [values], (err, rows) => {
-            if(err) {
-                console.log("No se pudo subir a la base de datos.");
-                throw err
-            };
-            console.log('Datos insertados en la base de datos.');
-        });
+            io.on('connection', function(socket) {
+                socket.emit('change', {
+                    latitud_text: latitud,
+                    longitud_text: longitud,
+                    fecha_text: fecha,
+                    hora_text: hora
+                });
+            });
+
+
+            // Insertar datos en la db.
+            let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
+
+            connection.query(insert_query, [values], (err, rows) => {
+                if(err) {
+                    console.log("No se pudo subir a la base de datos.");
+                    throw err
+                };
+                console.log('Datos insertados en la base de datos.');
+                // Cerrar conexión.
+               // connection.destroy();
+            });    
+
+            
+        }
+
     });
 
     udp_server.on('error', (err) => {

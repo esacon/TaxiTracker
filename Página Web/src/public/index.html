@@ -30,54 +30,57 @@
             <div id ="mapid"></div>
         </section>
 
-        <script>
+        <script>         
+
             var socket = io();
-            var map = L.map('mapid');
             var marker;
             var circle;
-            map.setView([0,0], 18);
+            var map = L.map('mapid');            
+            let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            
             document.addEventListener('DOMContentLoaded', function() {
-                socket.on('change', function(info) {
+                
+                // Polilínea.
+                socket.on('getData', function(info) {
+                    console.log('últimos datos: ')
+                    console.log([parseFloat(info.latitud), parseFloat(info.longitud)]);      
+                    map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
 
+                    document.getElementById('latitud_text').innerText = info.latitud;
+                    document.getElementById('longitud_text').innerText = info.longitud;
+                    document.getElementById('fecha_text').innerText = info.fecha;
+                    document.getElementById('hora_text').innerText = info.hora; 
+
+                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
+                            attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+                            maxZoom: 20,
+                            center: [parseFloat(info.latitud), parseFloat(info.longitud)],
+                            tileSize: 512,
+                            zoomOffset: -1,
+                        }).addTo(map);   
+                
+                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);                         
+                });              
+
+                socket.on('change', function(info) {
+                    
+                    polyline.addTo(map);
                     document.getElementById('latitud_text').innerText = info.latitud_text;
                     document.getElementById('longitud_text').innerText = info.longitud_text;
                     document.getElementById('fecha_text').innerText = info.fecha_text;
                     document.getElementById('hora_text').innerText = info.hora_text;
-                    
+
                     // Initialize map.
-                    map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-
-                    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
-                        attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-                        maxZoom: 20,
-                        center: [parseFloat(info.latitud_text), parseFloat(info.longitud_text)],
-                        tileSize: 512,
-                        zoomOffset: -1,
-                    }).addTo(map);
-
-                    if(!circle) {
-                        circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
-                            color: 'green',
-                            fillColor: '#00ff00',
-                            fillOpacity: 0.3,
-                            radius: 50
-                        }).addTo(map);
-                    }
-                    
-                    if(!marker) {
-                        marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
-                    }
-
+                    map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
+                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                 });
-            });
+            }); 
         </script>
     </main>
-    
     <footer class="footer">
         <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Sebastian Romero, Jesus Suarez.
+            Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.
         </p>
     </footer>
 </body>
