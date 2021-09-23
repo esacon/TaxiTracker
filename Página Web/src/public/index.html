@@ -83,9 +83,7 @@
                     }
     
                     all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    console.log(all_points);
-                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-
+                    polyline.setPoints(all_points);
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                 });
