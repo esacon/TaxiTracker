@@ -19,11 +19,11 @@ app.set('port', 3000);
 
 
 function getDate(UNIX_timestamp) {        
-    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO');
+    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
 }
 
 function getHour(UNIX_timestamp) {  
-    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO');
+    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
 }
 
 server.listen(app.get('port'), () => {
