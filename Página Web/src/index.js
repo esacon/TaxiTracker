@@ -1,33 +1,41 @@
 const express = require('express');
 const app = express();
 const http = require('http');
-const socket = require('socket.io');
-
 const server = http.createServer(app);
+
+
+const socket = require('socket.io');
+const env_var = require('dotenv').config();
+
+const mysql = require('mysql2');
+
+const udp = require('dgram');
+const udp_server = udp.createSocket('udp4');
+
 var io = socket(server);
-var moment = require('moment');
+
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
+
+
+function getDate(UNIX_timestamp) {        
+    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
+    }
+    
+function getHour(UNIX_timestamp) {  
+    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
+    }
 
 server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
 
-    function getDate(UNIX_timestamp) {        
-        return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
-    }
-    
-    function getHour(UNIX_timestamp) {  
-        return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
-    }
-
     // Base de datos.
-    const mysql = require('mysql');
 
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '12345',
-        database: 'app'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: 'taxiApp'
     });
 
     // Conexión a la base de datos.
@@ -40,8 +48,6 @@ server.listen(app.get('port'), () => {
     });
 
     // Recibir datos del router.
-    const udp = require('dgram');
-    const udp_server = udp.createSocket('udp4');
     udp_server.on('message', (msg, rinfo) => {
 
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
@@ -106,7 +112,7 @@ server.listen(app.get('port'), () => {
     });
 
     udp_server.bind({
-        addres: 'localhost',
+        addres: process.env.HOST,
         port:8888
     });
 });
