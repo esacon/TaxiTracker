@@ -55,7 +55,7 @@ server.listen(app.get('port'), () => {
             throw err
         };
         console.log(info);
-        console.log(info[latitud]);
+        console.log(info['latitud']);
         console.log('Último dato recopilado con éxito.');
 
         io.emit('getData', {
