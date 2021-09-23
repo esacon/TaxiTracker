@@ -37,8 +37,7 @@
             var circle;
             var map = L.map('mapid');            
             let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-            map.removeLayer(polyline);
-
+            
             document.addEventListener('DOMContentLoaded', function() {
                 
                 // Polilínea.
@@ -64,6 +63,7 @@
                 });              
 
                 socket.on('change', function(info) {
+                    
                     polyline.addTo(map);
                     document.getElementById('latitud_text').innerText = info.latitud_text;
                     document.getElementById('longitud_text').innerText = info.longitud_text;
