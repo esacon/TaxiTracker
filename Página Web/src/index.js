@@ -87,30 +87,31 @@ server.listen(app.get('port'), () => {
         let fecha = getDate(timeStamp);
         let hora = getHour(timeStamp);
 
-        console.log(latitud);
-        console.log(longitud);
-        console.log(timeStamp);
-        console.log(fecha);
-        console.log(hora);
+        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
+        
+        if (longitud != 0) {  
+            console.log(latitud);
+            console.log(longitud);
+            console.log(timeStamp);
+            console.log(fecha);
+            console.log(hora);
 
-        io.emit('change', {
-            latitud_text: latitud,
-            longitud_text: longitud,
-            fecha_text: fecha,
-            hora_text: hora
-        });
-
-        io.on('connection', function(socket) {
-            socket.emit('change', {
+            io.emit('change', {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
                 hora_text: hora
             });
-        });
 
-        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-        if (longitud != 0) {
+            io.on('connection', function(socket) {
+                socket.emit('change', {
+                    latitud_text: latitud,
+                    longitud_text: longitud,
+                    fecha_text: fecha,
+                    hora_text: hora
+                });
+            });
+
             // Insertar datos en la db.
             let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
 
