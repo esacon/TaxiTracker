@@ -35,14 +35,14 @@
             var map = L.map('mapid');
             var marker;
             var circle;
-            Lastlat="0.0";
-            Lastlon="0.0";
+            Lastlat="0";
+            Lastlon="0";
             var polyline = L.polyline([]).addTo(map);
             var polylinePoints = [
                         [Lastlat,Lastlon],
                         [parseFloat(info.latitud_text), parseFloat(info.longitud_text)]
                     ];
-            map.setView([Lastlat,Lastlon], 18);
+            map.setView([0,0], 18);
             
             document.addEventListener('DOMContentLoaded', function() {
                 
