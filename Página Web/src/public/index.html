@@ -43,7 +43,7 @@
 
             socket.on('getData', function(info) {
                 map.setView([info.latitud, info.longitud], 18);
-                polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });           
             
             document.addEventListener('DOMContentLoaded', function() {
