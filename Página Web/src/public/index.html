@@ -35,13 +35,6 @@
             var map = L.map('mapid');
             var marker;
             var circle;
-            var polyline;
-            var polylinePoints = [
-                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 1
-                        //[parseFloat(info.latitud_text), parseFloat(info.longitud_text)] // PUNTO 2.debo.sacarlo.de.database.
-                        // Y ASÍ, SE AGREGAN LOS DEMAS
-                        ];
-
             map.setView([0,0], 18);
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
@@ -64,11 +57,9 @@
 
                     if(!circle) {
                         circle = L.circle([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], {
-                            //color: 'black',
                             color: 'green',
                             fillColor: '#00ff00',
                             fillOpacity: 0.3,
-                            //radius: 500
                             radius: 50
                         }).addTo(map);
                     }
@@ -76,23 +67,9 @@
                     if(!marker) {
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
                     }
-                    
-
-                    if(!polyline) {
-                        polyline = L.polyline([polylinePoints], {
-                            color: 'red',
-                            weight: 3,
-                            opacity: 0.5,
-                            smoothFactor: 1
-                        }).addTo(map);
-                    }
-       
-
 
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    polyline.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-
                 });
             });
         </script>
@@ -100,7 +77,7 @@
     
     <footer class="footer">
         <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles.
+            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Sebastian Romero, Jesus Suarez.
         </p>
     </footer>
 </body>
