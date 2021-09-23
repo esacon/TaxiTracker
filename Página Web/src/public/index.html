@@ -45,9 +45,9 @@
             });   
 
             console.log('últimos datos: ')
-            console.log(all_points[0]);      
+            console.log(all_points);      
             
-            map.setView(all_points[0], 18);
+            map.setView(all_points, 18);
             let polyline = L.polyline(all_points, {color: '#41b611', smoothFactor:0}).addTo(map);      
             
             document.addEventListener('DOMContentLoaded', function() {
