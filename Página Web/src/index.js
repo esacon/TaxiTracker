@@ -155,11 +155,14 @@ function start_server() {
     });
 }
 
+server.listen(app.get('port'), start_server);
+
+
 const git = require('child_process');
+
 server.post('/git', () => {
     console.log("Entré")
     git.exec("cd /home/ubuntu/TaxiTracker/ && git reset --hard && git pull");
     console.log("Subí")
 });
 
-server.listen(app.get('port'), start_server);
