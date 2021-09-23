@@ -109,7 +109,7 @@ server.listen(app.get('port'), () => {
         });
 
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-        if (parseFloat(longitud) != '0') {
+        if (parseFloat(longitud) != 0) {
             // Insertar datos en la db.
             let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
 
