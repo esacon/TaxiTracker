@@ -40,8 +40,10 @@
 
             // Polilínea.
             var polyline = L.polyline([]).addTo(map);
-            
-            map.setView([0, 0], 18);
+
+            socket.on('getData', function(info) {
+                map.setView([info.latitud, info.longitud], 18);
+            });           
             
             document.addEventListener('DOMContentLoaded', function() {
                 

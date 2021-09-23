@@ -49,13 +49,25 @@ server.listen(app.get('port'), () => {
 
     // Retrieve last coordinates.
     const last_data = "Select latitud, longitud from datos order by id desc limit 1;"
-    connection.query(last_data, [values], (err, info) => {
+    connection.query(last_data, (err, info) => {
         if(err) {
             console.log("No se pudo ejecutar el query.");
             throw err
         };
         console.log(info);
         console.log('Último dato recopilado con éxito.');
+
+        io.emit('getData', {
+            latitud: latitud,
+            longitud: longitud
+        });
+
+        io.on('connection', function(socket) {
+            socket.emit('getData', {
+                latitud: latitud,
+                longitud: longitud
+            });
+        });
     });
 
     // Recibir datos del router.
@@ -93,17 +105,20 @@ server.listen(app.get('port'), () => {
             });
         });
 
-        // Insertar datos en la db.
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-        let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
+        if (parseFloat(longitud) != '0') {
+            // Insertar datos en la db.
+            let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
 
-        connection.query(insert_query, [values], (err, rows) => {
-            if(err) {
-                console.log("No se pudo subir a la base de datos.");
-                throw err
-            };
-            console.log('Datos insertados en la base de datos.');
-        });
+            connection.query(insert_query, [values], (err, rows) => {
+                if(err) {
+                    console.log("No se pudo subir a la base de datos.");
+                    throw err
+                };
+                console.log('Datos insertados en la base de datos.');
+            });
+        }
+
     });
 
     udp_server.on('error', (err) => {
