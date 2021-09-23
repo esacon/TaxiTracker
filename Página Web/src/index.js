@@ -33,8 +33,10 @@ let db_connection_info = {
         database: 'taxiApp'
     };
 
-function database_upload(values) {
+const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
+function database_upload(values) {
+    
     let connection = mysql.createConnection(db_connection_info);
 
     // Conexión a la base de datos.
@@ -113,8 +115,6 @@ server.listen(app.get('port'), () => {
 
         let fecha = getDate(timeStamp);
         let hora = getHour(timeStamp);
-
-        const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
         if (latitud != 0) {  
             console.log(latitud.blue);
