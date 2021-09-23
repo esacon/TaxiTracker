@@ -43,12 +43,12 @@
 
             socket.on('getData', function(info) {
                 all_points.push([parseFloat(info.latitud), parseFloat(info.longitud)]);
+                map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18);
+                polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });   
             
-            console.log('Info papu: ')
-            console.log(all_points);  
-            map.setView(all_points, 18);
-            polyline.addLatLng(all_points);            
+            console.log('últimos datos: ')
+            console.log(all_points);              
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
@@ -82,6 +82,8 @@
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);                        
                     }
     
+                    all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                    console.log(all_points);
                     polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
