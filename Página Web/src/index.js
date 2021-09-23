@@ -17,7 +17,6 @@ var io = socket(server);
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
 
-
 function getDate(UNIX_timestamp) {        
     return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
 }
