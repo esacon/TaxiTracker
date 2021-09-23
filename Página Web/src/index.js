@@ -59,11 +59,13 @@ server.listen(app.get('port'), () => {
         let fecha = info[0]['fecha'];
         let hora = info[0]['hora'];
 
-        io.emit('getData', {
-            latitud: latitud,
-            longitud: longitud,
-            fecha: fecha,
-            hora: hora
+        io.on('connection', function(socket) {
+            socket.emit('getData', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
         });
         
         console.log('Último dato recopilado con éxito.'.green);
