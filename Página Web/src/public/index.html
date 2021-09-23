@@ -37,10 +37,10 @@
             var circle;
 
             // Polilínea.
-            var first_coords;
+            var first_coords = [];
 
             socket.on('getData', function(info) {
-                first_coords = [parseFloat(info.latitud), parseFloat(info.longitud)];
+                first_coords.push(parseFloat(info.latitud), parseFloat(info.longitud));
             });   
 
             console.log('últimos datos: ')
