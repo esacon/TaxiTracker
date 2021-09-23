@@ -30,7 +30,6 @@ server.listen(app.get('port'), () => {
     console.log('Servidor web escuchando en el puerto 3000');
 
     // Base de datos.
-
     const connection = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -41,17 +40,17 @@ server.listen(app.get('port'), () => {
     // Conexión a la base de datos.
     connection.connect((err) => {
         if (err) {
-            console.log("No se pudo conectar a la base de datos.");
+            console.log("No se pudo conectar a la base de datos.".red);
             throw err
         };
-        console.log('Base de datos conectada');
+        console.log('Base de datos conectada'.green);
     });
 
     // Retrieve last coordinates.
     const last_data = "Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"
     connection.query(last_data, (err, info) => {
         if(err) {
-            console.log("No se pudo ejecutar el query.");
+            console.log("No se pudo ejecutar el query.".red);
             throw err
         };   
 
@@ -76,14 +75,14 @@ server.listen(app.get('port'), () => {
             });
         });
         
-        console.log('Último dato recopilado con éxito.');
+        console.log('Último dato recopilado con éxito.'.green);
     });
  
 
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
 
-        console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+        console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`.yellow);
 
         let arr = msg.toString().split(";");
         let latitud = parseFloat(arr[0]).toFixed(4);
@@ -96,11 +95,11 @@ server.listen(app.get('port'), () => {
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
 
         if (latitud != 0) {  
-            console.log(latitud);
-            console.log(longitud);
-            console.log(timeStamp);
-            console.log(fecha);
-            console.log(hora);
+            console.log(latitud.blue);
+            console.log(longitud.blue);
+            console.log(timeStamp.blue);
+            console.log(fecha.blue);
+            console.log(hora.blue);
 
             io.emit('change', {
                 latitud_text: latitud,
@@ -124,21 +123,18 @@ server.listen(app.get('port'), () => {
 
             connection.query(insert_query, [values], (err, rows) => {
                 if(err) {
-                    console.log("No se pudo subir a la base de datos.");
+                    console.log("No se pudo subir a la base de datos.".red);
                     throw err
                 };
-                console.log('Datos insertados en la base de datos.');
+                console.log("Datos insertados en la base de datos.".green);
                 // Cerrar conexión.
                // connection.destroy();
-            });    
-
-            
+            });                
         }
-
     });
 
     udp_server.on('error', (err) => {
-        console.log(`server error:\n${err.stack}`);
+        console.log(`server error:\n${err.stack}`.red);
         server.close();
     });
 
