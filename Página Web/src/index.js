@@ -134,10 +134,10 @@ server.listen(app.get('port'), () => {
                     };
                     console.log('Datos insertados en la base de datos.');
                 });
-            });            
 
-            // Cerrar conexión.
-            connection.end();
+                // Cerrar conexión.
+                connection.end();
+            });     
         }
 
     });
