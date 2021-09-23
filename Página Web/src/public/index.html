@@ -33,22 +33,21 @@
         <script>         
 
             var socket = io();
-            var map = L.map('mapid');
             var marker;
             var circle;
 
             // Polilínea.
-            let all_points = []
+            let first_coords;
 
             socket.on('getData', function(info) {
-                all_points.push([parseFloat(info.latitud), parseFloat(info.longitud)]);
+                first_coords = [parseFloat(info.latitud), parseFloat(info.longitud)];
             });   
 
             console.log('últimos datos: ')
-            console.log(all_points);      
+            console.log(first_coords);      
             
-            map.setView(all_points, 18);
-            let polyline = L.polyline(all_points, {color: '#41b611', smoothFactor:0}).addTo(map);      
+            var map = new L.Map('map', { center: new L.LatLng(first_coords[0], first_coords[1]), zoom: 18});
+            let polyline = L.polyline(first_coords, {color: '#41b611', smoothFactor:0}).addTo(map);      
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
@@ -83,7 +82,7 @@
                     }
     
                     all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-                    polyline.addLatLng(all_points);
+                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                 });
