@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
     database: 'taxiApp'
 });
 
-module.exports = function connect (latitud, longitud, fecha, hora) {
+module.exports = function insert(latitud, longitud, fecha, hora) {
     let values = [[null, latitud, longitud, fecha, hora]];
 
     // Conexión a la base de datos.

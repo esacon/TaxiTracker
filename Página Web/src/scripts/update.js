@@ -4,6 +4,8 @@ const marker;
 const circle;
 
 document.addEventListener('DOMContentLoaded', function() {
+    map.setView([0, 0], 18);
+
     socket.on('update', function(info) {
         console.log("\nDatos recibidos:");
         
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(info);        
                     
         // Initialize map.
-        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], 18);
+        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
             attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
