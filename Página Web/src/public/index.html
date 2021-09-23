@@ -35,6 +35,7 @@
             var map = L.map('mapid');
             var marker;
             var circle;
+            var polyline = L.polyline([]).addTo(map)
             map.setView([0,0], 18);
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
@@ -63,7 +64,7 @@
                             radius: 50
                         }).addTo(map);
                     }
-                    var polyline = L.polyline([]).addTo(map)
+                    
                     if(!marker) {
                         marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
                         
