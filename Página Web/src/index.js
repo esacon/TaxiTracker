@@ -54,7 +54,9 @@ server.listen(app.get('port'), () => {
             console.log("No se pudo ejecutar el query.");
             throw err
         };
-        console.log(info);
+        console.log(info);        
+        console.log(info[0]);
+        console.log(info[0]['latitud']);
         console.log(info['latitud']);
         console.log('Último dato recopilado con éxito.');
 
