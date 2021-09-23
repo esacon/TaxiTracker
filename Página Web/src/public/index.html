@@ -35,8 +35,10 @@
             var map = L.map('mapid');
             var marker;
             var circle;
-            Lastlat="0";
-            Lastlon="0";
+            Lastlat = "0";
+            Lastlon = "0";
+
+            // Polilínea.
             var polyline = L.polyline([]).addTo(map);
             
             map.setView([0,0], 18);
@@ -49,19 +51,7 @@
                     document.getElementById('longitud_text').innerText = info.longitud_text;
                     document.getElementById('fecha_text').innerText = info.fecha_text;
                     document.getElementById('hora_text').innerText = info.hora_text;
-                    var polylinePoints = [
-                        [Lastlat,Lastlon],
-                        [parseFloat(info.latitud_text), parseFloat(info.longitud_text)]
-                    ];
-                    Alat= info.latitud_text;
-                    Alon= info.longitud_text;
-                    if (Lastlat != Alat) {
-                    Lastlat = Alat;
-                    }
-    
-                    if (Lastlon != Alon) {
-                    Lastlon = Alon;
-                    }
+
                     // Initialize map.
                     map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
 
@@ -83,10 +73,11 @@
                     }
                     
                     if(!marker) {
-                        marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);
-                        
+                        marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);                        
                     }
-                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)])
+    
+                    polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+
                     marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                     circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                 });
@@ -95,7 +86,7 @@
     </main>
     <footer class="footer">
         <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Diaz, Enrique Niebles, Jesús Suárez.
+            Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.
         </p>
     </footer>
 </body>

@@ -40,11 +40,11 @@ server.listen(app.get('port'), () => {
 
     // Conexión a la base de datos.
     connection.connect((err) => {
-    if (err) {
-        console.log("No se pudo conectar a la base de datos.");
-        throw err
-    };
-    console.log('Base de datos conectada');
+        if (err) {
+            console.log("No se pudo conectar a la base de datos.");
+            throw err
+        };
+        console.log('Base de datos conectada');
     });
 
     // Recibir datos del router.
