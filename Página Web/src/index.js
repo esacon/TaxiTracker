@@ -26,16 +26,44 @@ function getHour(UNIX_timestamp) {
     return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
 }
 
-server.listen(app.get('port'), () => {
-    console.log('Servidor web escuchando en el puerto 3000');
-
-    // Base de datos.
-    const connection = mysql.createConnection({
+let db_connection_info = {
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASS,
         database: 'taxiApp'
+    };
+
+function database_upload(values) {
+
+    connection = mysql.createConnection(db_connection_info);
+    
+    // Conexión a la base de datos.
+    connection.connect((err) => {
+        if (err) {
+            console.log("No se pudo conectar a la base de datos.".red);
+            throw err
+        };
+        console.log('Base de datos conectada'.green);
     });
+    
+    // Insert data.
+    connection.query(insert_query, [values], (err, info) => {
+        if(err) {
+            console.log("No se pudo subir a la base de datos.".red);
+            throw err
+        };
+        console.log("Datos insertados en la base de datos.".green);        
+    });   
+
+    // Cerrar conexión.
+    connection.destroy();
+}
+
+server.listen(app.get('port'), () => {
+    console.log('Servidor web escuchando en el puerto 3000');
+
+    // Base de datos.
+    let connection = mysql.createConnection(db_connection_info);
 
     // Conexión a la base de datos.
     connection.connect((err) => {
@@ -45,6 +73,8 @@ server.listen(app.get('port'), () => {
         };
         console.log('Base de datos conectada'.green);
     });
+
+    connection.end();
 
     // Retrieve last coordinates.
     const last_data = "Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"
@@ -110,19 +140,9 @@ server.listen(app.get('port'), () => {
                 });
             });
 
-
             // Insertar datos en la db.
             let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
-
-            connection.query(insert_query, [values], (err, rows) => {
-                if(err) {
-                    console.log("No se pudo subir a la base de datos.".red);
-                    throw err
-                };
-                console.log("Datos insertados en la base de datos.".green);
-                // Cerrar conexión.
-               // connection.destroy();
-            });                
+            database_upload(values);          
         }
     });
 
