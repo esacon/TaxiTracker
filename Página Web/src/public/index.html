@@ -38,8 +38,6 @@
 
             // Polilínea.
             socket.on('getData', function(data) {
-                first_coords.push(parseFloat(data.latitud), parseFloat(data.longitud));
-
                 console.log('últimos datos: ')
                 console.log([parseFloat(data.latitud), parseFloat(data.longitud)]);      
 
@@ -78,7 +76,6 @@
                             marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map);                        
                         }
         
-                        all_points.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                         polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                         marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
                         circle.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
