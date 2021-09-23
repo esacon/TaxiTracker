@@ -86,8 +86,8 @@ server.listen(app.get('port'), () => {
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
         let arr = msg.toString().split(";");
-        let latitud = parseFloat(arr[0]).toFixed(6);
-        let longitud = parseFloat(arr[1]).toFixed(6);
+        let latitud = parseFloat(arr[0]).toFixed(4);
+        let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
 
         let fecha = getDate(timeStamp);
