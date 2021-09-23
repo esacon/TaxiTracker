@@ -47,14 +47,25 @@ server.listen(app.get('port'), () => {
         console.log('Base de datos conectada');
     });
 
+    // Retrieve last coordinates.
+    const last_data = "Select latitud, longitud from datos order by id desc limit 1;"
+    connection.query(last_data, [values], (err, info) => {
+        if(err) {
+            console.log("No se pudo ejecutar el query.");
+            throw err
+        };
+        console.log(info);
+        console.log('Último dato recopilado con éxito.');
+    });
+
     // Recibir datos del router.
     udp_server.on('message', (msg, rinfo) => {
 
         console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
 
         let arr = msg.toString().split(";");
-        let latitud = arr[0];
-        let longitud = arr[1];
+        let latitud = round(parseFloat(arr[0]), 6);
+        let longitud = round(parseFloat(arr[1]), 6);
         let timeStamp = arr[2];
 
         let fecha = getDate(timeStamp);
@@ -81,6 +92,7 @@ server.listen(app.get('port'), () => {
                 hora_text: hora
             });
         });
+
         // Insertar datos en la db.
         const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
         let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
