@@ -65,15 +65,6 @@ server.listen(app.get('port'), () => {
             fecha: fecha,
             hora: hora
         });
-
-        io.on('connection', function(socket) {
-            socket.emit('getData', {
-                latitud: latitud,
-                longitud: longitud,
-                fecha: fecha,
-                hora: hora
-            });
-        });
         
         console.log('Último dato recopilado con éxito.'.green);
     });
