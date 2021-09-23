@@ -60,7 +60,7 @@ function database_upload(values) {
     });       
 }
 
-server.listen(app.get('port'), () => {
+function start_server() {
     console.log('Servidor web escuchando en el puerto 3000');
 
     // Base de datos.
@@ -153,8 +153,13 @@ server.listen(app.get('port'), () => {
         addres: process.env.HOST,
         port:8888
     });
+}
+
+const git = require('child_process');
+server.post('/git', () => {
+    console.log("Entré")
+    git.exec("cd /home/ubuntu/TaxiTracker/ && git reset --hard && git pull");
+    console.log("Subí")
 });
 
-server.listen('/git', () => {
-    console.log("Entré")
-});
+server.listen(app.get('port'), start_server);
