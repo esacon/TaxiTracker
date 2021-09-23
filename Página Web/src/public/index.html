@@ -59,7 +59,8 @@
                             zoomOffset: -1,
                         }).addTo(map);   
                 
-                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);       
+                    marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);   
+                    map.removeLayer(polyline);  
                 });              
 
                 socket.on('change', function(info) {
