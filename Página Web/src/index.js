@@ -48,7 +48,7 @@ server.listen(app.get('port'), () => {
     });
 
     // Retrieve last coordinates.
-    const last_data = "Select latitud, longitud from datos order by id desc limit 1;"
+    const last_data = "Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"
     connection.query(last_data, (err, info) => {
         if(err) {
             console.log("No se pudo ejecutar el query.");
@@ -57,16 +57,22 @@ server.listen(app.get('port'), () => {
 
         let latitud = info[0]['latitud'];
         let longitud = info[0]['longitud'];
+        let fecha = info[0]['fecha'];
+        let hora = info[0]['hora'];
 
         io.emit('getData', {
             latitud: latitud,
-            longitud: longitud
+            longitud: longitud,
+            fecha: fecha,
+            hora: hora
         });
 
         io.on('connection', function(socket) {
             socket.emit('getData', {
                 latitud: latitud,
-                longitud: longitud
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
             });
         });
         
