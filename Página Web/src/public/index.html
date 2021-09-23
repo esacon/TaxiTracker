@@ -37,20 +37,17 @@
             var circle;
 
             // Polilínea.
-            var latitud;
-            var longitud;
+            var first_coords = [];
 
             socket.on('getData', function(info) {
-                latitud = parseFloat(info.latitud);
-                longitud = parseFloat(info.longitud);
+                first_coords.push(parseFloat(info.latitud), parseFloat(info.longitud));
             });   
 
             console.log('últimos datos: ')
-            console.log(latitud);
-            console.log(longitud);      
+            console.log(first_coords);      
 
-            var map = new L.Map('map', { center: [10.487573, -73.277327], zoom: 18});
-            let polyline = L.polyline([10.487573, -73.277327], {color: '#41b611', smoothFactor:0}).addTo(map);      
+            var map = new L.Map('mapid', { center: first_coords, zoom: 18});
+            let polyline = L.polyline(first_coords, {color: '#41b611', smoothFactor:0}).addTo(map);      
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
