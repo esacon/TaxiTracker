@@ -39,7 +39,7 @@
 
             // Polilínea.
             
-            var polyline = L.polyline(allPoints, {color: '#41b611', smoothFactor:0}).addTo(map);
+            var polyline = L.polyline([], {color: '#41b611', smoothFactor:0}).addTo(map);
 
             socket.on('getData', function(info) {
                 console.log([info.latitud, info.longitud]);
