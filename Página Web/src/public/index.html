@@ -42,14 +42,13 @@
             var polyline = L.polyline([], {color: '#41b611', smoothFactor:0}).addTo(map);
 
             socket.on('getData', function(info) {
-                all_points.push((info.latitud, info.longitud));
-                console.log(all_points);
-                map.setView([info.latitud, info.longitud], 18);
-                polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
+                all_points.push([info.latitud, info.longitud]);
             });   
             
             console.log('Info papu: ')
-            console.log(all_points);              
+            console.log(all_points);  
+            map.setView(all_points, 18);
+            polyline.addLatLng(all_points);            
             
             document.addEventListener('DOMContentLoaded', function() {
                 socket.on('change', function(info) {
