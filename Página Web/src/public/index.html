@@ -42,7 +42,7 @@
             var polyline = L.polyline([], {color: '#41b611', smoothFactor:0}).addTo(map);
 
             socket.on('getData', function(info) {
-                all_points.push([info.latitud, info.longitud]);
+                all_points.push([parseFloat(info.latitud), parseFloat(info.longitud)]);
             });   
             
             console.log('Info papu: ')
