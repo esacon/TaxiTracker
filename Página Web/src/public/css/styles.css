@@ -52,7 +52,7 @@ html {
   p {
     font-family:monospace;
     font-weight: bold;
-    background: #000000;
+    color:#ff0000;
   }
 
   button{
