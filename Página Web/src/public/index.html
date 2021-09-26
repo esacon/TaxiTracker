@@ -12,6 +12,9 @@
     <script src="./socket.io/socket.io.js" charset="utf-8"></script>
 </head>
 <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
     <header class="taxi_app">
         <div class="taxi_info">
             <h1>Taxi Tracker App</h1>
@@ -26,12 +29,12 @@
             <p class="fecha">Fecha: <span id="fecha_text"></span></p>
             <p class="hora">Hora: <span id="hora_text"></span></p>
         </section>
-
+        <div class="contenido"> 
         <!-- Map section -->
         <section class="map">
             <div id ="mapid"></div>
         </section>
-
+        </div>
         <!-- Load mapa into de page. -->
         <script src="scripts/map.js"></script>
     </main>
