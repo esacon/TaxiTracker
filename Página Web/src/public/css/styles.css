@@ -56,6 +56,7 @@ html {
   }
   p.footer_copyright{
     font-family:monospace;
+    font-size: 80px;
     font-weight: bold;
     color:#ff00d4;
   }
