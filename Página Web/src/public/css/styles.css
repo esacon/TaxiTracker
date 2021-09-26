@@ -52,13 +52,14 @@ html {
   p {
     font-family:monospace;
     font-weight: bold;
-    color:#ff0000;
+    color:#000000;
   }
   p.footer_copyright{
     font-family:monospace;
-    font-size: 80px;
+    /* 
+    font-size: 80px;*/
     font-weight: bold;
-    color:#ff00d4;
+    color:#000000;
   }
   button{
     border-radius: 55px 55px 55px 55px;
