@@ -54,7 +54,11 @@ html {
     font-weight: bold;
     color:#ff0000;
   }
-
+  p.footer_copyright{
+    font-family:monospace;
+    font-weight: bold;
+    color:#ff00d4;
+  }
   button{
     border-radius: 55px 55px 55px 55px;
     -moz-border-radius: 55px 55px 55px 55px;
