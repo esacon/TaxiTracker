@@ -1,4 +1,5 @@
 #mapid { 
+    margin-right: 90px;
     width: 800px;
     height: 580px;
     box-shadow: 5px 5px 5px #888;
@@ -12,8 +13,4 @@
 }
 .content2 {
     max-width: 400px;
-}
-
-.main {
-    margin-right: 90px;
 }
