@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hora_text').innerText = info.hora_text;
 
         // Initialize map.
-        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)], 18); 
+        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
         polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
     });

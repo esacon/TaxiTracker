@@ -3,3 +3,13 @@
     height: 580px;
     box-shadow: 5px 5px 5px #888;
  }
+ body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.content {
+    max-width: 500px;
+}
+.content2 {
+    max-width: 400px;
+}
