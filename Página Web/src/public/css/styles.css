@@ -61,6 +61,16 @@ html {
     font-weight: bold;
     color:#000000;
   }
+  label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+    }
+
+    input,
+    label {
+        margin: .4rem 0;
+    }
+
   button{
     border-radius: 55px 55px 55px 55px;
     -moz-border-radius: 55px 55px 55px 55px;
