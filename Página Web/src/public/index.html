@@ -12,19 +12,16 @@
     <script src="./socket.io/socket.io.js" charset="utf-8"></script>
 </head>
 <body>
-    
-    <div class="center">
-        <font color="000000">
-        <h1>Taxi Tracker  App </h1>
-        </font>
-    </div>
+        <div class="center">
+            <h1>Taxi Tracker  App </h1>
+        </div>
     
     <div class="container-fluid" style= "background-color:rgb(75, 11, 11);">
             <div class="row justify-content-center">
-                <div class="col"><h5>Latitud</h5></div>
-                <div class="col"><h5>Longitud</h5></div>
-                <div class="col"><h5>Fecha</h5></div>
-                <div class="col"><h5>Hora</h5></div>
+                <div class="col" ><h5><p class="text-light">Latitud</p></h5></div>
+                <div class="col"><h5><p class="text-light">Longitud</p></h5></div>
+                <div class="col"><h5><p class="text-light">Fecha</p></h5></div>
+                <div class="col"><h5><p class="text-light">Hora</p></h5></div>
             </div> 
             <div class="row justify-content-center">
                 <main class="main">
@@ -38,14 +35,12 @@
             </div>
     </div>
     <main class="main">
-        <div class="center">
             <!-- Map section -->
             <section class="map">
             <div id ="mapid"></div>
             </section>
             <!-- Load mapa into de page. -->
             <script src="scripts/map.js"></script>
-        </div>
     </main>
     <footer class="footer">
         <p class="footer_copyright">
