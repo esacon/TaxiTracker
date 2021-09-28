@@ -12,36 +12,33 @@
     <script src="./socket.io/socket.io.js" charset="utf-8"></script>
 </head>
 <body>
-        <div class="center">
-            <h1>Taxi Tracker  App </h1>
-        </div>
+        <div class="container-fluid text-center" style= "background-color:rgb(75, 13, 13);">
+            <h1><p class="text-light">Taxi Tracker  App </p></h1>
 
             <main class="main">
                 <section class="coordenadas info">
-                    <div class="container-fluid" style= "background-color:rgb(32, 170, 66);">
+                    
                         <div class="row justify-content-center">
-                            <div class="col" ><h5> <p class="latitud">Latitud: <span id="latitud_text"></span></p></h5></div>
-                            <div class="col" ><h5> <p class="longitud">Longitud: <span id="longitud_text"></span></p></h5></div>
-                            <div class="col" ><h5> <p class="fecha">Fecha: <span id="fecha_text"></span></p></h5></div>
-                            <div class="col" ><h5> <p class="hora">Hora: <span id="hora_text"></span></p></h5></div>
+                            <div class="col" ><h5><p class="latitud"><p class="text-light">Latitud: <span id="latitud_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="longitud"><p class="text-light">Longitud: <span id="longitud_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="fecha"><p class="text-light">Fecha: <span id="fecha_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="hora"><p class="text-light">Hora: <span id="hora_text"></span></p></p></h5></div>
                         </div>
-                    </div>
+                
                 </section>
-        
+        </div>
                 <!-- Map section -->
                 <section class="map">
-                    <div id ="mapid"></div>
-                </section>
+                    <div class="container-fluid text-center" id ="mapid"></div>
+               </section>
         
                 <!-- Load mapa into de page. -->
                 <script src="scripts/map.js"></script>
             </main>
-    <footer class="footer">
-        <p class="footer_copyright">
-            <div class="container-fluid" style= "background-color:rgb(32, 170, 66);">
-                <font color="FFFFFFF">
-                    <h6>Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.</h6>
-            </font>
+            <footer class="bg-dark text-center text-white">
+                <p class="footer_copyright">
+                <div class="text-center p-3" style="background-color: rgb(75, 13, 13);">
+                    <h6><p class="text-light">Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.</p></h6>
              </div>
            
         </p>
