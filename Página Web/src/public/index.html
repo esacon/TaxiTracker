@@ -30,19 +30,21 @@
             <p class="hora">Hora: <span id="hora_text"></span></p>
         </section>
         <!--Date-time-->
+        <label for="start">Fecha inicial:</label>
+        <input type="datetime-local" id="start" name="trip-start"
+       value="2018-07-22"
+       min="2021-01-01" max="2021-12-31">
+       <label for="start">Fecha final:</label>
         <input type="datetime-local" id="start" name="trip-start"
        value="2018-07-22"
        min="2021-01-01" max="2021-12-31">
         <!-- Map section -->
-        <section class="map">
+        <section class="map mb-1">
             <div id ="mapid"></div>
         </section>
         <!-- Load mapa into de page. -->
         <script src="scripts/map.js"></script>
     </main>
-    <label for="start">Start date:</label>
-
-
     <footer class="footer">
         <p class="footer_copyright">
             Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.
