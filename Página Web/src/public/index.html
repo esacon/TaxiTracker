@@ -31,9 +31,14 @@
                 
                 </section>
     </div>
-                <label for="meeting-time">Choose a time for your appointment:</label>
-                <input type="datetime-local" id="meeting-time"
-                    name="meeting-time" value="2021-06-12T19:30"
+                <label for="strat">Fecha de inicio:</label>
+                <input type="datetime-local" id="start"
+                    name="start" value="2021-06-12T19:30"
+                    min="2021-01-01T00:00" max="2021-12-31T00:00">
+
+                <label for="end">Fecha de Fin:</label>
+                <input type="datetime-local" id="end"
+                    name="end" value="2021-06-12T19:30"
                     min="2021-01-01T00:00" max="2021-12-31T00:00">
 
                     <!-- Map section -->
