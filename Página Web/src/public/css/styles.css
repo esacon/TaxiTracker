@@ -9,14 +9,16 @@
     padding: 1rem;
     /* IMPORTANTE */
     text-align: center;
+  
   }
   
   div [class|="col"]{
-   border: 4px solid rgb(22, 3, 3);   
+   border: 4px solid #000000;   
   }
   
 
 footer{
   width: 100%;
     height: 50px;
+    background-color: #FAE671;
 }
