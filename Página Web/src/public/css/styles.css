@@ -58,10 +58,11 @@ html {
     font-weight: bold;
     color:#000000;
   }
+
   p.footer_copyright{
     font-family:monospace;
-    /* 
-    font-size: 80px;*/
+     
+    font-size: 80px;
     font-weight: bold;
     color:#000000;
   }
