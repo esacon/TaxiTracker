@@ -1,4 +1,4 @@
-     
+    
 var socket = io();
 let marker;
 let circle;
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hora_text').innerText = info.hora; 
 
         // Load Map
+        map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
                 attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 maxZoom: 20,

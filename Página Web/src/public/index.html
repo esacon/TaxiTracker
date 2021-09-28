@@ -4,40 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taxi App Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>    
     <script src="./socket.io/socket.io.js" charset="utf-8"></script>
 </head>
 <body>
-    <header class="taxi_app">
-        <div class="taxi_info">
-            <h1>Taxi Tracker App</h1>
-            <p id="descripcion">Coordenadas:</p>
+    
+    <div class="center">
+        <font color="000000">
+        <h1>Taxi Tracker  App </h1>
+        </font>
+    </div>
+    
+    <div class="container">
+            <div class="row justify-content-center">
+                <div class="col">Latitud</div>
+                <div class="col">Longitud</div>
+                <div class="col">Fecha</div>
+                <div class="col">Hora</div>
+            </div>
+
+        <div class="row justify-content-center">
+            <main class="main">
+                <section class="coordenadas info">
+                    <div class="col"><span id="latitud_text"></span></div>
+                    <div class="col"><span id="longitud_text"></span></div>
+                    <div class="col"><span id="fecha_text"></span></div>
+                    <div class="col"><span id="hora_text"></span></div>
+                </section>
+            </main>
         </div>
-    </header>
-
+    </div>
     <main class="main">
-        <section class="coordenadas info">
-            <p class="latitud">Latitud: <span id="latitud_text"></span></p>
-            <p class="longitud">Longitud: <span id="longitud_text"></span></p>
-            <p class="fecha">Fecha: <span id="fecha_text"></span></p>
-            <p class="hora">Hora: <span id="hora_text"></span></p>
-        </section>
-
-        <!-- Map section -->
-        <section class="map">
+        <div class="center">
+            <!-- Map section -->
+            <section class="map">
             <div id ="mapid"></div>
-        </section>
-
-        <!-- Load mapa into de page. -->
-        <script src="scripts/map.js"></script>
+            </section>
+            <!-- Load mapa into de page. -->
+            <script src="scripts/map.js"></script>
+        </div>
     </main>
     <footer class="footer">
         <p class="footer_copyright">
-            Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.
+            <div class="container-fluid" style=background-color:#80e5f79f;>
+                <font color="000000">
+                    <h6>Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.</h6>
+            </font>
+             </div>
+           
         </p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
-<!-- Prueba bootstrap5 -->
