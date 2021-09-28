@@ -19,35 +19,33 @@
     <div class="container-fluid text-center" style= "background-color:#FAE671;">
         <h1><p class="text-dark">Taxi Tracker  App </p></h1>
 
-        <main class="main">
-            <section class="coordenadas info">
+            <main class="main">
+                <section class="coordenadas info">
+                    
+                        <div class="row justify-content-center">
+                            <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="longitud"><p class="text-dark">Longitud: <span id="longitud_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="fecha"><p class="text-dark">Fecha: <span id="fecha_text"></span></p></p></h5></div>
+                            <div class="col" ><h5><p class="hora"><p class="text-dark">Hora: <span id="hora_text"></span></p></p></h5></div>
+                        </div>
                 
-                    <div class="row justify-content-center">
-                        <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
-                        <div class="col" ><h5><p class="longitud"><p class="text-dark">Longitud: <span id="longitud_text"></span></p></p></h5></div>
-                        <div class="col" ><h5><p class="fecha"><p class="text-dark">Fecha: <span id="fecha_text"></span></p></p></h5></div>
-                        <div class="col" ><h5><p class="hora"><p class="text-dark">Hora: <span id="hora_text"></span></p></p></h5></div>
-                    </div>
-            
-            </section>
+                </section>
     </div>
-                <!-- Map section -->
-                <section class="map">
-                    <div class="container-fluid text-center" id ="mapid"></div>
-               </section>
-        
-                <!-- Load mapa into de page. -->
-                <script src="scripts/map.js"></script>
+                    <!-- Map section -->
+                    <section class="map">
+                        <div class="container-fluid text-center" id ="mapid"></div>
+                </section>
+            
+                    <!-- Load mapa into de page. -->
+                    <script src="scripts/map.js"></script>
             </main>
 
             <footer class="blockquote text-white">
                 <div class="blockquote p-3" style="background-color: #000000";>
-                    <section id="hero">
                         <div class ="row justify-content-around">
                             <div class ="col-5"><h1><p class ="content blockquote my-4"><p class="tex-light"><p class = "display-4 fw-bold mb-5">La mejor aplicación para el registro de tus rutas y viajes.<img src="https://play.google.com/intl/es-419/badges/static/images/badges/es-419_badge_web_generic.png" class ="me-1"></p></p></p></h1></div>
                             <div class ="col-5 "><p class= "content2 mx-auto align-self-center my-4"><img src ="https://github.com/esacon/TaxiTracker/blob/pagedesign/P%C3%A1gina%20Web/src/public/Pixel%204%20XL%20image.png?raw=true" class ="img-fluid"></p></div>
                         </div>
-                    </section>
 
                     <p class="footer_copyright">
                         <div class="text-center p-3" style="background-color: #000000";>  
@@ -57,6 +55,5 @@
                 </div>
             </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/dc3b0fb2c6.js" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -22,3 +22,9 @@ footer{
     height: 50px;
     background-color: #000000;
 }
+.content {
+  max-width: 500px;
+}
+.content2 {
+  max-width: 400px;
+}
