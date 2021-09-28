@@ -45,7 +45,11 @@ html {
     top:50%;
     transform:translate(-50%, -50%);
   }
-  
+  label{
+    font-family:monospace;
+    font-weight: bold;
+    color:#000000;  
+  }
   h1 {
     font-family:monospace;
   }
