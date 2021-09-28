@@ -45,7 +45,7 @@ html {
     top:50%;
     transform:translate(-50%, -50%);
   }
-  
+
   h1 {
     font-family:monospace;
   }
@@ -54,19 +54,26 @@ html {
     font-weight: bold;
     color:#000000;
   }
-
+  p.Fecha_inicial{
+    font-family:monospace;
+    font-weight: bold;
+    color:#000000;
+  }
+  p.Fecha_final{
+    font-family:monospace;
+    font-weight: bold;
+    color:#000000;
+  }
   p.footer_copyright{
     font-family:monospace;
-     
-    font-size: 80px;
+    /* 
+    font-size: 80px;*/
     font-weight: bold;
     color:#000000;
   }
   label {
     display: block;
-    font-family:monospace;
-    font-weight: bold;
-    color:#000000;
+
     }
 
     input,
