@@ -155,6 +155,7 @@ server.listen(app.get('port'), () => {
     });
 });
 
+/*
 server.listen('/git', () => {
     console.log("Entré")
-});
+});*/
