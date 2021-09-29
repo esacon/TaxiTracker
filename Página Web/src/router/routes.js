@@ -71,7 +71,7 @@ function getHour(UNIX_timestamp) {
 }
 
 router.get('/', (req, res) => {    
-    let rows = await getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
+    let rows = getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
     
     udp_server.on('message', (msg, rinfo) => {
         cont += 1;
@@ -89,7 +89,7 @@ router.get('/', (req, res) => {
             console.log([latitud, longitud, timeStamp, fecha, hora].blue);            
 
             // Insertar datos en la db.
-            let insert = await insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
+            let insert = insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
 
             res.render("index", {first_data:rows, udp_data:[latitud, longitud, fecha, hora]});     
         }
