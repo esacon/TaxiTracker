@@ -14,6 +14,13 @@ const udp_server = udp.createSocket('udp4');
 
 var io = socket(server);
 
+var date;
+function setDate(val) {
+    date = val;
+}
+
+
+
 app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
 
