@@ -115,4 +115,4 @@ router.post('/historicos', (req, res) => {
 });
 
 
-
+module.exports = router;
