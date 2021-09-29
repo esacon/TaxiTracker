@@ -1,0 +1,37 @@
+<%- include("../templates/header", {ruta: 'Inicio'}) %>
+<body>
+    <main class="main">
+        <div class="container-fluid text-center" style= "background-color:#FAE671;">    
+            <h1><p class="text-dark">Taxi Tracker  App </p></h1>
+        
+            <section class="coordenadas info">                
+                    <div class="row justify-content-center">
+                        <div class="col" ><h5><p class="text-dark">Latitud: <%= udp_data[0] %> ></span></p></h5></div>
+                        <div class="col" ><h5><p class="text-dark">Longitud: <%= udp_data[1] %></span></p></h5></div>
+                        <div class="col" ><h5><p class="text-dark">Fecha: <%= udp_data[2] %></span></p></h5></div>
+                        <div class="col" ><h5><p class="text-dark">Hora: <%= udp_data[3] %></span></p></h5></div>
+                    </div>            
+            </section>
+        </div>        
+                       
+        <!-- Map section -->
+        <section class="map">
+            <div class="container-fluid text-center" id ="mapid"></div>
+        </section>
+
+        <!-- Load mapa into de page. -->
+        <script>
+            let marker;
+            let circle;
+            let map = L.map('mapid');            
+            let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+
+            console.log([parseFloat(info.latitud), parseFloat(info.longitud)]);      
+            map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
+
+            map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
+            polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);     
+        </script>
+    </main>
+<%- include("../templates/footer") %>
