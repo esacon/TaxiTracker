@@ -17,6 +17,8 @@ var io = socket(server);
 var date;
 function setDate(val) {
     date = val;
+    document.getElementById("jsValue").value = yourVariable;
+    document.getElementById("seeYourVariable").innerHTML = yourVariable;
 }
 
 
