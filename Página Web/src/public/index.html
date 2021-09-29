@@ -65,7 +65,13 @@
                             <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label><input type="datetime-local"  id="end" name="end" value="" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
                             -->
                             <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label><input type="date" id="bday" name="bday"><input type="time" id="taim" name="taim">
-                        
+                                <script>
+                                function fff() {
+                                    document.getElementById("sisas").innerHTML = bday.value;
+                                    document.getElementById("ombe").innerHTML = taim.value;
+                                  }
+                                </script>
+                                  
                         </div>
                             
                         <!-- Map section -->
