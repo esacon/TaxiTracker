@@ -39,11 +39,13 @@
             <section class="map">
                 <div class="container-fluid text-center my-4" id ="maphi"></div>
             </section>
+
+            <input name="datos" style="display: none;" type="text" id="db_info" value=<%=info%>><input
     
             <!-- Load mapa into de page. -->
             <script>
-                const info = '<%- JSON.stringify(info) %>';
-                console.log("maphi")
+                const info = document.getElementById("db_info").innerText;
+                console.log(info)
                 var socket = io();
                 let marker;
                 let circle;
