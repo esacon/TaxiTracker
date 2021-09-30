@@ -111,8 +111,8 @@ server.listen(PORT, () => {
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
 
-        let fecha = getDate(timeStamp);
-        let hora = getHour(timeStamp);
+        let fecha = datetime.getDate(timeStamp);
+        let hora = datetime.getHour(timeStamp);
 
         if (latitud != 0) {  
             console.log(latitud.blue);
@@ -138,8 +138,7 @@ server.listen(PORT, () => {
             });
 
             // Insertar datos en la db.
-            let values = [[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]];
-            database_upload(values);          
+            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);         
         }
     });
 
