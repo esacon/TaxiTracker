@@ -42,6 +42,8 @@ router.get('/historicos', (req, res) => {
     res.render("historicos");
 });
 
+app.use('/', router);
+
 server.listen(PORT, function() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
     
