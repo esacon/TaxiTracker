@@ -5,7 +5,7 @@ const db_connection_info = {
     database: 'taxiApp'
 };
 
-export async function getData(query) {
+async function getData(query) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -30,7 +30,7 @@ export async function getData(query) {
     });
 }
 
-export async function insertData(values) {
+async function insertData(values) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -53,3 +53,8 @@ export async function insertData(values) {
         });
     });
 }
+
+module.exports = {
+    getData: getData,
+    insertData: insertData
+};
