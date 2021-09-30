@@ -3,7 +3,7 @@ function getDate(UNIX_timestamp) {
     const d = date.split("/")[0];
     const m = date.split("/")[1]; 
     const y = date.split("/")[2];
-    return new Date(new Date(`${y}-${m}-${d}`).toISOString().slice(0,10));
+    return new Date(`${y}-${m}-${d}`).toISOString().slice(0,10);
 }
 
 function convertTime12to24(time12h) {
