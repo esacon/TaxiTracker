@@ -1,3 +1,3 @@
 import { getDate, getHour } from "./datetime.mjs";
 
-console.log(getDate("1632895204000"));
+console.log(getHour("1632966903434"));
