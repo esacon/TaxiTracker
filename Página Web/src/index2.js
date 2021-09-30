@@ -81,14 +81,39 @@ const init = () => {
 
     udp_server.on('error', (err) => {
         console.log(`server error:\n${err.stack}`.red);
-        server.close();
+        udp_server.close();
     });
 
     udp_server.bind({
         addres: process.env.HOST,
         port:8888
     });
-
 };
+
+app.get('/historicos', (req, res) => {
+
+    async function retrieve() {
+        const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-29' and hora >= '23:00:00' and hora <= '23:30:04'");
+        let latitud = info[0]['latitud'];
+        let longitud = info[0]['longitud'];
+        let fecha = info[0]['fecha'];
+        let hora = info[0]['hora'];
+
+        console.log(info)
+
+        io.on('connection', function(socket) {
+            socket.emit('getData', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
+        });
+    };
+
+    retrieve();
+
+    //res.render("historicos");
+});
 
 server.listen(PORT, init);
