@@ -19,65 +19,6 @@ app.use(express.urlencoded({extended: false}));
 
 const PORT = process.env.PORT || 3000; // puerto del servidor.
 
-function getDate(UNIX_timestamp) {        
-    const date = new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
-    const d = date.split("/")[0];
-    const m = date.split("/")[1]; 
-    const y = date.split("/")[2];
-    return new Date(`${y}-${m}-${d}`).toISOString().slice(0,10);
-}
-    
-function getHour(UNIX_timestamp) {  
-    time12h = new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
-
-    const [time, modifier] = time12h.split(' ');
-    let [hours, minutes, seconds] = time.split(':');
-
-    if (hours === '12') {
-        hours = '00';
-    }
-    if (modifier === 'PM') {
-        hours = parseInt(hours, 10) + 12;
-    }
-
-    return `${hours}:${minutes}:${seconds}`;
-}
-
-let db_connection_info = {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: 'taxiApp'
-    };
-
-const insert_query = "INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?";
-
-function database_upload(values) {
-    
-    let connection = mysql.createConnection(db_connection_info);
-
-    // Conexión a la base de datos.
-    connection.connect((err) => {
-        if (err) {
-            console.log("No se pudo conectar a la base de datos.".red);
-            throw err
-        };
-        console.log('Base de datos conectada'.green);
-    });
-    
-    // Insert data.
-    connection.query(insert_query, [values], (err, info) => {
-        if(err) {
-            console.log("No se pudo subir a la base de datos.".red);
-            throw err
-        };
-        console.log("Datos insertados en la base de datos.".green);     
-        // Cerrar conexión.
-        connection.end(); 
-        console.log("Conexión cerrada".grey); 
-    });       
-}
-
 const init = () => {
 
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
