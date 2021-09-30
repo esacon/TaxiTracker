@@ -20,18 +20,6 @@
         </section>
 
         <!-- Load mapa into de page. -->
-        <script>
-            let marker;
-            let circle;
-            let map = L.map('mapid');            
-            let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-
-            console.log([parseFloat(info.latitud), parseFloat(info.longitud)]);      
-            map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
-
-            map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-            marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
-            polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);     
-        </script>
+        <script src="scripts/map.js"></script>
     </main>
 <%- include("../templates/footer") %>
