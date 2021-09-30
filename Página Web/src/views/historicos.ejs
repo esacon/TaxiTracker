@@ -26,10 +26,10 @@
             <div class="row justify-content-evenly" style= "background-color:#FAE671;">
                 <form method="post" action="/historicos">
                     <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label>
-                        <input type="datetime-local" id="start_date" name="start" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00">
+                        <input type="datetime-local" id="start_date" name="start" value="2021-09-30T19:30" min="2021-09-01T00:00" max="2021-12-31T00:00">
                     </div>
                     <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label>
-                        <input type="datetime-local" id="end_date" name="end" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00">
+                        <input type="datetime-local" id="end_date" name="end" value="2021-09-30T19:30" min="2021-09-01T00:00" max="2021-12-31T00:00">
                     </div>
                     <button class="mg7 mgB10" id="post-btn" type="submit">Buscar</button>
                 </form>
@@ -48,7 +48,7 @@
                 let marker;
                 let circle;
                 let map = L.map('maphi');    
-                map.setView([0,0], 18);         
+                map.setView([0,0], 12);         
                 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
                 // Load Map
                 L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
@@ -67,12 +67,10 @@
                     const fin = [parseFloat(info[info.length - 1]['latitud']), parseFloat(info[info.length - 1]['longitud'])];
                     const medio = [parseFloat(info[Math.floor(info.length/2)]['latitud']), parseFloat(info[Math.floor(info.length/2)]['longitud'])];
                     
-
                     // Place first marker
-                    marker = L.marker(medio).addTo(map); 
-
-                    marker.setLatLng(inicio); 
-                    marker.setLatLng(fin);  
+                    map.setView(medio);
+                    marker = L.marker(inicio).addTo(map); 
+                    marker = L.marker(fin).addTo(map); 
 
                     info.forEach(coord => {
                         polyline.addLatLng([parseFloat(info[coord]['latitud']), parseFloat(info[coord]['longitud'])]);
