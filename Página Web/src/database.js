@@ -5,7 +5,7 @@ const db_connection_info = {
     database: 'taxiApp'
 };
 
-async function getData(query) {
+const data = function getData(query) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -13,7 +13,7 @@ async function getData(query) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
-                connection.end(); 
+                reject(connection.end());
             };
             console.log('Base de datos conectada'.yellow);
         });
@@ -21,7 +21,7 @@ async function getData(query) {
         connection.query(query,  (err, info) => {
             if (err) {
                 console.log("No se pudo ejecutar el query.".red);
-                return reject(err);
+                reject(connection.end());
             }
             console.log("Datos recibidos con éxito.".gray);
             connection.end();
@@ -30,7 +30,7 @@ async function getData(query) {
     });
 }
 
-async function insertData(values) {
+const insert =  function insertData(values) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -38,7 +38,7 @@ async function insertData(values) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
-                connection.end(); 
+                reject(connection.end()); 
             };
             console.log('Base de datos conectada'.yellow);
         });
@@ -46,7 +46,7 @@ async function insertData(values) {
         connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", values,  (err, info) => {
             if (err) {
                 console.log("No se pudo ejecutar el query.".red);
-                return reject(err);
+                reject(connection.end());
             }
             console.log("Datos insertados con éxito.".gray);
             resolve(connection.end());
@@ -55,6 +55,6 @@ async function insertData(values) {
 }
 
 module.exports = {
-    getData: getData,
-    insertData: insertData
+    getData: data,
+    insertData: insert
 };

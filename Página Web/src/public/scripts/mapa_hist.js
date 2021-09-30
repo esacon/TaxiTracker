@@ -1,0 +1,35 @@
+    
+let marker;
+let circle;
+let map = L.map('mapid');            
+let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+
+// Load Map
+map.setView([0, 0], 18); 
+L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
+        attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+        maxZoom: 20,
+        center: [parseFloat(info.latitud), parseFloat(info.longitud)],
+        tileSize: 512,
+        zoomOffset: -1,
+    }).addTo(map);   
+
+// Place first marker
+marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map); 
+
+// Update HTML content
+document.addEventListener('DOMContentLoaded', function() {
+    // Add Polyline to map.
+    polyline.addTo(map);
+
+    // Update HTML content.
+    document.getElementById('latitud_text').innerText = info.latitud_text;
+    document.getElementById('longitud_text').innerText = info.longitud_text;
+    document.getElementById('fecha_text').innerText = info.fecha_text;
+    document.getElementById('hora_text').innerText = info.hora_text;
+
+    // Initialize map.
+    map.setView([parseFloat(info.latitud), parseFloat(info.longitud)]);
+    marker.setLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);                        
+    polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
+}); 
