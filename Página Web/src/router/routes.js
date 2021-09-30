@@ -5,6 +5,7 @@ const dotenv = require('dotenv').config();
 const mysql = require('mysql2');
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
+import {getDate, getHour, convertTime12to24} from "../datetime.mjs"
 
 const db_connection_info = {
     host: process.env.DB_HOST,
@@ -62,16 +63,17 @@ async function insertData(values) {
     });
 }
 
-function getDate(UNIX_timestamp) {        
-    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
-}
-    
-function getHour(UNIX_timestamp) {  
-    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
-}
-
 router.get('/', (req, res) => {    
     let rows = getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
+
+    io.on('connection', function(socket) {
+        socket.emit('getData', {
+            latitud: latitud,
+            longitud: longitud,
+            fecha: fecha,
+            hora: hora
+        });
+    });
     
     udp_server.on('message', (msg, rinfo) => {
         cont += 1;
@@ -91,7 +93,14 @@ router.get('/', (req, res) => {
             // Insertar datos en la db.
             let insert = insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
 
-            res.render("index", {first_data:rows, udp_data:[latitud, longitud, fecha, hora]});     
+            io.on('connection', function(socket) {
+                socket.emit('change', {
+                    latitud: latitud,
+                    longitud: longitud,
+                    fecha: fecha,
+                    hora: hora
+                });
+            });    
         }
     });
 

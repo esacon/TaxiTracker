@@ -14,12 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log([parseFloat(info.latitud), parseFloat(info.longitud)]);      
         map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
 
-        // Update HTML
-        document.getElementById('latitud_text').innerText = info.latitud;
-        document.getElementById('longitud_text').innerText = info.longitud;
-        document.getElementById('fecha_text').innerText = info.fecha;
-        document.getElementById('hora_text').innerText = info.hora; 
-
         // Load Map
         map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
@@ -45,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hora_text').innerText = info.hora_text;
 
         // Initialize map.
-        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-        marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
-        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        map.setView([parseFloat(info.latitud), parseFloat(info.longitud)]);
+        marker.setLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);                        
+        polyline.addLatLng([parseFloat(info.latitud), parseFloat(info.longitud)]);
     });
 }); 
