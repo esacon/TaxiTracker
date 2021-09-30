@@ -37,26 +37,23 @@
             </div>
           </nav>
     </div>
-
-    <div class="container-fluid text-center" style= "background-color:#FAE671;">
+    <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
-            <section class="coordenadas info">
-                <div class="row justify-content-center">
-                    <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
-                    <div class="col" ><h5><p class="longitud"><p class="text-dark">Longitud: <span id="longitud_text"></span></p></p></h5></div>
-                    <div class="col" ><h5><p class="fecha"><p class="text-dark">Fecha: <span id="fecha_text"></span></p></p></h5></div>
-                    <div class="col" ><h5><p class="hora"><p class="text-dark">Hora: <span id="hora_text"></span></p></p></h5></div>
-                </div>
-            </section>
-        </div>
+            <div class="row justify-content-evenly" style= "background-color:#FAE671;">
+                <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label><input type="datetime-local" id="start" name="start" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
+                <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label><input type="datetime-local" id="end" name="end" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
+            </div>
+                
             <!-- Map section -->
             <section class="map">
-                <div class="container-fluid text-center" id ="mapid"></div>
-                </section>
+                <div class="container-fluid text-center" id ="maphi"></div>
+            </section>
+    
             <!-- Load mapa into de page. -->
             <script src="scripts/map.js"></script>
         </main>
     </div>
+
     <footer class="blockquote text-white">
         <div class="blockquote p-3" style="background-color: #000000";>
                 <div class ="row justify-content-around">
