@@ -45,6 +45,8 @@ router.get('/historicos', (req, res) => {
 router.post('/historicos', (req, res) => {
     const body = req.body;
 
+    console.log(body);
+
     const start_date = body.start.split("T")[0];
     const start_hour = body.start.split("T")[1];
     const end_date = body.end.split("T")[0];
