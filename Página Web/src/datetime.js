@@ -15,12 +15,7 @@ function convertTime12to24(time12h) {
         hours = '00';
     }
     
-    console.log(typeof(modifier.trim()));
-    console.log(modifier.trim());
-     
-    console.log(modifier.trim() == "p. m.");
-    if (modifier == "p. m.") {
-        console.log("entre");
+    if (modifier.split('.')[0] == 'p') {
         hours = parseInt(hours, 10) + 12;
     }
 

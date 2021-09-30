@@ -9,7 +9,8 @@ const udp_server = udp.createSocket('udp4');
 const socket = require('socket.io');
 const mysql = require('mysql2');
 const env_var = require('dotenv').config();
-const datetime = require('../src/datetime.js')
+const datetime = require('../src/datetime.js');
+const database = require('../src/databse.js');
 
 
 app.use(express.static(__dirname + '/public/'));
@@ -25,62 +26,6 @@ var io = socket(server);
 //Rutas webS
 app.use('/', require('./router/routes'));
 
-// Funciones 
-const db_connection_info = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: 'taxiApp'
-};
-
-async function getData(query) {
-    return new Promise(function(resolve, reject) {
-        const connection = mysql.createConnection(db_connection_info);
-
-        // Conexión a la base de datos.
-        connection.connect((err) => {
-            if (err) {
-                console.log("No se pudo conectar a la base de datos.".red);
-                connection.end(); 
-            };
-            console.log('Base de datos conectada'.yellow);
-        });
-
-        connection.query(query,  (err, info) => {
-            if (err) {
-                console.log("No se pudo ejecutar el query.".red);
-                return reject(err);
-            }
-            console.log("Datos recibidos con éxito.".gray);
-            connection.end();
-            resolve(info);
-        });
-    });
-}
-
-async function insertData(values) {
-    return new Promise(function(resolve, reject) {
-        const connection = mysql.createConnection(db_connection_info);
-
-        // Conexión a la base de datos.
-        connection.connect((err) => {
-            if (err) {
-                console.log("No se pudo conectar a la base de datos.".red);
-                connection.end(); 
-            };
-            console.log('Base de datos conectada'.yellow);
-        });
-
-        connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", values,  (err, info) => {
-            if (err) {
-                console.log("No se pudo ejecutar el query.".red);
-                return reject(err);
-            }
-            console.log("Datos insertados con éxito.".gray);
-            resolve(connection.end());
-        });
-    });
-}
 
 function connection() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
