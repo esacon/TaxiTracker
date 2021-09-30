@@ -3,12 +3,9 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const colors = require('colors');
-
 const socket = require('socket.io');
 const env_var = require('dotenv').config();
-
 const mysql = require('mysql2');
-
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
 
