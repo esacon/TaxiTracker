@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on('change', function(info) {
         // Add Polyline to map.
-        polyline.addTo(map);
+        polyline.addTo(arrayCoordsLatLng);
 
         addPolyline(arrayCoordsLatLng= [10.9888	-74.8299, 10.9888 -74.8294]); {
             this.polylineRoute = L.polyline(arrayCoordsLatLng,
