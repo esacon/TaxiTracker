@@ -2,12 +2,12 @@
   "name": "taxi-tracker",
   "version": "1.0.0",
   "description": "Página web que permite rastrear vehículos mediante su ubicación GPS.",
-  "main": "index2.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index2.js"
+    "start": "node src/main.js"
   },
-  "author": "Enrique Niebles",
+  "author": "Enrique Niebles, Sebastián Romero, Adriana Díaz, Blondis Barrios, Jesús Súarez.",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.1.1",
