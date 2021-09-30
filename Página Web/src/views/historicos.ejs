@@ -62,6 +62,7 @@
                 document.addEventListener('DOMContentLoaded', function() {         
                     socket.on("getConsulta", function(data){
                         const info = data.info;
+                        console.log(info);
                         // Initialize map.
                         const inicio = [parseFloat(info[0]['latitud']), parseFloat(info[0]['longitud'])];
                         const fin = [parseFloat(info[info.length - 1]['latitud']), parseFloat(info[info.length - 1]['longitud'])];
