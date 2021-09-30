@@ -3,7 +3,7 @@ var socket = io();
 let marker1;
 let marker2;
 let map = L.map('maphi');  
-map.setView([], 15);     
+map.setView([10.97, -74.65], 15);     
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
 
 // Update HTML content
