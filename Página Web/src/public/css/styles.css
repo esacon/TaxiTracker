@@ -6,10 +6,17 @@
  body {
     font-family: 'Poppins', sans-serif;
 }
-
+nav{
+    background-color: #6209DB;
+}
 .content {
     max-width: 500px;
 }
 .content2 {
     max-width: 400px;
 }
+
+.table2 {
+    align-content: center;
+}
+
