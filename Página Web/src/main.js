@@ -30,7 +30,7 @@ function connection() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
 
     async function retrieve() {
-        const info = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
+        const info = await database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
         console.log(info);
         let latitud = info[0]['latitud'];
         let longitud = info[0]['longitud'];
