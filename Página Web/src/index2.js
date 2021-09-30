@@ -93,6 +93,13 @@ server.listen(PORT, function() {
         if (latitud != 0) {  
             console.log([latitud, longitud, timeStamp, fecha, hora]); 
 
+            io.emit('change', {
+                latitud_text: latitud,
+                longitud_text: longitud,
+                fecha_text: fecha,
+                hora_text: hora
+            });
+
             io.on('connection', function(socket) {
                 socket.emit('change', {
                     latitud_text: latitud,
