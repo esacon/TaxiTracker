@@ -18,11 +18,27 @@ app.use(express.static(__dirname + '/public/'));
 app.set('port', 3000);
 
 function getDate(UNIX_timestamp) {        
-    return new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
+    const date = new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
+    const d = date.split("/")[0];
+    const m = date.split("/")[1]; 
+    const y = date.split("/")[2];
+    return new Date(`${y}-${m}-${d}`).toISOString().slice(0,10);
 }
     
 function getHour(UNIX_timestamp) {  
-    return new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
+    time12h = new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
+
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes, seconds] = time.split(':');
+
+    if (hours === '12') {
+        hours = '00';
+    }
+    if (modifier === 'PM') {
+        hours = parseInt(hours, 10) + 12;
+    }
+
+    return `${hours}:${minutes}:${seconds}`;
 }
 
 let db_connection_info = {
