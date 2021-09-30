@@ -50,7 +50,6 @@ router.get('/historicos', (req, res) => {
 
     retrieve();
 
-
     //res.render("historicos");
 });
 

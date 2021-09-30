@@ -7,14 +7,15 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs">
             <li class="nav-item" role="presentation" >
-                <button class="nav-link active" data-bs-toggle="tab" id="Inicio-tab" type="button" data-bs-target="#Inicio"
+                <button class="nav-link active" data-bs-toggle="tab" id="Inicio-tab" type="button" data-bs-target="/inicio"
                 role="tab" aria-controls="Inicio" aria-selected="true">Inicio</button>
             </li>
             <li class="nav-item" role="presentation" >
-                <button class="nav-link" data-bs-toggle="tab" id="Historicos-tab" type="button" data-bs-target="#Historicos"
+                <button class="nav-link" data-bs-toggle="tab" id="Historicos-tab" type="button" data-bs-target="/historicos"
                 role="tab" aria-controls="Historicos" aria-selected="true">Históricos</button>
             </li>
-        </ul>
+        </ul>        
+    </div>   
     <main class="main">
         <div class="container-fluid text-center" style= "background-color:#FAE671;">
             <section class="coordenadas info">
@@ -33,5 +34,4 @@
         <!-- Load mapa into de page. -->
         <script src="scripts/map.js"></script>
     </main>
-</div>   
 <%- include("../templates/footer.ejs") %>
