@@ -24,7 +24,7 @@ app.set('view engine', 'ejs'); // motor de plantillas.
 app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
 router.get('/', (req, res) => {
-    
+
     async function retrieve() {
         const info = await database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
         let latitud = info[0]['latitud'];
@@ -92,7 +92,7 @@ router.get('/', (req, res) => {
     });
 
     res.render()
-};
+});
 
 router.get('/historicos', (req, res) => {
 
