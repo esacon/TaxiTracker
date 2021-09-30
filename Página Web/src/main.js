@@ -56,7 +56,7 @@ function connection() {
             console.log([latitud, longitud, timeStamp, fecha, hora]);            
 
             // Insertar datos en la db.
-            let insert = database.insertData([null, latitud, longitud, fecha, hora]);
+            let insert = database.insertData([['null', latitud, longitud, fecha, hora]]);
 
             io.on('connection', function(socket) {
                 socket.emit('change', {
