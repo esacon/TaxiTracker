@@ -5,8 +5,8 @@ const dotenv = require('dotenv').config();
 const mysql = require('mysql2');
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
-import {getDate, getHour, convertTime12to24} from "../datetime.mjs";
-import {getData, insertData} from "../database.mjs";
+import {getDate, getHour, convertTime12to24} from "../datetime.js";
+import {getData, insertData} from "../database.js";
 
 router.get('/', (req, res) => {    
     let rows = getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
