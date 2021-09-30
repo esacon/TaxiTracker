@@ -1,112 +1,110 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
+<html style="font-size: 16px;">
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taxi App Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>    
-    <script src="./socket.io/socket.io.js" charset="utf-8"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container-fluid" style="background-color: #000000;">
-        <a href="#" class="navbar-brand "><h3><p class="text-light">Taxi Tracker App </p></h3></a>
-    </div>
-    <div class="container-fluid">
-        <ul class="nav nav-tabs">
-            <li class="nav-item" role="presentation" >
-                <button class="nav-link" data-bs-toggle="tab" id="Inicio-tab" type="button" data-bs-target="#Inicio"
-                role="tab" aria-controls="Inicio" aria-selected="true">Inicio</button>
-            </li>
-            <li class="nav-item" role="presentation" >
-                <button class="nav-link" data-bs-toggle="tab" id="Historicos-tab" type="button" data-bs-target="#Historicos"
-                role="tab" aria-controls="Historicos" aria-selected="true">Históricos</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="my TabControl">
-            <div class="tab-pane fade show" role="tabpanel" id="Inicio" aria-labelledby="Inicio-tab">
-                <div class="container-fluid text-center" style= "background-color:#FAE671;">
-                    <main class="main">
-                        <section class="coordenadas info">
-                            <div class="row justify-content-center">
-                                <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
-                                <div class="col" ><h5><p class="longitud"><p class="text-dark">Longitud: <span id="longitud_text"></span></p></p></h5></div>
-                                <div class="col" ><h5><p class="fecha"><p class="text-dark">Fecha: <span id="fecha_text"></span></p></p></h5></div>
-                                <div class="col" ><h5><p class="hora"><p class="text-dark">Hora: <span id="hora_text"></span></p></p></h5></div>
-                            </div>
-                        </section>
-                    </div>
-                        <!-- Map section aaaaaaaaaaaaaaaaaa-->
-                        <section class="map">
-                            <div class="container-fluid text-center" id ="mapid"></div>
-                            </section>
-                        <!-- Load mapa into de page. -->
-                        <script src="scripts/map.js"></script>
-                    </main>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Contact Us">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>home</title>
+    <link rel="stylesheet" href="nicepage.css" media="screen">
+<link rel="stylesheet" href="home.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 3.26.4, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "/",
+		"logo": "images/g31b1b5c2a0b9f71f7ab668ca4e8a8d5006cc311ba06e68a3d33d0d923733d0519775f2a7efc8429f160c02e8a333a38f_1280.png"
+}</script>
+    <meta name="theme-color" content="#036d4c">
+    <meta property="og:title" content="home">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="/">
+  </head>
+  <body data-home-page="https://website780959.nicepage.io/home.html?version=9ae3ee07-88da-4738-b527-fb96d196131b" data-home-page-title="home" class="u-body"><header class="u-clearfix u-header u-header" id="sec-5942"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <a href="#" class="u-image u-logo u-image-1" data-image-width="1280" data-image-height="705">
+          <img src="images/g31b1b5c2a0b9f71f7ab668ca4e8a8d5006cc311ba06e68a3d33d0d923733d0519775f2a7efc8429f160c02e8a333a38f_1280.png" class="u-logo-image u-logo-image-1" data-image-width="64">
+        </a>
+        <nav class="u-align-left u-menu u-menu-dropdown u-nav-spacing-25 u-offcanvas u-menu-1" data-responsive-from="XL">
+          <div class="menu-collapse">
+            <a class="u-button-style u-nav-link" href="#" style="font-size: calc(1em + 8px);">
+              <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 302 302" style="undefined"><use xlink:href="#svg-7b92"></use></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg-7b92" x="0px" y="0px" viewBox="0 0 302 302" style="enable-background:new 0 0 302 302;" xml:space="preserve" class="u-svg-content"><g><rect y="36" width="302" height="30"></rect><rect y="236" width="302" height="30"></rect><rect y="136" width="302" height="30"></rect>
+</g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="home.html" style="padding: 10px 20px;">HOME</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="historicos.html" style="padding: 10px 20px;">HISTORY</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-align-center u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-inner-container-layout u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="home.html" style="padding: 10px 20px;">HOME</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="historicos.html" style="padding: 10px 20px;">HISTORY</a>
+</li></ul>
+              </div>
             </div>
-            
-
-
-            <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
-                <main class="main">
-
-                    <p>Clickea esa vaina compae.</p>
-                    <button onclick="fff()">Peguelo Ñero</button>
-                    <p id="sisas"></p>
-                    <p id="ombe"></p>
-                    <p id="sisasf"></p>
-                    <p id="ombef"></p>
-
-                        <div class="row justify-content-evenly" style= "background-color:#FAE671;">
-                            <!--
-                            <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label><input type="datetime-local" name="datest" value="" onChange="setDate(this.value)" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
-                            <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label><input type="datetime-local"  id="end" name="end" value="" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
-                            -->
-                            <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label><input type="date" id="bday" name="bday"><input type="time" id="taim" name="taim">
-                            <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label><input type="date" id="bdayf" name="bdayf"><input type="time" id="taimf" name="taimf">
-
-                            <script>
-                                function fff() {
-                                    document.getElementById("sisas").innerHTML = bday.value;
-                                    document.getElementById("ombe").innerHTML = taim.value;
-                                    document.getElementById("sisasf").innerHTML = bdayf.value;
-                                    document.getElementById("ombef").innerHTML = taimf.value;
-                                }
-                            </script>
-
-                        </div>
-                            
-                        <!-- Map section -->
-                        <section class="map">
-                            <div class="container-fluid text-center" id ="mapid"></div>
-                    </section>
-                
-                        <!-- Load mapa into de page. -->
-                        <script src="scripts/map.js"></script>
-                </main>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header> 
+    <section class="u-align-center u-clearfix u-palette-5-dark-3 u-section-1" id="sec-9e01">
+      <h2 class="u-text u-text-palette-4-base u-text-1">TRACKEADO&nbsp;</h2>
+      <div class="u-border-5 u-border-palette-4-base u-line u-line-horizontal u-line-1"></div>
+      <p class="u-text u-text-2">Se observa el recorrido en tiempo real del vehiculo.</p>
+      <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+        <div class="u-gutter-0 u-layout">
+          <div class="u-layout-row">
+            <div class="u-container-style u-layout-cell u-palette-5-light-3 u-size-30 u-layout-cell-1">
+              <div class="u-container-layout u-container-layout-1"><span class="u-icon u-icon-circle u-palette-4-base u-spacing-17 u-text-body-alt-color u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style=""><use xlink:href="#svg-9534"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg-9534" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" class="u-svg-content"><g><g><path d="M256,0C156.748,0,76,80.748,76,180c0,33.534,9.289,66.26,26.869,94.652l142.885,230.257    c2.737,4.411,7.559,7.091,12.745,7.091c0.04,0,0.079,0,0.119,0c5.231-0.041,10.063-2.804,12.75-7.292L410.611,272.22    C427.221,244.428,436,212.539,436,180C436,80.748,355.252,0,256,0z M384.866,256.818L258.272,468.186l-129.905-209.34    C113.734,235.214,105.8,207.95,105.8,180c0-82.71,67.49-150.2,150.2-150.2S406.1,97.29,406.1,180    C406.1,207.121,398.689,233.688,384.866,256.818z"></path>
+</g>
+</g><g><g><path d="M256,90c-49.626,0-90,40.374-90,90c0,49.309,39.717,90,90,90c50.903,0,90-41.233,90-90C346,130.374,305.626,90,256,90z     M256,240.2c-33.257,0-60.2-27.033-60.2-60.2c0-33.084,27.116-60.2,60.2-60.2s60.1,27.116,60.1,60.2    C316.1,212.683,289.784,240.2,256,240.2z"></path>
+</g>
+</g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></span>
+                <p class="u-align-center u-text u-text-3">10.999</p>
+                <h5 class="u-align-center u-custom-font u-text u-text-palette-5-dark-2 u-text-4">Latitud</h5>
+              </div>
+            </div>
+            <div class="u-container-style u-layout-cell u-palette-5-light-3 u-size-30 u-layout-cell-2">
+              <div class="u-container-layout u-container-layout-2"><span class="u-icon u-icon-circle u-palette-4-base u-spacing-17 u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style=""><use xlink:href="#svg-eeaf"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-eeaf" style="enable-background:new 0 0 512 512;"><circle style="fill:#FF9E24;" cx="256" cy="256" r="256"></circle><circle style="fill:#FFFFFF;" cx="256" cy="256" r="207.469"></circle><path style="fill:#181818;" d="M342.649,196.805c7.582-7.582,7.582-19.872,0-27.453c-7.582-7.582-19.872-7.582-27.453,0  l-73.605,73.605l27.453,27.453L342.649,196.805z"></path><path style="fill:#EE3840;" d="M244.229,250.613L135.035,359.807c-4.738,4.738-4.738,12.42,0,17.159  c2.37,2.368,5.474,3.554,8.579,3.554c3.105,0,6.211-1.185,8.579-3.554l109.194-109.194L244.229,250.613z"></path><path style="fill:#181818;" d="M171.066,143.614c-7.582-7.582-19.872-7.582-27.453,0c-7.582,7.582-7.582,19.872,0,27.453  l99.343,99.343l27.453-27.453L171.066,143.614z"></path><path style="fill:#524E4D;" d="M256,286.332c-16.725,0-30.332-13.607-30.332-30.332s13.607-30.332,30.332-30.332  s30.332,13.607,30.332,30.332S272.725,286.332,256,286.332z"></path><g><path style="fill:#7A7674;" d="M115.261,268.133H97.062c-6.701,0-12.133-5.433-12.133-12.133s5.432-12.133,12.133-12.133h18.199   c6.701,0,12.133,5.433,12.133,12.133S121.962,268.133,115.261,268.133z"></path><path style="fill:#7A7674;" d="M256,127.393c-6.701,0-12.133-5.433-12.133-12.133V97.062c0-6.7,5.432-12.133,12.133-12.133   c6.701,0,12.133,5.433,12.133,12.133v18.199C268.133,121.96,262.701,127.393,256,127.393z"></path><path style="fill:#7A7674;" d="M414.938,268.133h-18.199c-6.701,0-12.133-5.433-12.133-12.133s5.432-12.133,12.133-12.133h18.199   c6.701,0,12.133,5.433,12.133,12.133S421.639,268.133,414.938,268.133z"></path><path style="fill:#7A7674;" d="M256,427.071c-6.701,0-12.133-5.433-12.133-12.133v-18.199c0-6.7,5.432-12.133,12.133-12.133   c6.701,0,12.133,5.433,12.133,12.133v18.199C268.133,421.638,262.701,427.071,256,427.071z"></path>
+</g></svg></span>
+                <h5 class="u-align-center u-custom-font u-text u-text-palette-5-dark-2 u-text-5">Fecha:</h5>
+                <p class="u-align-center u-text u-text-6">10.999</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>     
-            <footer class="blockquote text-white">
-                <div class="blockquote p-3" style="background-color: #000000";>
-                        <div class ="row justify-content-around">
-                            <div class ="col-5"><h1><p class ="content blockquote my-4"><p class="tex-light"><p class = "display-4 fw-bold mb-5">La mejor aplicación para el registro de tus rutas y viajes.<img src="https://play.google.com/intl/es-419/badges/static/images/badges/es-419_badge_web_generic.png" class ="me-1"></p></p></p></h1></div>
-                            <div class ="col-5 "><p class= "content2 mx-auto align-self-center my-4"><img src ="https://github.com/esacon/TaxiTracker/blob/pagedesign/P%C3%A1gina%20Web/src/public/Pixel%204%20XL%20image.png?raw=true" class ="img-fluid"></p></div>
-                        </div>
-
-                    <p class="footer_copyright">
-                        <div class="text-center p-3" style="background-color: #000000";>  
-                            <h6><p class="text-light">Sitio web creado por &copy; Blondis Barrios, Adriana Díaz, Enrique Niebles, Sebastián Romero, y Jesús Suárez.</p></h6> 
-                        </div> 
-                    </p> 
-                </div>
-            </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+      </div>
+      <div class="u-grey-light-2 u-map u-map-1">
+        <div class="embed-responsive">
+          <iframe class="embed-responsive-item" src="//maps.google.com/maps?output=embed&amp;q=Manhattan%2C%20New%20York&amp;z=10&amp;t=m" data-map="JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQSUyMiUyMiU3RA=="></iframe>
+        </div>
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-palette-5-dark-3 u-footer" id="sec-a295"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="https://nicepage.com/" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  </body>
 </html>
