@@ -1,4 +1,3 @@
-    
 var socket = io();
 let marker;
 let circle;

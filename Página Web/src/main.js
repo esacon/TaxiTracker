@@ -30,14 +30,14 @@ app.use('/', require('./router/routes'));
 function connection() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
 
-    database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
+    const info = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
 
     io.on('connection', function(socket) {
         socket.emit('getData', {
-            latitud: latitud,
-            longitud: longitud,
-            fecha: fecha,
-            hora: hora
+            latitud: info[0]['latitud'],
+            longitud: info[0]['longitud'],
+            fecha: info[0]['fecha'],
+            hora: info[0]['hora']
         });
     });
     
@@ -58,17 +58,17 @@ function connection() {
             // Insertar datos en la db.
             database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);
             io.emit('change', {
-                latitud: latitud,
-                longitud: longitud,
-                fecha: fecha,
-                hora: hora
+                latitud_text: latitud,
+                longitud_text: longitud,
+                fecha_text: fecha,
+                hora_text: hora
             });
             io.on('connection', function(socket) {
                 socket.emit('change', {
-                    latitud: latitud,
-                    longitud: longitud,
-                    fecha: fecha,
-                    hora: hora
+                    latitud_text: latitud,
+                    longitud_text: longitud,
+                    fecha_text: fecha,
+                    hora_text: hora
                 });
             });     
         }
