@@ -1,0 +1,37 @@
+<%- include("../templates/header", {ruta: 'Inicio'}) %>
+
+<body>
+    <div class="container-fluid" style="background-color: #000000;">
+        <a href="#" class="navbar-brand "><h3><p class="text-light">Taxi Tracker App </p></h3></a>
+    </div>
+    <div class="container-fluid">
+        <ul class="nav nav-tabs">
+            <li class="nav-item" role="presentation" >
+                <button class="nav-link active" data-bs-toggle="tab" id="Inicio-tab" type="button" data-bs-target="#Inicio"
+                role="tab" aria-controls="Inicio" aria-selected="true">Inicio</button>
+            </li>
+            <li class="nav-item" role="presentation" >
+                <button class="nav-link" data-bs-toggle="tab" id="Historicos-tab" type="button" data-bs-target="#Historicos"
+                role="tab" aria-controls="Historicos" aria-selected="true">Históricos</button>
+            </li>
+        </ul>
+    <main class="main">
+        <div class="container-fluid text-center" style= "background-color:#FAE671;">
+            <section class="coordenadas info">
+                <div class="row justify-content-center">
+                    <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
+                    <div class="col" ><h5><p class="longitud"><p class="text-dark">Longitud: <span id="longitud_text"></span></p></p></h5></div>
+                    <div class="col" ><h5><p class="fecha"><p class="text-dark">Fecha: <span id="fecha_text"></span></p></p></h5></div>
+                    <div class="col" ><h5><p class="hora"><p class="text-dark">Hora: <span id="hora_text"></span></p></p></h5></div>
+                </div>
+            </section>
+        </div>
+        <!-- Map section -->
+        <section class="map">
+            <div class="container-fluid text-center" id ="mapid"></div>
+            </section>
+        <!-- Load mapa into de page. -->
+        <script src="scripts/map.js"></script>
+    </main>
+</div>   
+<%- include("../templates/footer.ejs") %>
