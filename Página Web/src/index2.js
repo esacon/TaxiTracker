@@ -78,7 +78,7 @@ function database_upload(values) {
     });       
 }
 
-server.listen(PORT, () => {
+const init = () => {
 
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
 
@@ -115,11 +115,7 @@ server.listen(PORT, () => {
         let hora = datetime.getHour(timeStamp);
 
         if (latitud != 0) {  
-            console.log(latitud.blue);
-            console.log(longitud.blue);
-            console.log(timeStamp.blue);
-            console.log(fecha.blue);
-            console.log(hora.blue);
+            console.log([latitud, longitud, timeStamp, fecha, hora]); 
 
             io.emit('change', {
                 latitud_text: latitud,
@@ -151,4 +147,7 @@ server.listen(PORT, () => {
         addres: process.env.HOST,
         port:8888
     });
-});
+
+};
+
+server.listen(PORT, init);
