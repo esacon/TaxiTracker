@@ -33,28 +33,29 @@ async function getData(query) {
     });
 }
 
-async function insertData(values) {
-    return new Promise(function(resolve, reject) {
-        const connection = mysql.createConnection(db_connection_info);
+function insertData(values) {    
+    let connection = mysql.createConnection(db_connection_info);
 
-        // Conexión a la base de datos.
-        connection.connect((err) => {
-            if (err) {
-                console.log("No se pudo conectar a la base de datos.".red);
-                connection.end(); 
-            };
-            console.log('Base de datos conectada'.yellow);
-        });
-
-        connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", values,  (err, info) => {
-            if (err) {
-                console.log("No se pudo ejecutar el query.".red);
-                return reject(err);
-            }
-            console.log("Datos insertados con éxito.".gray);
-            resolve(connection.end());
-        });
+    // Conexión a la base de datos.
+    connection.connect((err) => {
+        if (err) {
+            console.log("No se pudo conectar a la base de datos.".red);
+            throw err
+        };
+        console.log('Base de datos conectada'.green);
     });
+    
+    // Insert data.
+    connection.query(insert_query, [values], (err, info) => {
+        if(err) {
+            console.log("No se pudo subir a la base de datos.".red);
+            throw err
+        };
+        console.log("Datos insertados en la base de datos.".green);     
+        // Cerrar conexión.
+        connection.end(); 
+        console.log("Conexión cerrada".grey); 
+    });       
 }
 
 module.exports = {
