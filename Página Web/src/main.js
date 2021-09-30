@@ -54,7 +54,14 @@ router.post('/historicos', (req, res) => {
 
     async function retrieve() {
         const info = await database.getData(`SELECT * FROM datos WHERE fecha >= '${start_date}' and fecha <= '${end_date}' and hora >= '${start_hour}' or hora <= '${end_hour}';`);
-        res.render("historicos", {info: JSON.stringify(info)});
+        
+        io.on('connection', function(socket) {
+            socket.emit('getConsulta', {
+                info: info
+            });
+        });
+        
+        res.render("historicos");
     };
 
     retrieve();
