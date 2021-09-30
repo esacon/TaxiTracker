@@ -5,8 +5,95 @@ const dotenv = require('dotenv').config();
 const mysql = require('mysql2');
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
-const datetime = require('../datetime.js');
-const database = require("../database.js");
+
+function getDate(UNIX_timestamp) {        
+    const date = new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
+    const d = date.split("/")[0];
+    const m = date.split("/")[1]; 
+    const y = date.split("/")[2];
+    return new Date(`${y}-${m}-${d}`).toISOString().slice(0,10);
+}
+
+function convertTime12to24(time12h) {
+    const [time, modifier] = time12h.split(' ');
+    let [hours, minutes, seconds] = time.split(':');
+
+    if (hours === '12') {
+        hours = '00';
+    }
+    
+    console.log(typeof(modifier.trim()));
+    console.log(modifier.trim());
+     
+    console.log(modifier.trim() == "p. m.");
+    if (modifier == "p. m.") {
+        console.log("entre");
+        hours = parseInt(hours, 10) + 12;
+    }
+
+    return `${hours}:${minutes}:${seconds}`;
+}
+    
+function getHour(UNIX_timestamp) {  
+    const time12h = new Date(parseInt(UNIX_timestamp)).toLocaleTimeString('es-CO', { timeZone: 'America/Bogota'});
+    return convertTime12to24(time12h);
+}
+
+const db_connection_info = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: 'taxiApp'
+};
+
+async function getData(query) {
+    return new Promise(function(resolve, reject) {
+        const connection = mysql.createConnection(db_connection_info);
+
+        // Conexión a la base de datos.
+        connection.connect((err) => {
+            if (err) {
+                console.log("No se pudo conectar a la base de datos.".red);
+                connection.end(); 
+            };
+            console.log('Base de datos conectada'.yellow);
+        });
+
+        connection.query(query,  (err, info) => {
+            if (err) {
+                console.log("No se pudo ejecutar el query.".red);
+                return reject(err);
+            }
+            console.log("Datos recibidos con éxito.".gray);
+            connection.end();
+            resolve(info);
+        });
+    });
+}
+
+async function insertData(values) {
+    return new Promise(function(resolve, reject) {
+        const connection = mysql.createConnection(db_connection_info);
+
+        // Conexión a la base de datos.
+        connection.connect((err) => {
+            if (err) {
+                console.log("No se pudo conectar a la base de datos.".red);
+                connection.end(); 
+            };
+            console.log('Base de datos conectada'.yellow);
+        });
+
+        connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", values,  (err, info) => {
+            if (err) {
+                console.log("No se pudo ejecutar el query.".red);
+                return reject(err);
+            }
+            console.log("Datos insertados con éxito.".gray);
+            resolve(connection.end());
+        });
+    });
+}
 
 router.get('/', (req, res) => {    
     let rows = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
