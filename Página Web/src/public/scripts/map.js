@@ -32,19 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Place first marker
         marker = L.marker([parseFloat(info.latitud), parseFloat(info.longitud)]).addTo(map);                         
     });              
-    const latlon = [
-                   [10.8716,-74.7781],
-                   [10.8716,-74.7780],
-                   [10.8715,-74.7775], 
-                   [10.8715,-74.7775], 
-                   [10.8715,-74.7774], 
-                   [10.8714,-74.7769],
-                   [10.8714,-74.7769], 
-                   [10.8713,-74.7768], 
-                   [10.8712,-74.7763]
-                ];
-    var polylinePoints = [latlon];
-    var polyline = L.polyline(polylinePoints).add.To(map);
     socket.on('change', function(info) {
         // Add Polyline to map.
         polyline.addTo(map);
@@ -58,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize map.
         map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
-        //polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-        polyline.addLatLng(latlon);
+        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
     });
 }); 
