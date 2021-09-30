@@ -3,7 +3,7 @@ var socket = io();
 let marker1;
 let marker2;
 let map = L.map('maphi');  
-map.setView([0, 0], 15);     
+map.setView([], 15);     
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
 
 // Update HTML content
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         polyline.remove();
         marker1.remove();
         marker2.remove();
-        
+
         // Initialize map.
         const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
         const fin = [parseFloat(info[info.length - 1].Latitud), parseFloat(info[info.length - 1].Longitud)];
