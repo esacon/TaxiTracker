@@ -44,7 +44,7 @@
     
             <!-- Load mapa into de page. -->
             <script>
-                const info = document.getElementById("db_info").innerText;
+                const info = "<%= JSON.stringify(info) %>";
                 console.log(info)
                 var socket = io();
                 let marker;
