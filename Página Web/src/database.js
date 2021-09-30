@@ -46,7 +46,7 @@ function insertData(values) {
     });
     
     // Insert data.
-    connection.query(insert_query, [values], (err, info) => {
+    connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", [values], (err, info) => {
         if(err) {
             console.log("No se pudo subir a la base de datos.".red);
             throw err
