@@ -42,8 +42,8 @@
     
             <!-- Load mapa into de page. -->
             <script>
+                const info = '<%- JSON.stringify(info) %>';
                 console.log("maphi")
-                console.log("<%= info %>");
                 var socket = io();
                 let marker;
                 let circle;
@@ -58,7 +58,6 @@
                         tileSize: 512,
                         zoomOffset: -1,
                     }).addTo(map);   
-                const info = "<%= info %>"
 
                 // Update HTML content
                 document.addEventListener('DOMContentLoaded', function() {         
