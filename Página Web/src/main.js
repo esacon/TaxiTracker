@@ -17,8 +17,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
 const PORT = process.env.PORT || 3000; // puerto del servidor.
-app.set('view engine', 'ejs'); // motor de plantillas.
-app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
 var io = socket(server);
 
@@ -31,7 +29,6 @@ function connection() {
 
     async function retrieve() {
         const info = await database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
-        console.log(info);
         let latitud = info[0]['latitud'];
         let longitud = info[0]['longitud'];
         let fecha = info[0]['fecha'];
