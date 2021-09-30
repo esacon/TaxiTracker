@@ -63,14 +63,14 @@
                     socket.on("getConsulta", function(data){
                         const info = data.info
                         console.log(info);
-                        console.log(info[0])
+                        console.log(info[0].Latitud)
                         // Initialize map.
-                        const inicio = [parseFloat(info[0]['latitud']), parseFloat(info[0]['longitud'])];
+                        const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
                         
                         console.log(inicio);
-                        const fin = [parseFloat(info[info.length - 1]['latitud']), parseFloat(info[info.length - 1]['longitud'])];
+                        const fin = [parseFloat(info[info.length - 1].Latitud), parseFloat(info[info.length - 1].Longitud)];
                         console.log(fin);
-                        const medio = [parseFloat(info[Math.floor(info.length/2)]['latitud']), parseFloat(info[Math.floor(info.length/2)]['longitud'])];
+                        const medio = [parseFloat(info[Math.floor(info.length/2)].Latitud), parseFloat(info[Math.floor(info.length/2)].Longitud)];
                         console.log(medio);
                         // Place first marker
                         marker = L.marker(medio).addTo(map); 
