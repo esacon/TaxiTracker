@@ -79,7 +79,7 @@
                         marker.setLatLng(fin);  
 
                         info.forEach(coord => {
-                            polyline.addLatLng([parseFloat(info[coord]['latitud']), parseFloat(info[coord]['longitud'])]);
+                            polyline.addLatLng([parseFloat(info[coord].Latitud), parseFloat(info[coord].Longitud)]);
                         }); 
                     });
                 }); 
