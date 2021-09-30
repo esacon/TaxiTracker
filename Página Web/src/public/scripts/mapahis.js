@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on("getConsulta", function(data){
         const info = data.info;
+        map.removeLayer([marker1, marker2, polyline]);
 
         // Initialize map.
         const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
