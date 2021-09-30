@@ -50,7 +50,6 @@ router.post('/historicos', (req, res) => {
 
     async function retrieve() {
         const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-30' and hora >= '23:00:00' or hora <= '04:30:04';");
-        console.log(info);
         res.render("historicos", {info: info});
     };
 
