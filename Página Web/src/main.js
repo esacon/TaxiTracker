@@ -30,12 +30,7 @@ app.use('/', require('./router/routes'));
 function connection() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
 
-    let rows = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;")
-                        .then(function () {
-                            console.log("Promise Resolved");
-                        }).catch(function () {
-                            console.log("Promise Rejected");
-                        });  
+    let rows = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
 
     io.on('connection', function(socket) {
         socket.emit('getData', {
@@ -61,12 +56,7 @@ function connection() {
             console.log([latitud, longitud, timeStamp, fecha, hora].blue);            
 
             // Insertar datos en la db.
-            let insert = database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]])
-                        .then(function () {
-                            console.log("Promise Resolved");
-                        }).catch(function () {
-                            console.log("Promise Rejected");
-                        }); 
+            let insert = database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);
 
             io.on('connection', function(socket) {
                 socket.emit('change', {

@@ -1,3 +1,6 @@
+
+const mysql = require('mysql2');
+
 const db_connection_info = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -5,7 +8,7 @@ const db_connection_info = {
     database: 'taxiApp'
 };
 
-const data = function getData(query) {
+async function getData(query) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -13,6 +16,7 @@ const data = function getData(query) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
+                connection.end(); 
             };
             console.log('Base de datos conectada'.yellow);
         });
@@ -20,7 +24,7 @@ const data = function getData(query) {
         connection.query(query,  (err, info) => {
             if (err) {
                 console.log("No se pudo ejecutar el query.".red);
-                reject(connection.end());
+                return reject(err);
             }
             console.log("Datos recibidos con éxito.".gray);
             connection.end();
@@ -29,7 +33,7 @@ const data = function getData(query) {
     });
 }
 
-const insert =  function insertData(values) {
+async function insertData(values) {
     return new Promise(function(resolve, reject) {
         const connection = mysql.createConnection(db_connection_info);
 
@@ -37,6 +41,7 @@ const insert =  function insertData(values) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
+                connection.end(); 
             };
             console.log('Base de datos conectada'.yellow);
         });
@@ -44,7 +49,7 @@ const insert =  function insertData(values) {
         connection.query("INSERT INTO datos (Id, Latitud, Longitud, Fecha, Hora) VALUES ?", values,  (err, info) => {
             if (err) {
                 console.log("No se pudo ejecutar el query.".red);
-                reject(connection.end());
+                return reject(err);
             }
             console.log("Datos insertados con éxito.".gray);
             resolve(connection.end());
@@ -53,6 +58,6 @@ const insert =  function insertData(values) {
 }
 
 module.exports = {
-    getData: data,
-    insertData: insert
+    getData: getData,
+    insertData: insertData
 };
