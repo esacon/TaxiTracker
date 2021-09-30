@@ -10,7 +10,7 @@ const socket = require('socket.io');
 const mysql = require('mysql2');
 const env_var = require('dotenv').config();
 const datetime = require('../src/datetime.js');
-const database = require('../src/databse.js');
+const database = require('../src/database.js');
 
 
 app.use(express.static(__dirname + '/public/'));
