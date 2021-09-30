@@ -39,7 +39,7 @@ router.get('/historicos', (req, res) => {
 
     retrieve();
 
-    //res.render("historicos");
+    res.render("historicos");
 });
 
 server.listen(PORT, function() {
