@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var polyline = L.polyline(polylinePoints).add.To(map);
     socket.on('change', function(info) {
         // Add Polyline to map.
-        polyline.addTo(map);
+        //polyline.addTo(map);
 
         // Update HTML content.
         document.getElementById('latitud_text').innerText = info.latitud_text;
@@ -58,6 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize map.
         map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
-        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        //polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
     });
 }); 
