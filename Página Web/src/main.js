@@ -57,7 +57,12 @@ function connection() {
 
             // Insertar datos en la db.
             database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);
-
+            io.emit('change', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
             io.on('connection', function(socket) {
                 socket.emit('change', {
                     latitud: latitud,
