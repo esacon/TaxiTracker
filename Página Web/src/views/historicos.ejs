@@ -44,7 +44,7 @@
     
             <!-- Load mapa into de page. -->
             <script>
-                const info = "<%= JSON.parse(info) %>";
+                const info = "<%- JSON.parse(info) %>";
                 console.log(info)
                 var socket = io();
                 let marker;
