@@ -96,7 +96,7 @@ async function insertData(values) {
 }
 
 router.get('/', (req, res) => {    
-    let rows = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
+    let rows = getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
 
     io.on('connection', function(socket) {
         socket.emit('getData', {
@@ -116,14 +116,14 @@ router.get('/', (req, res) => {
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
 
-        let fecha = datetime.getDate(timeStamp);
-        let hora = datetime.getHour(timeStamp);
+        let fecha = getDate(timeStamp);
+        let hora = getHour(timeStamp);
 
         if (latitud != 0) {  
             console.log([latitud, longitud, timeStamp, fecha, hora].blue);            
 
             // Insertar datos en la db.
-            let insert = database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
+            let insert = insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
 
             io.on('connection', function(socket) {
                 socket.emit('change', {
