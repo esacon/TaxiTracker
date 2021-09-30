@@ -1,5 +1,41 @@
 <%- include("../templates/header", {ruta: 'Históricos'}) %>
 
-
+<body>
+    <div class="container-fluid" style="background-color: #000000;">
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container">
+                <a class="navbar-brand text-light fw-bold" href="/">Taxi Tracker App</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars lead text-dark"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">                
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/">Principal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/historicos">Históricos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
+        <main class="main">
+            <div class="row justify-content-evenly" style= "background-color:#FAE671;">
+                <div class="col" ><label for="strat"><h5><p class="text-dark">Fecha de inicio:</p></h5></label><input type="datetime-local" id="start" name="start" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
+                <div class="col" ><label for="end"><h5><p class="text-dark">Fecha de Fin:</p></h5></label><input type="datetime-local" id="end" name="end" value="2021-06-12T19:30" min="2021-01-01T00:00" max="2021-12-31T00:00"> </div>
+            </div>
+                
+            <!-- Map section -->
+            <section class="map">
+                <div class="container-fluid text-center my-4" id ="maphi"></div>
+            </section>
+    
+            <!-- Load mapa into de page. -->
+            <script src="scripts/map.js"></script>
+        </main>
+    </div>
 
 <%- include("../templates/footer.ejs") %>

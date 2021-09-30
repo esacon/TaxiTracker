@@ -35,17 +35,6 @@ router.get('/historicos', (req, res) => {
         let longitud = info[0]['longitud'];
         let fecha = info[0]['fecha'];
         let hora = info[0]['hora'];
-
-        console.log(info)
-
-        io.on('connection', function(socket) {
-            socket.emit('getHist', {
-                latitud: latitud,
-                longitud: longitud,
-                fecha: fecha,
-                hora: hora
-            });
-        });
     };
 
     retrieve();
