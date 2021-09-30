@@ -6,10 +6,10 @@ const mysql = require('mysql2');
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
 const datetime = require('../datetime.js');
-const databse = require("../database.js");
+const database = require("../database.js");
 
 router.get('/', (req, res) => {    
-    let rows = databse.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
+    let rows = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;"); 
 
     io.on('connection', function(socket) {
         socket.emit('getData', {
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
             console.log([latitud, longitud, timeStamp, fecha, hora].blue);            
 
             // Insertar datos en la db.
-            let insert = databse.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
+            let insert = database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);  
 
             io.on('connection', function(socket) {
                 socket.emit('change', {
