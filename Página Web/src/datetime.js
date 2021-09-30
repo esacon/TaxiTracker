@@ -32,7 +32,6 @@ function getHour(UNIX_timestamp) {
     return convertTime12to24(time12h);
 }
 
-
 module.exports = {
     getDate: getDate,
     getHour: getHour,
