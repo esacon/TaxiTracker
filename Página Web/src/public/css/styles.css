@@ -4,6 +4,12 @@
     box-shadow: 5px 5px 5px #888;
     text-align: center;
  }
+ #maphi { 
+  width: 1000px;
+  height: 580px;
+  box-shadow: 5px 5px 5px #888;
+  text-align: center;
+}
  .center {
     margin: 1rem;
     padding: 1rem;
