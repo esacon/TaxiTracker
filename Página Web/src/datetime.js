@@ -1,10 +1,12 @@
+const moment = require('moment');
 
 function getDate(UNIX_timestamp) {        
     const date = new Date(parseInt(UNIX_timestamp)).toLocaleDateString('es-CO', { timeZone: 'America/Bogota'});
     const d = date.split("/")[0];
     const m = date.split("/")[1]; 
     const y = date.split("/")[2];
-    return new Date(`${y}-${m}-${d}`).toISOString().slice(0,10);
+    const momentDate = new moment(`${y}-${m}-${d}`);
+    return momentDate.format("YYYY-MM-DD");    
 }
 
 function convertTime12to24(time12h) {
