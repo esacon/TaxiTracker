@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on("getConsulta", function(data){
         const info = data.info
-
+        polyline.remove();
         // Initialize map.
         const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
         const fin = [parseFloat(info[info.length - 1].Latitud), parseFloat(info[info.length - 1].Longitud)];
@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).addTo(map);   
 
         // Place markers
+        polyline.addTo(map);
         marker = L.marker(inicio).addTo(map);
         marker.bindPopup("<b>Punto de inicio</b>").openPopup(); 
         marker = L.marker(fin).addTo(map); 
