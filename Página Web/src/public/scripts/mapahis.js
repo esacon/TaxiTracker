@@ -3,8 +3,6 @@ var socket = io();
 let marker;
 let map = L.map('maphi');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-// Load Map
-map.setView([0,0], 18);   
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
@@ -16,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
         const fin = [parseFloat(info[info.length - 1].Latitud), parseFloat(info[info.length - 1].Longitud)];
         const medio = [parseFloat(info[Math.floor(info.length/2)].Latitud), parseFloat(info[Math.floor(info.length/2)].Longitud)];
+        
+        // Load Map
+        map.setView(inicio, 18);   
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
                 attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 maxZoom: 20,
