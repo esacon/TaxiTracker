@@ -13,7 +13,6 @@ const data = function getData(query) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
-                reject(connection.end());
             };
             console.log('Base de datos conectada'.yellow);
         });
@@ -38,7 +37,6 @@ const insert =  function insertData(values) {
         connection.connect((err) => {
             if (err) {
                 console.log("No se pudo conectar a la base de datos.".red);
-                reject(connection.end()); 
             };
             console.log('Base de datos conectada'.yellow);
         });
