@@ -29,16 +29,24 @@ app.use('/', require('./router/routes'));
 function connection() {
     console.log(`Servidor iniciado en el puerto ${PORT}`.green);
 
-    const info = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
+    async function retrieve() {
+        const info = database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
+        let latitud = info[0]['latitud'];
+        let longitud = info[0]['longitud'];
+        let fecha = info[0]['fecha'];
+        let hora = info[0]['hora'];
 
-    io.on('connection', function(socket) {
-        socket.emit('getData', {
-            latitud: info[0]['latitud'],
-            longitud: info[0]['longitud'],
-            fecha: info[0]['fecha'],
-            hora: info[0]['hora']
+        io.on('connection', function(socket) {
+            socket.emit('getData', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
         });
-    });
+    };
+
+    retrieve();
     
     udp_server.on('message', (msg, rinfo) => {
         console.log(`Server got: ${msg} from ${rinfo.address}:${rinfo.port}`.gray);
@@ -53,15 +61,14 @@ function connection() {
 
         if (latitud != 0) {  
             console.log([latitud, longitud, timeStamp, fecha, hora]);            
-
-            // Insertar datos en la db.
-            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);
+            
             io.emit('change', {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
                 hora_text: hora
             });
+
             io.on('connection', function(socket) {
                 socket.emit('change', {
                     latitud_text: latitud,
@@ -69,7 +76,10 @@ function connection() {
                     fecha_text: fecha,
                     hora_text: hora
                 });
-            });     
+            });
+
+            // Insertar datos en la db.
+            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);
         }
     });
 
