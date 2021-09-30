@@ -24,6 +24,39 @@ app.set('view engine', 'ejs'); // motor de plantillas.
 app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
 router.get('/', (req, res) => {
+    res.render("index");
+});
+
+router.get('/historicos', (req, res) => {
+
+    async function retrieve() {
+        const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-30' and hora >= '23:00:00' or hora <= '04:30:04';");
+        let latitud = info[0]['latitud'];
+        let longitud = info[0]['longitud'];
+        let fecha = info[0]['fecha'];
+        let hora = info[0]['hora'];
+
+        console.log(info)
+
+        io.on('connection', function(socket) {
+            socket.emit('getHist', {
+                latitud: latitud,
+                longitud: longitud,
+                fecha: fecha,
+                hora: hora
+            });
+        });
+    };
+
+    retrieve();
+
+
+    //res.render("historicos");
+});
+
+server.listen(PORT, function() {
+    console.log(`Servidor iniciado en el puerto ${PORT}`.green);
+    
 
     async function retrieve() {
         const info = await database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
@@ -90,37 +123,4 @@ router.get('/', (req, res) => {
         addres: process.env.HOST,
         port:8888
     });
-
-    res.render()
-});
-
-router.get('/historicos', (req, res) => {
-
-    async function retrieve() {
-        const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-30' and hora >= '23:00:00' or hora <= '04:30:04';");
-        let latitud = info[0]['latitud'];
-        let longitud = info[0]['longitud'];
-        let fecha = info[0]['fecha'];
-        let hora = info[0]['hora'];
-
-        console.log(info)
-
-        io.on('connection', function(socket) {
-            socket.emit('getHist', {
-                latitud: latitud,
-                longitud: longitud,
-                fecha: fecha,
-                hora: hora
-            });
-        });
-    };
-
-    retrieve();
-
-
-    //res.render("historicos");
-});
-
-server.listen(PORT, function() {
-    console.log(`Servidor iniciado en el puerto ${PORT}`.green)
 });
