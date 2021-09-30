@@ -1,30 +1,33 @@
-
+var socket = io();
 let marker;
+let circle;
 let map = L.map('maphi');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-var lat = [10.554300, 10.554300, 10.554300, 10.554300, 10.554300, 10.554300, 10.556000, 10.556000, 10.556200, 10.556400, 10.556400, 10.556600, 10.556900, 10.556900, 10.557200, 10.557500, 10.557500];
-var lon = [-73.224000, -73.224000, -73.224000, -73.224000, -73.224000, -73.224000, -73.222600, -73.222600, -73.222500, -73.222200, -73.222200, -73.222100, -73.221900, -73.221900, -73.221800, -73.221700];       
-var es=new L.LatLng(lat,lon);
-var polyline = L.polyline(es).addTo(map);   
 
 // Update HTML content
-document.addEventListener('DOMContentLoaded', function() {
-    polyline.addTo(map);
-
+document.addEventListener('DOMContentLoaded', function() {         
+    
+    // Initialize map.
+    const inicio = [parseFloat(info[0]['latitud']), parseFloat(info[0]['longitud'])];
+    const fin = [parseFloat(info[info.length - 1]['latitud']), parseFloat(info[info.length - 1]['longitud'])];
+    const medio = [parseFloat(info[Math.floor(info.length/2)]['latitud']), parseFloat(info[Math.floor(info.length/2)]['longitud'])];
     // Load Map
-    map.setView(es, 18); 
+    map.setView(medio, 18); 
     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
             attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
             maxZoom: 20,
+            center: medio,
             tileSize: 512,
             zoomOffset: -1,
         }).addTo(map);   
 
     // Place first marker
-    marker = L.marker(es).addTo(map);                         
+    marker = L.marker(medio).addTo(map); 
 
-    // Initialize map.
-    map.setView(es);
-    marker.setLatLng(es);                        
-    polyline.addLatLng(es);
+    marker.setLatLng(inicio); 
+    marker.setLatLng(fin);  
+
+    info.forEach(coord => {
+        polyline.addLatLng([parseFloat(info[coord]['latitud']), parseFloat(info[coord]['longitud'])]);
+    }); 
 }); 
