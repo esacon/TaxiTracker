@@ -12,7 +12,6 @@ const env_var = require('dotenv').config();
 const datetime = require('./datetime.js');
 const database = require('./database.js');
 
-
 app.use(express.static(__dirname + '/public/'));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
