@@ -8,6 +8,8 @@ const env_var = require('dotenv').config();
 const mysql = require('mysql2');
 const udp = require('dgram');
 const udp_server = udp.createSocket('udp4');
+const router = express.Router();
+const { render } = require('ejs');
 const datetime = require('./datetime.js');
 const database = require('./database.js');
 
@@ -21,10 +23,8 @@ const PORT = process.env.PORT || 3000; // puerto del servidor.
 app.set('view engine', 'ejs'); // motor de plantillas.
 app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
-const init = () => {
-
-    console.log(`Servidor iniciado en el puerto ${PORT}`.green);
-
+router.get('/', (req, res) => {
+    
     async function retrieve() {
         const info = await database.getData("Select latitud, longitud, fecha, hora from datos order by id desc limit 1;");
         let latitud = info[0]['latitud'];
@@ -90,9 +90,11 @@ const init = () => {
         addres: process.env.HOST,
         port:8888
     });
+
+    res.render()
 };
 
-app.get('/historicos', (req, res) => {
+router.get('/historicos', (req, res) => {
 
     async function retrieve() {
         const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-30' and hora >= '23:00:00' or hora <= '04:30:04';");
@@ -119,4 +121,6 @@ app.get('/historicos', (req, res) => {
     //res.render("historicos");
 });
 
-server.listen(PORT, init);
+server.listen(PORT, function() {
+    console.log(`Servidor iniciado en el puerto ${PORT}`.green)
+});
