@@ -2,20 +2,26 @@
 
 <body>
     <div class="container-fluid" style="background-color: #000000;">
-        <a href="#" class="navbar-brand "><h3><p class="text-light">Taxi Tracker App </p></h3></a>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container">
+                <a class="navbar-brand text-light fw-bold" href="/">Taxi Tracker App</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars lead text-dark"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/">Principal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/historicos">Históricos</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-    <div class="container-fluid">
-        <ul class="nav nav-tabs">
-            <li class="nav-item" role="presentation" >
-                <button class="nav-link active" data-bs-toggle="tab" id="Inicio-tab" type="button" data-bs-target="/inicio"
-                role="tab" aria-controls="Inicio" aria-selected="true">Inicio</button>
-            </li>
-            <li class="nav-item" role="presentation" >
-                <button class="nav-link" data-bs-toggle="tab" id="Historicos-tab" type="button" data-bs-target="/historicos"
-                role="tab" aria-controls="Historicos" aria-selected="true">Históricos</button>
-            </li>
-        </ul>        
-    </div>   
     <main class="main">
         <div class="container-fluid text-center" style= "background-color:#FAE671;">
             <section class="coordenadas info">
@@ -29,8 +35,8 @@
         </div>
         <!-- Map section -->
         <section class="map">
-            <div class="container-fluid text-center" id ="mapid"></div>
-            </section>
+            <div class="container-fluid text-center my-4" id ="mapid"></div>
+        </section>
         <!-- Load mapa into de page. -->
         <script src="scripts/map.js"></script>
     </main>
