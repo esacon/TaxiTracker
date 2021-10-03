@@ -1,0 +1,7 @@
+#container ul li a{
+    transition: .2s;
+}
+
+#container ul li a:hover{
+    background: #353535;";
+}
