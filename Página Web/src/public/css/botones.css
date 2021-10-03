@@ -1,7 +1,7 @@
-#container ul li a{
+#menu sup ul li a{
     transition: .2s;
 }
 
-#container ul li a:hover{
+#menu sup ul li a:hover{
     background: #353535;
 }
