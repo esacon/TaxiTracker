@@ -1,7 +1,7 @@
-#menu sup ul li a{
+a.nav-item{
     transition: .2s;
 }
 
-#menu sup ul li a:hover{
+#a.nav-item:hover{
     background: #aaaaaa;
 }
