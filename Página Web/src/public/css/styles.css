@@ -44,4 +44,13 @@ label {
   margin: .4rem 0;
 }
 
+.btn-primary {
+  background-color: var(--bs-secondary);
+  border-color:var(--bs-secondary) ;
+}
+
+.btn-primary:hover {
+  background-color: var(--bs-light);
+  border-color:var(--bs-light) ;
+}
 
