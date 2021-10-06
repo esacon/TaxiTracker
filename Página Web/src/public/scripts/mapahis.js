@@ -30,9 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }).addTo(maphi);    
 
             // Place markers
-            
-            marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             maphi.removeLayer(marker1)
+            marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
+            
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
