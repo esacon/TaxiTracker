@@ -38,6 +38,7 @@ text-align: center;
 
 
 footer{
+  position: absolute;
 width: 100%;
   height: 10px;
   background-color: #000000;
