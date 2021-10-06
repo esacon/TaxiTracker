@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize map.
         map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-        marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                        
+        marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);    
+        polyline.removeFrom(map)                    
         polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+     
     });
 }); 
