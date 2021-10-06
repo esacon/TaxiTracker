@@ -38,8 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
-            maphi.removeLayer(marker1);
-             
+            marker1.closePopup();
         }
     });
 }); 
