@@ -25,15 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 maxZoom: 20,
                 center: medio,
-                tileSize: 512,
+                tileSize: 512
                 zoomOffset: -1,
             }).addTo(maphi);    
 
             // Place markers
-            polyline.removeFrom(maphi);
             marker1.removeFrom(maphi);
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
+            polyline.removeFrom(maphi);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
