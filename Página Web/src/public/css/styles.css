@@ -33,7 +33,7 @@ text-align: center;
 
 }
 
-.map-responsive iframe{
+.map-responsive script{
   left:0;
   top:0;
   height:100%;
