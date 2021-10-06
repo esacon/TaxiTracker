@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
             marker2 = L.marker(fin).addTo(map).bindPopup("<b>Punto de fin</b>").openPopup();
         
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-            info.forEach(coord => {
-                polyline.removeFrom(map)   
+            info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
+            polyline.removeFrom(map) 
         }
     });
 }); 
