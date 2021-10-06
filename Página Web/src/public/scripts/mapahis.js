@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Place markers
             marker1 = L.marker(inicio).addTo(map).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(map).bindPopup("<b>Punto de fin</b>").openPopup();
-            polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
