@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 maxZoom: 20,
                 center: medio,
-                tileSize: 512
-                zoomOffset: -1,
+                tileSize: 512,
+                zoomOffset: -1
             }).addTo(maphi);    
 
             // Place markers
