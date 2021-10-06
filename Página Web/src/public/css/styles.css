@@ -1,21 +1,10 @@
-@media only screen and (max-width: 952px) {
-  #mapid { 
-    margin:0 auto;
+@media only screen and (max-width: 600px) {
+  #maphi { 
     width: 1000px;
-    height: 580px;
-    box-shadow: 5px 5px 5px #888;
-    text-align: center;
   }
-  
-#maphi { 
-  margin:0 auto;
-  width: 1000px;
-  height: 580px;
-  box-shadow: 5px 5px 5px #888;
-  text-align: center;
+  #mapid { 
+    width: 1000px;
   }
-
-
 }
 body {
   padding: 0;
@@ -30,7 +19,20 @@ html, body, #maphi {
   width: 100vw;
 }
 
-
+#mapid { 
+  margin:0 auto;
+  width: 1000px;
+  height: 580px;
+  box-shadow: 5px 5px 5px #888;
+  text-align: center;
+}
+#maphi { 
+margin:0 auto;
+width: 1000px;
+height: 580px;
+box-shadow: 5px 5px 5px #888;
+text-align: center;
+}
 .map-responsive{
   overflow:hidden;
   padding-bottom:56.25%;
