@@ -1,12 +1,12 @@
 #mapid { 
-  width: 1000px;
-  height: 580px;
+  width: 'responsive';
+  height: 'responsive';
   box-shadow: 5px 5px 5px #888;
   text-align: center;
 }
 #maphi { 
-width: 1000px;
-height: 580px;
+width: 'responsive';
+height: 'responsive';
 box-shadow: 5px 5px 5px #888;
 text-align: center;
 }
