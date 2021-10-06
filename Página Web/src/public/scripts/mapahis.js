@@ -1,7 +1,7 @@
 
 var socket = io();
-let marker1;
-let marker2;
+var marker1;
+var marker2;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);;
 
