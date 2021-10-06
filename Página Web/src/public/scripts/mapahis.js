@@ -30,8 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }).addTo(maphi);    
 
             // Place markers
-            marker1.removeFrom(maphi);
-            marker2.removeFrom(maphi);
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
-            
+            maphi.removeLayer(marker1);
              
         }
     });
