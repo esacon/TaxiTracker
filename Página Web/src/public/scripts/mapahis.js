@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (marker1 != undefined) {
                 maphi.removeLayer(marker1);
           };
+          if (marker2 != undefined) {
+            maphi.removeLayer(marker2);
+      };
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
