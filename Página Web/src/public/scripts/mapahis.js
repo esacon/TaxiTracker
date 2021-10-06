@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             info.forEach(coord => {
+                polyline.removeFrom(map)   
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
         }
