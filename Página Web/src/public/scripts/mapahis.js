@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }).addTo(maphi);    
 
             // Place markers
-            map.removeLayer(marker1)
-            map.removeLayer(marker2)
+            maphi.removeLayer(marker1)
+            maphi.removeLayer(marker2)
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
