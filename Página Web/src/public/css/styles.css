@@ -26,21 +26,15 @@ html, body, #maphi {
   box-shadow: 5px 5px 5px #888;
   text-align: center;
   }
-.map-responsive{
-  overflow:hidden;
-  padding-bottom:56.25%;
-  position:relative;
-  height:0;
 
-}
+  @media (max-width: 858px){
+    #mapid {
+      height: 300px;
+      width: 90%;
+      border-radius: 15px;
+    }
+  }
 
-.map-responsive iframe{
-  left:0;
-  top:0;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
 .center {
   margin: 1rem;
   padding: 1rem;
