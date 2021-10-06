@@ -30,14 +30,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }).addTo(maphi);    
 
             // Place markers
-            maphi.clear ();
+            
+
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
-        
+            maphi.clear ();
         }
     });
 }); 
