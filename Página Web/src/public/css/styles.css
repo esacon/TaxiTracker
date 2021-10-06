@@ -33,6 +33,11 @@ html, body, #maphi {
       width: 90%;
       border-radius: 15px;
     }
+    #maphi {
+      height: 300px;
+      width: 90%;
+      border-radius: 15px;
+    }
   }
 
 .center {
