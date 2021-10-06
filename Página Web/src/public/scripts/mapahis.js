@@ -3,7 +3,7 @@ var socket = io();
 let marker1;
 let marker2;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
-let polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
+let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);;
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
@@ -33,10 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup(); 
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+            polyline.removeFrom(maphi);
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
-            polyline.removeFrom(maphi);
+            
              
         }
     });
