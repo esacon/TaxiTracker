@@ -99,5 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         polyline.removeFrom(maphi);
         maphi.removeLayer(marker1);
         maphi.removeLayer(marker2);
+        alert("La búsqueda no arrojó ningún resultado, intente nuevamente.");
     });
 }); 
