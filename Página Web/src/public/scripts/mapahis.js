@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let hasData = data.hasData;
         if(!hasData) {
             alert("La búsqueda no ha encontrado ningún resultado.");
-            maphi.remove();
+            maphi.removeLayer([marker1, marker2, polyline]);
+            polyline.removeFrom(maphi);
         } else {
             maphi.removeLayer([marker1, marker2, polyline]);
 
