@@ -75,10 +75,20 @@ label {
 margin: .4rem 0;
 }
 
-.btn-primary {
-background-color: var(--bs-secondary);
-border-color:var(--bs-secondary) ;
+.btn-primary2 {
+background-color: #ffffff;
+border-color:#ffffff;
 }
+.btn-primary2:hover {
+  background-color: #7c7c7c;
+  border-color:#7c7c7c;
+}
+
+.btn-primary {
+  background-color: var(--bs-secondary);
+  border-color:var(--bs-secondary) ;
+}
+
 
 .btn-primary:hover {
 background-color: var(--bs-light);
