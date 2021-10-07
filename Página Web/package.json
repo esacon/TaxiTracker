@@ -10,6 +10,7 @@
   "author": "Enrique Niebles, Sebastián Romero, Adriana Díaz, Blondis Barrios, Jesús Súarez.",
   "license": "ISC",
   "dependencies": {
+    "alert": "^5.0.10",
     "bootstrap": "^5.1.1",
     "colors": "^1.4.0",
     "dgram": "^1.0.1",
