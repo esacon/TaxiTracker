@@ -46,11 +46,11 @@ router.post('/historicos', (req, res) => {
     const body = req.body;
 
     console.log(body);
-    console.log(body.datetimes);
-    let start_date = body.datetimes.split(" ")[0].split(" - ")[0];
-    let start_hour = body.datetimes.split(" ")[0].split(" - ")[1];
-    let end_date = body.datetimes.split(" ")[1].split(" - ")[0];
-    let end_hour = body.datetimes.split(" ")[1].split(" - ")[1];
+    console.log(body.datetimes.split(" "));
+    let start_date = body.datetimes.split(" ")[0];
+    let start_hour = body.datetimes.split(" ")[0];
+    let end_date = body.datetimes.split(" ")[0];
+    let end_hour = body.datetimes.split(" ")[0];
 
     
     console.log([start_date, start_hour, end_date, end_hour]);
