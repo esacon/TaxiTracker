@@ -12,7 +12,7 @@ const router = express.Router();
 const { render } = require('ejs');
 const datetime = require('./datetime.js');
 const database = require('./database.js');
-const popup = require('popups');
+const alert = require('alert'); 
 
 
 var io = socket(server);
@@ -64,9 +64,7 @@ router.post('/historicos', (req, res) => {
                 });
             });
         } else {
-            popup.alert({
-                content: "No se han encontrado datos que cumplan el criterio de búsqueda."
-            });
+            alert("No se han encontrado datos que cumplan el criterio de búsqueda.");
         }
 
         
