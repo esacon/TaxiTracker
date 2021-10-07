@@ -41,8 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+            latlngs = []
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
+                latlngs.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
 
             polyline.on('click', (e) => {
