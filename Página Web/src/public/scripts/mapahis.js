@@ -44,6 +44,24 @@ document.addEventListener('DOMContentLoaded', function() {
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             }); 
+
+            polyline.on('click', (e) => {
+                console.log(e);
+
+                var counts =[];
+                for ( var j=0;j<latlngs.length;j++ ){
+                    counts.push(latlngs[j][0]);
+                };
+            
+                goal = parseFloat(e.latlng.lat);
+                var closest = counts.reduce(
+                                function(prev, curr) {
+                                    return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+                                });
+                console.log(counts.indexOf(closest));
+                var index=counts.indexOf(closest);
+                popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"n\ fecha : "+dates[index][0]+ " hora : "+dates[index][1] ).openOn(myMap);
+            })
         
         }
     });

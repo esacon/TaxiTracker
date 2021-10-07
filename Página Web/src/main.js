@@ -44,7 +44,7 @@ router.get('/historicos', (req, res) => {
     res.render("historicos");
 });
 
-router.post('/historicoss', (req, res) => {
+router.post('/historicos', (req, res) => {
     const body = req.body;
 
     const start_date = body.datetimes.split(" ")[0];
@@ -66,7 +66,6 @@ router.post('/historicoss', (req, res) => {
         } else {
             alert("No se han encontrado datos que cumplan el criterio de búsqueda.");
         }
-               
     }; 
 
     retrieve();
