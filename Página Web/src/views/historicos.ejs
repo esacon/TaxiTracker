@@ -24,16 +24,16 @@
     <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
             <div class="row justify-content-center" style= "background-color:#FAE671;">
-                <form method="post" class="align-self-center"  action="/historicos">
-                    <input type="text" name="datetimes" />
+                <form method="post" class="align-self-center" action="/historicos">
+                    <input type="text" name="datetimes"/>
                     <script>
                         $(function() {
                             $('input[name="datetimes"]').daterangepicker({
                                 timePicker: true,
                                 timePicker24Hour: true,
                                 timePickerSeconds: true,
-                                startDate: moment().startOf('hour'),
-                                endDate: moment().startOf('hour').add(32, 'hour'),
+                                startDate: moment("09/30/2021").startOf('hour'),
+                                endDate: moment("09/30/2021").startOf('hour').add(24, 'hour'),
                                 locale: {
                                     format: 'DD/M hh:mm:ss A'
                                 }
