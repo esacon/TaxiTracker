@@ -7,16 +7,6 @@ let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 var popup = L.popup();
 var index = 0;
 
-function avanzarIndex() {
-    index++;
-}
-
-function retrocederIndex() {
-    if (index != 0) {
-        index--;
-    }
-}
-
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
 
@@ -65,6 +55,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (index == coords.length) {
             index--;
         }  
+
+        function avanzarIndex() {
+            index++;
+        }
+
+        function retrocederIndex() {
+            if (index != 0) {
+                index--;
+            }
+        }
 
         let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
         popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
