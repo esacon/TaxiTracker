@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fechas.push(coord.Fecha);
         });  
 
-        const $avanzar = document.querySelector('#siguiente');
+        let $avanzar = document.querySelector('#siguiente');
         $avanzar.addEventListener('click', ()=> {
             if (index != coords.length) {
                 index++;
