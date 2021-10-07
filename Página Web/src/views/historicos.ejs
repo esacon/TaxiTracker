@@ -43,6 +43,20 @@
                     <button class="mg7 mgB10" id="post" type="submit">Buscar</button>
                 </form>
             </div>
+
+            <input type="text" name="datetimes" />
+            <script>
+                $(function() {
+                    $('input[name="datetimes"]').daterangepicker({
+                        timePicker: true,
+                        startDate: moment().startOf('hour'),
+                        endDate: moment().startOf('hour').add(32, 'hour'),
+                        locale: {
+                        format: 'DD/M hh:mm:ss A'
+                        }
+                    });
+                });
+            </script>
                 
             <!-- Map section -->
             <section class="map">
