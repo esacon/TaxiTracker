@@ -21,7 +21,7 @@ app.use(express.static(__dirname + '/public/'));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
-const PORT = process.env.PORT || 3000; // puerto del servidor.
+const PORT = 80; // puerto del servidor.
 app.set('view engine', 'ejs'); // motor de plantillas.
 app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
@@ -30,17 +30,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/historicos', (req, res) => {
-
-    async function retrieve() {
-        const info = await database.getData("SELECT * FROM datos WHERE fecha >= '2021-09-29' and fecha <= '2021-09-30' and hora >= '23:00:00' or hora <= '04:30:04';");
-        let latitud = info[0]['latitud'];
-        let longitud = info[0]['longitud'];
-        let fecha = info[0]['fecha'];
-        let hora = info[0]['hora'];
-    };
-
-    retrieve();
-
     res.render("historicos");
 });
 
@@ -56,16 +45,11 @@ router.post('/historicos', (req, res) => {
 
     async function retrieve() {
         const info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s')`);
-        
-        if (info.length != 0) {
-            io.on('connection', function(socket) {
-                socket.emit('getConsulta', {
-                    info: info
-                });
+        io.on('connection', function(socket) {
+            socket.emit('getConsulta', {
+                info: info
             });
-        } else {
-            alert("No se han encontrado datos que cumplan el criterio de búsqueda.");
-        }
+        });        
     }; 
 
     retrieve();

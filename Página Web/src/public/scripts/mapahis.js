@@ -62,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const index = latitudes.indexOf(cercano);
                 let label = "You clicked the map at " + e.latlng.toString() +"\n Fecha : "+ fechas[index] + " Hora : " + horas[index];
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
-            })
-        
+            });        
         }
+        
     });
 }); 
