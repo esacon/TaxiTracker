@@ -47,7 +47,12 @@ html, body, #maphi {
   text-align: center;
 
 }
-
+#form{
+  position:fixed;
+  top:50%;
+  left:90%;
+  width:90%;
+}
 
 
 footer{
