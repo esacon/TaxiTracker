@@ -52,12 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }); 
 
         polyline.on('click', function(e) {
-                                    const target = parseFloat(e.latlng);
+                                    const target = [parseFloat(e.latlng.lat), parseFloat(e.latlng.lng)];
                                     console.log(target)
+                                    console.log(e.target.getLatLngs())
                                     let cercano = coords.reduce(
-                            function(prev, curr) {
-                                return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
-                            });
+                                                    function(prev, curr) {
+                                                        return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
+                                                    });
             const index = coords.indexOf(cercano);
             let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${e.latlng.lat}<br/>Longitud: ${e.latlng.lng}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
             popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
