@@ -46,6 +46,7 @@ router.post('/historicos', (req, res) => {
     const body = req.body;
 
     console.log(body);
+    res.render("index")
     /*
     let start_date = body.start.split("T")[0];
     let start_hour = body.start.split("T")[1];
