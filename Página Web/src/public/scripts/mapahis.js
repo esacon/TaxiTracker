@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on("getConsulta", function(data){
         let info = data.info;
-        if(info.length != 0) {
+        let hasData = data.hasData;
+        if(!hasData) {
+            alert("La búsqueda no ha encontrado ningún resultado.");
+            maphi.remove();
+        } else {
             maphi.removeLayer([marker1, marker2, polyline]);
 
             // Initialize map.
@@ -59,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
                                 });
                 const index = longitudes.indexOf(cercano);
-                let label = `<b>Taxi ubicado en:</b><br/>Latitud:${e.latlng.lat}<br/>Longitud:${e.latlng.lng}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${e.latlng.lat}<br/>Longitud: ${e.latlng.lng}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
         } 
