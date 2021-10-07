@@ -5,6 +5,17 @@ var marker2;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 var popup = L.popup();
+var index = 0;
+
+function avanzarIndex() {
+    index++;
+}
+
+function retrocederIndex() {
+    if (index != 0) {
+        index--;
+    }
+}
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
@@ -49,20 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
             coords.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
             horas.push(coord.Hora);
             fechas.push(coord.Fecha);
-        }); 
-
-        polyline.on('click', function(e) {
-                                    const target = [parseFloat(e.latlng.lat), parseFloat(e.latlng.lng)];
-                                    console.log(target)
-                                    console.log(e.target.getLatLngs())
-                                    let cercano = coords.reduce(
-                                                    function(prev, curr) {
-                                                        return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
-                                                    });
-            const index = coords.indexOf(cercano);
-            let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${e.latlng.lat}<br/>Longitud: ${e.latlng.lng}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-            popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
         });  
+
+        if (index == coords.length) {
+            index--;
+        }  
+
+        let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+        popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
     });
 
     socket.on('noData', function(data){
