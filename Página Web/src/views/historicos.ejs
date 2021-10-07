@@ -26,6 +26,7 @@
             <div class="row justify-content-center" style= "background-color:#FAE671;">
                 <form method="post" class="align-self-center" action="/historicos">
                     <input type="text" name="datetimes"/>
+                    <input type="submit" id='btn-form' style='display: none;'>
                     <script>
                         $(function() {
                             $('input[name="datetimes"]').daterangepicker({
@@ -38,9 +39,9 @@
                                     format: 'DD/M hh:mm:ss A'
                                 }
                             });
-                            $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+                            $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
                                 //do something, like clearing an input
-                                $('input[name="datetimes"]').val('');
+                                $('#btn-form').click();
                             });
                         });
                     </script>
