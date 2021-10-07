@@ -52,22 +52,24 @@ document.addEventListener('DOMContentLoaded', function() {
             fechas.push(coord.Fecha);
         });  
 
-        if (index == coords.length) {
-            index--;
-        }  
+        const $avanzar = document.querySelector('#siguiente');
+        $avanzar.addEventListener('click', ()=> {
+            if (index != coords.length) {
+                index++;
+                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
+            } 
+        });
 
-        function avanzarIndex() {
-            index++;
-        }
-
-        function retrocederIndex() {
+        let $retroceder = document.querySelector('#anterior');
+        $retroceder.addEventListener('click', ()=> {
             if (index != 0) {
                 index--;
-            }
-        }
-
-        let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-        popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
+                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
+            } 
+        });
+        
     });
 
     socket.on('noData', function(data){
