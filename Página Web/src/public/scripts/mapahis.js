@@ -12,10 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on("getConsulta", function(data){
         let info = data.info;
         let hasData = data.hasData;
+        console.log(hasData);
         if(!hasData) {
             alert("La búsqueda no ha encontrado ningún resultado.");
-            maphi.removeLayer([marker1, marker2, polyline]);
             polyline.removeFrom(maphi);
+            maphi.removeLayer(marker1);
+            maphi.removeLayer(marker2);
         } else {
             maphi.removeLayer([marker1, marker2, polyline]);
 
