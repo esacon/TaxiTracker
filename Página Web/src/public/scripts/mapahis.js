@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.removeFrom(maphi);
             maphi.removeLayer(marker1);
             maphi.removeLayer(marker2);
-        } else {
+        } if(hasData) {
             maphi.removeLayer([marker1, marker2, polyline]);
 
             // Initialize map.
