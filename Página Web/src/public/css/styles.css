@@ -79,11 +79,13 @@ margin: .4rem 0;
 background-color: #ffffff;
 border-color:#ffffff;
 padding: 0.4%;
-margin: 0.4%;  
+margin: 0.6%;  
 }
 .btn-primary2:hover {
   background-color: #aaaaaa;
   border-color:#aaaaaa;
+  padding: 0.4%;
+ margin: 0.6%;
 }
 
 .btn-primary {
