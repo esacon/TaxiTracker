@@ -47,13 +47,16 @@ router.post('/historicos', (req, res) => {
 
     console.log(body);
     console.log(body.datetimes);
-    /*
-    let start_date = body.start.split("T")[0];
-    let start_hour = body.start.split("T")[1];
-    let end_date = body.end.split("T")[0];
-    let end_hour = body.end.split("T")[1];
+    let start_date = body.datetimes.split(" ")[0].split(" - ")[0];
+    let start_hour = body.datetimes.split(" ")[0].split(" - ")[1];
+    let end_date = body.datetimes.split(" ")[1].split(" - ")[0];
+    let end_hour = body.datetimes.split(" ")[1].split(" - ")[1];
 
+    
     console.log([start_date, start_hour, end_date, end_hour]);
+
+    /*
+
 
     async function retrieve() {
         const info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s')`);
