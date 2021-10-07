@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
         } else {
-            maphi.clear();
             alert("La búsqueda no ha encontrado ningún resultado.");
+            maphi.remove();
         }
 
     });
