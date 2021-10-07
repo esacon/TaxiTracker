@@ -25,41 +25,23 @@
         <main class="main">
             <div class="row justify-content-center" style= "background-color:#FAE671;">
                 <form method="post" class="align-self-center"  action="/historicos">
-                    <div class="col align-self-center" ><label for="strat"><h5><p class="text-dark ">Fecha de inicio:</p></h5></label>
-                        <input type="datetime-local" id="start_date" name="start" value="" min="2021-09-01T00:00" max="2021-12-31T00:00">
-                    </div>
-                    <div class="col align-self-center" ><label for="end"><h5><p class="text-dark ">Fecha de Fin:</p></h5></label>
-                        <input type="datetime-local" id="end_date" name="end" value="" min="2021-09-01T00:00" max="2021-12-31T00:00">
-                    </div>     
-                    <button class="mg7 mgB10" id="post-btn" type="submit">Buscar</button>
+                    <input type="text" name="datetimes" />
+                    <script>
+                        $(function() {
+                            $('input[name="datetimes"]').daterangepicker({
+                                timePicker: true,
+                                timePicker24Hour: true,
+                                timePickerSeconds: true,
+                                startDate: moment().startOf('hour'),
+                                endDate: moment().startOf('hour').add(32, 'hour'),
+                                locale: {
+                                    format: 'DD/M hh:mm:ss A'
+                                }
+                            });
+                        });
+                    </script>
                 </form>
             </div>
-
-            <div class="row justify-content-center" style= "background-color:#FAE671;">
-                <form method="post" class="align-self-center"  action="/historicos">
-                    <div class="col align-self-center" ><label for="punto"><h5><p class="text-dark ">Fecha especifica:</p></h5></label>
-                        <input type="datetime-local" id="punto_date" name="punto" value="" min="2021-09-01T00:00:00" max="2021-12-31T00:00:00">
-                    </div>  
-                    <button class="mg7 mgB10" id="post" type="submit">Buscar</button>
-                </form>
-            </div>
-
-            <input type="text" name="datetimes" />
-            <script>
-                $(function() {
-                    $('input[name="datetimes"]').daterangepicker({
-                        timePicker: true,
-                        timePicker24Hour: true,
-                        timePickerSeconds: true,
-                        startDate: moment().startOf('hour'),
-                        endDate: moment().startOf('hour').add(32, 'hour'),
-                        locale: {
-                            format: 'DD/M hh:mm:ss A'
-                        }
-                    });
-                });
-            </script>
-                
             <!-- Map section -->
             <section class="map">
                 <div class="container-fluid text-center my-4" id ="maphi"></div>

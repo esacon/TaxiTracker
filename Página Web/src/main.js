@@ -46,7 +46,7 @@ router.post('/historicos', (req, res) => {
     const body = req.body;
 
     console.log(body);
-
+    /*
     let start_date = body.start.split("T")[0];
     let start_hour = body.start.split("T")[1];
     let end_date = body.end.split("T")[0];
@@ -72,9 +72,9 @@ router.post('/historicos', (req, res) => {
         });
         
         res.render("historicos");
-    };
+    }; 
 
-    retrieve();
+    retrieve(); */
 });
 
 app.use('/', router);
