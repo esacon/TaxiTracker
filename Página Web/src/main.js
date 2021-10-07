@@ -55,13 +55,17 @@ router.post('/historicos', (req, res) => {
     async function retrieve() {
         const info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s')`);
         
-        console.log(info.length);
-
-        io.on('connection', function(socket) {
-            socket.emit('getConsulta', {
-                info: info
+        if (info.length != 0) {
+            io.on('connection', function(socket) {
+                socket.emit('getConsulta', {
+                    info: info
+                });
             });
-        });
+        } else {
+            alert("No se han encontrado datos que cumplan el criterio de búsqueda.");
+        }
+
+        
     }; 
 
     retrieve();
