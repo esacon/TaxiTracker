@@ -46,20 +46,12 @@ router.post('/historicos', (req, res) => {
     const body = req.body;
 
     console.log(body);
+    console.log(body.datetimes);
     /*
     let start_date = body.start.split("T")[0];
     let start_hour = body.start.split("T")[1];
     let end_date = body.end.split("T")[0];
     let end_hour = body.end.split("T")[1];
-
-    if (start_date > end_date) {
-        let temp = end_date;
-        end_date = start_date;
-        start_date = temp;
-        let temp_h = end_hour;
-        end_hour = start_hour;
-        start_hour = temp_h;
-    }
 
     console.log([start_date, start_hour, end_date, end_hour]);
 
