@@ -62,6 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${e.latlng.lat}<br/>Longitud: ${e.latlng.lng}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
-        } 
+        } else {
+            maphi.removeLayer([marker1, marker2, polyline]);
+            polyline.removeFrom(maphi);
+            maphi.removeLayer(marker1);
+            maphi.removeLayer(marker2);
+        }
     });
 }); 
