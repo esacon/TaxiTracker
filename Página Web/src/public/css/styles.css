@@ -48,7 +48,10 @@ html, body, #maphi {
 
 }
 
-
+div [class|="borde"]{
+  padding: 0.2%;
+  margin: 0.2%;  
+ }
 
 footer{
   position: absolute;
