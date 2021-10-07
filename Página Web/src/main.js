@@ -47,9 +47,15 @@ router.post('/historicos', (req, res) => {
         let info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s')`);
  
         io.on('connection', function(socket) {
-            socket.emit('getConsulta', {
-                info: info
-            });
+            if (info.length != 0) {
+                socket.emit('getConsulta', {
+                    info: info
+                });
+            } else {
+                socket.emit('noData', {
+                    info: info
+                });
+            }
         });        
     }; 
 
