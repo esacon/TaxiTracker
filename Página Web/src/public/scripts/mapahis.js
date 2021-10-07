@@ -3,7 +3,8 @@ var socket = io();
 var marker1;
 var marker2;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
-let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);;
+let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+var popup = L.popup();
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
@@ -41,10 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+
             latlngs = []
+            datetimes = []
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 latlngs.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
+                datetimes.push([coord.Fecha, coord.Hora])
             }); 
 
             polyline.on('click', (e) => {
@@ -61,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
                                 });
                 console.log(counts.indexOf(closest));
-                var index=counts.indexOf(closest);
-                popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"n\ fecha : "+dates[index][0]+ " hora : "+dates[index][1] ).openOn(myMap);
+                var index = counts.indexOf(closest);
+                popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"\n Fecha : "+datetimes[index][0]+ " Hora : "+datetimes[index][1] ).openOn(maphi);
             })
         
         }
