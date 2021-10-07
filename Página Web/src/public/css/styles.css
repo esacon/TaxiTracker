@@ -47,6 +47,11 @@ html, body, #maphi {
   text-align: center;
 
 }
+inpu {
+  
+  width: 300px;
+}
+
 
 div [class|="borde"]{
   padding: 0.2%;
