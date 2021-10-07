@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
         } else {
-            maphi.removeLayer([marker1, marker2, polyline]);
+            maphi.clear();
+            alert("La búsqueda no ha encontrado ningún resultado.");
         }
 
     });
