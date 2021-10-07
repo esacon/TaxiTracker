@@ -49,7 +49,7 @@ router.post('/historicos', (req, res) => {
         io.on('connection', function(socket) {
             socket.emit('getConsulta', {
                 info: info,
-                hasData: info.length === 0
+                hasData: info.length != 0
             });
         });        
     }; 
