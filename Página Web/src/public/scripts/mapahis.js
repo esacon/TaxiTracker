@@ -43,30 +43,25 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.removeFrom(maphi);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 
-            latlngs = []
-            datetimes = []
+            let fechas = [];
+            let horas = [];
+            let latitudes = [];
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
-                latlngs.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
-                datetimes.push([coord.Fecha, coord.Hora])
+                latitudes.push(parseFloat(coord.Latitud));
+                horas.push(coord.Hora);
+                fechas.push(coord.Fecha);
             }); 
 
             polyline.on('click', (e) => {
-                console.log(e);
-
-                var counts =[];
-                for ( var j=0;j<latlngs.length;j++ ){
-                    counts.push(latlngs[j][0]);
-                };
-            
-                goal = parseFloat(e.latlng.lat);
-                var closest = counts.reduce(
+                const target = parseFloat(e.latlng.lat);
+                let cercano = latitudes.reduce(
                                 function(prev, curr) {
-                                    return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
+                                    return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
                                 });
-                console.log(counts.indexOf(closest));
-                var index = counts.indexOf(closest);
-                popup.setLatLng(e.latlng).setContent("You clicked the map at " + e.latlng.toString() +"\n Fecha : "+datetimes[index][0]+ " Hora : "+datetimes[index][1] ).openOn(maphi);
+                const index = latitudes.indexOf(cercano);
+                let label = "You clicked the map at " + e.latlng.toString() +"\n Fecha : "+ fechas[index] + " Hora : " + horas[index];
+                popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             })
         
         }
