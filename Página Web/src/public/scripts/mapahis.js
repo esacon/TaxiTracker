@@ -2,17 +2,29 @@
 var socket = io();
 var marker1;
 var marker2;
+var marker3;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 var popup = L.popup();
 var index = 0;
+
+var LeafIcon = L.Icon.extend({
+    options: {
+       iconSize:     [10, 20],
+       shadowSize:   [20, 14]
+    }
+});
+
+var taxiIcon = new LeafIcon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
+});
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
 
     socket.on("getConsulta", function(data){
         let info = data.info;
-        maphi.removeLayer([marker1, marker2, polyline]);
+        maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
         // Initialize map.
         const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
@@ -37,6 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (marker2 != undefined) {
             maphi.removeLayer(marker2);
         };
+        if (marker3 != undefined) {
+            maphi.removeLayer(marker3);
+        };
+
         marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup();             
         marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
         polyline.removeFrom(maphi);
@@ -57,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (index != coords.length) {
                 index++;
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-                popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
+                marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             } 
         });
 
@@ -66,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (index != 0) {
                 index--;
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-                popup.setLatLng([coords[index][0], coords[index][1]]).setContent(label).openOn(maphi);
+                marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             } 
         });
         
