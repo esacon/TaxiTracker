@@ -13,12 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let info = data.info;
         let hasData = data.hasData;
         console.log(hasData);
-        if(!hasData) {
-            alert("La búsqueda no ha encontrado ningún resultado.");
-            polyline.removeFrom(maphi);
-            maphi.removeLayer(marker1);
-            maphi.removeLayer(marker2);
-        } if(hasData) {
+        if(hasData) {
             maphi.removeLayer([marker1, marker2, polyline]);
 
             // Initialize map.
