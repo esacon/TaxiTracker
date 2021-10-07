@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on("getConsulta", function(data){
         let info = data.info;
-        let hasData = data.hasData;
-        console.log(hasData);
         if(info.length != 0) {
             maphi.removeLayer([marker1, marker2, polyline]);
 
