@@ -47,7 +47,10 @@ html, body, #maphi {
   text-align: center;
 
 }
-
+div [class|="text"]{
+  padding: 1rem;
+  margin: 0;  
+ }
  div [class|="row"]{
   border: 4px solid #000000;   
  }
