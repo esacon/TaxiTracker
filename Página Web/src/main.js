@@ -52,6 +52,8 @@ router.post('/historicos', (req, res) => {
         });        
     }; 
 
+    res.render('historicos');
+
 });
 
 app.use('/', router);
