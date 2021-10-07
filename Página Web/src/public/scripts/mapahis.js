@@ -10,7 +10,7 @@ var popup = L.popup();
 document.addEventListener('DOMContentLoaded', function() { 
 
     socket.on("getConsulta", function(data){
-        const info = data.info;
+        let info = data.info;
         if(info.length != 0) {
             maphi.removeLayer([marker1, marker2, polyline]);
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
         } 
-        if (info.length == 0) {
+        if (data.info.length == 0) {
             alert("La búsqueda no ha encontrado ningún resultado.");
             maphi.remove();
         }
