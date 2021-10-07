@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public/'));
 app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 
-const PORT = 80; // puerto del servidor.
+const PORT = process.env.PORT || 3000; // puerto del servidor.
 app.set('view engine', 'ejs'); // motor de plantillas.
 app.set('views', __dirname + '/views'); // Dirección de las vistas.
 
