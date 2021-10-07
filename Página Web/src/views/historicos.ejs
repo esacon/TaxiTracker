@@ -38,6 +38,10 @@
                                     format: 'DD/M hh:mm:ss A'
                                 }
                             });
+                            $('input[name="datetimes"]').on('cancel.daterangepicker', function(ev, picker) {
+                                //do something, like clearing an input
+                                $('input[name="datetimes"]').val('');
+                            });
                         });
                     </script>
                 </form>
