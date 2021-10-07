@@ -45,25 +45,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let fechas = [];
             let horas = [];
-            let latitudes = [];
+            let longitudes = [];
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
-                latitudes.push(parseFloat(coord.Latitud));
+                longitudes.push(parseFloat(coord.Longitud));
                 horas.push(coord.Hora);
                 fechas.push(coord.Fecha);
             }); 
 
             polyline.on('click', (e) => {
-                const target = parseFloat(e.latlng.lat);
-                let cercano = latitudes.reduce(
+                const target = parseFloat(e.latlng.lon);
+                let cercano = longitudes.reduce(
                                 function(prev, curr) {
                                     return (Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev);
                                 });
-                const index = latitudes.indexOf(cercano);
-                let label = "You clicked the map at " + e.latlng.toString() +"\n Fecha : "+ fechas[index] + " Hora : " + horas[index];
+                const index = longitudes.indexOf(cercano);
+                let label = `<b>Taxi ubicado en:</b>\nLatitud:${e.latlng.lat}\tLongitud:${e.latlng.lon}\nFecha: ${fechas[index]}\tHora: ${horas[index]}`
                 popup.setLatLng(e.latlng).setContent(label).openOn(maphi);
             });        
+        } else {
+            maphi.removeLayer([marker1, marker2, polyline]);
         }
-        
+
     });
 }); 
