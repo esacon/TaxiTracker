@@ -78,6 +78,8 @@ margin: .4rem 0;
 .btn-primary2 {
 background-color: #ffffff;
 border-color:#ffffff;
+padding: 0.4%;
+margin: 0.2%;  
 }
 .btn-primary2:hover {
   background-color: #aaaaaa;
