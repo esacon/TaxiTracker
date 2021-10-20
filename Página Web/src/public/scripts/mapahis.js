@@ -80,8 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
         });
 
-        let $avanzar = document.querySelector('#siguiente');
-        $avanzar.addEventListener('click', ()=> {
+        let $retroceder = document.querySelector('#anterior');
+        $retroceder.addEventListener('click', ()=> {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
             };
