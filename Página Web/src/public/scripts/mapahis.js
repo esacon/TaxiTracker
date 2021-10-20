@@ -7,7 +7,13 @@ let maphi= L.map('maphi').setView([10.97, -74.65], 15);
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 var popup = L.popup();
 var index = 0;
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
 
+slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
 var LeafIcon = L.Icon.extend({
     options: {
        iconSize:     [20, 25],
