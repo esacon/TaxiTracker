@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fechas.push(coord.Fecha);
         });  
 
-        let $avanzar =document.getElementById("fader"),;
+        let $avanzar = document.querySelector('#siguiente');
         $avanzar.addEventListener('click', ()=> {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
         });
 
-        let $retroceder = document.getElementById("fader"),;
+        let $retroceder = document.querySelector('#anterior');
         $retroceder.addEventListener('click', ()=> {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
