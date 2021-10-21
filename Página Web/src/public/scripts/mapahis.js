@@ -61,7 +61,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
             };
+            if (marker4 != undefined) {
+                maphi.removeLayer(marker4);
+            };
+            if (marker5 != undefined) {
+                maphi.removeLayer(marker5);
+            };
+            if (marker6 != undefined) {
+                maphi.removeLayer(marker6);
+            };
 
+            polyline2.removeFrom(maphi);
+            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
             marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup();             
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
             polyline.removeFrom(maphi);
