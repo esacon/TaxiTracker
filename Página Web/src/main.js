@@ -71,7 +71,7 @@ router.post('/historicos', (req, res) => {
                     });
                 }
             } else {
-                if (info.length != 0 && info2.length != 0) {
+                if (info.length != 0) {
                     socket.emit('getConsulta', {
                         info: info,
                         info2: info2
