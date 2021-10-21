@@ -87,6 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p1 = false;
                 console.log("soy p1 falso");
+                polyline.removeFrom(map);
+                map.removeLayer(polyline);
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         } 
@@ -116,6 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p2 = false;
                 console.log("soy p2 falso");
+                polyline2.removeFrom(map);
+                map.removeLayer(polyline2);
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
@@ -123,17 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if(p1) {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1); 
-        } else {            
-            polyline2.removeFrom(map);
-            map.removeLayer(polyline2);
         }
 
         if(p2) {
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2); 
-        } else{            
-            polyline.removeFrom(map);
-            map.removeLayer(polyline);
-        }
+        } 
     });
 }); 
