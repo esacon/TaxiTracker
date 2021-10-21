@@ -59,18 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_long = parseFloat(info.longitud_text);
         }                
        
-       polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
-       polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
        let p1 = false;
        let p2 = false;
 
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
 
+                polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
+
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined || placa === '0'){
-                    map.removeLayer(polyline2);
-                    map.removeLayer(polyline2);
+                    polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
+                    map.removeLayer(marker2);
                 }
 
                 polyline.addTo(map);
@@ -90,18 +90,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker != undefined) {
                     map.removeLayer(marker);
                 }
-                polyline.removeFrom(map);
+                polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
                 p1 = false;
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         } 
 
         if (info.placa === 'AAA222') {
-            if (placa === '1' || placa === '2') {                
+            if (placa === '1' || placa === '2') {      
+
+                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1
                 if (marker != undefined || placa === '2'){
-                    polyline.removeFrom(map);
+                    polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
                     map.removeLayer(marker);
                 }         
 
@@ -121,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
                 }
-                polyline2.removeFrom(map);
+                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
                 p2 = false;
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
