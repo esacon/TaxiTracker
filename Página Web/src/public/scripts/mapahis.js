@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 index = $avanzar.value;
-                let label = `<b>Taxi ubicado AAA111 en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                let label = `<b>Taxi AAA111 ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
 
@@ -199,10 +199,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     socket.on('noData', function(data){
-        maphi.removeLayer([marker1, marker2, polyline]);
+        maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
         polyline.removeFrom(maphi);
         maphi.removeLayer(marker1);
         maphi.removeLayer(marker2);
+        polyline2.removeFrom(maphi);
+        maphi.removeLayer(marker4);
+        maphi.removeLayer(marker5);
         alert("La búsqueda no arrojó ningún resultado, intente nuevamente.");
     });
 }); 
