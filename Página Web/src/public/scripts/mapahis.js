@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let info = data.info;
         let info2 = data.info2;
 
-        if (info != null && info2 == null) {                  
+        if (info != null) {       
+            console.log('Entré fino');           
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
             // Initialize map.
