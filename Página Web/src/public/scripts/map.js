@@ -121,7 +121,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
-        
+        if (p1 && p2) {
+            polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline.setLatLngs(coord_taxi1);
+            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2.setLatLngs(coord_taxi2);
+        } 
         if(p1) {
             polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
@@ -130,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.removeFrom(map);
             map.removeLayer(polyline);
         }
-
         if(p2) {
             polyline2.removeFrom(map);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
