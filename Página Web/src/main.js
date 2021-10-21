@@ -125,7 +125,7 @@ server.listen(PORT, function() {
             });
 
             // Insertar datos en la db.
-            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString()]]);         
+            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString(), placa.toString()]]);         
         }
     });
 
