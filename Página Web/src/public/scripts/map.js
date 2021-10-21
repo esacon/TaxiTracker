@@ -59,8 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_long = parseFloat(info.longitud_text);
         }                
        
-        polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
-        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
         let p1 = false;
         let p2 = false;
 
@@ -73,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker2);
                 }
 
-                polyline.addTo(map);
-                
                 p1 = true;
 
                 // Si ya hay un marker en el mapa, elimina marker.
@@ -105,8 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker);
                 }         
 
-                p2 = true;   
-                polyline2.addTo(map);    
+                p2 = true;    
 
                 // Si ya hay un marker2 en el mapa, elimina marker2.
                 if (marker2 != undefined) {
