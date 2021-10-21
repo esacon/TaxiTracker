@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });              
 
     socket.on('change', function(info) {
+        console.log('Info:');
+        console.log(info);
         // Add Polyline to map.
         polyline.addTo(map);
 
@@ -50,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('longitud_text').innerText = info.longitud_text;
         document.getElementById('fecha_text').innerText = info.fecha_text;
         document.getElementById('hora_text').innerText = info.hora_text;
-        console.log('Info:');
-        console.log(info);
 
         // Initialize map.
         let placa = document.querySelector('#placa').value;  
