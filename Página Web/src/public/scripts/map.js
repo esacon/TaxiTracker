@@ -121,17 +121,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if(p1) {
-            polyline.removeFrom(map);
-            map.removeLayer(polyline);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1); 
+        } else {            
+            polyline.removeFrom(map);
+            map.removeLayer(polyline);
         }
 
         if(p2) {
+            polyline2.setLatLngs(coord_taxi2); 
+        } else{            
+            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.removeFrom(map);
             map.removeLayer(polyline2);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-            polyline2.setLatLngs(coord_taxi2); 
-        }  
+        }
     });
 }); 
