@@ -131,8 +131,10 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
         } else if (p1 && p2) {
+            polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
+            polyline2.removeFrom(map);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
         } else {
