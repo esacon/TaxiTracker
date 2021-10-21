@@ -54,6 +54,7 @@
                                     <input type="text" class="btn btn-primary2 text-dark fw-bold" name="datetimes" style="width:300px;height:30px;"/>
                                     <input type="submit" class="btn btn-primary2 text-dark fw-bold" id='btn-form' style='display: none; width:300px;height: 30px;'>
                                     <script>
+                                        var placa = document.querySelector('#placa').value; 
                                         $(function() {
                                             $('input[name="datetimes"]').daterangepicker({
                                                 timePicker: true,
