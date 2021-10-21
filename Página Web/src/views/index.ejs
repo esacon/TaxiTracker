@@ -20,6 +20,24 @@
     </div>
     <main class="main">
         <div class="container-fluid text-center" style= "background-color:#FAE671;">
+            <div class="accordion" id="accordionPanelsStayOpenExample"> 
+                <div class="accordion-item" style= "background-color:#FAE671;">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                     Seleccione vehículo de preferencia
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                        <select class="form-select mt-2" id="placa" name="placa" style="width:150px;height:35px;"/>
+                        <option value="0">AAA111</option>
+                        <option value="1">AAA222</option>
+                        <option value="2">Ambos</option>
+                    </select>
+                    </div>
+                  </div>
+                </div>
+
             <section class="coordenadas info">
                 <div class="row justify-content-center">
                     <div class="col" ><h5><p class="latitud"><p class="text-dark">Latitud: <span id="latitud_text"></span></p></p></h5></div>
@@ -29,6 +47,7 @@
                 </div>
             </section>
         </div>
+    </div>
         <!-- Map section -->
     
         <section class="map">
