@@ -59,7 +59,7 @@ router.post('/historicos', (req, res) => {
         }
 
         io.on('connection', function(socket) {
-            if (info != null) {
+            if (info2 === null) {
                 if (info.length != 0) {
                     socket.emit('getConsulta', {
                         info: info,
@@ -70,7 +70,18 @@ router.post('/historicos', (req, res) => {
                         info: info
                     });
                 }
-            } 
+            } else {
+                if (info.length != 0) {
+                    socket.emit('getConsulta', {
+                        info: info,
+                        info2: info2
+                    });
+                } else {
+                    socket.emit('noData', {
+                        info: info
+                    });
+                }
+            }
         });        
     }; 
 
