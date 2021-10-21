@@ -182,6 +182,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
+
+            let $avanzar2 = document.querySelector('#rango2');    
+            $avanzar2.setAttribute("max", coords2.length - 1);
+
+            $avanzar2.addEventListener('change', ()=> {
+                if (marker6 != undefined) {
+                    maphi.removeLayer(marker6);
+                };
+
+                index2 = $avanzar2.value;
+                let label2 = `<b>Taxi AAA222 ubicado en:</b><br/>Latitud: ${coords2[index2][0]}<br/>Longitud: ${coords2[index2][1]}<br/>Fecha: ${fechas2[index2]}<br/>Hora: ${horas2[index2]}`
+                marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label2).openPopup();
+            });
         }
     });
 
