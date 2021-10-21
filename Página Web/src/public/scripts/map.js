@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker2 != undefined || placa === '0'){
                     map.removeLayer(polyline2);
                     polyline2.removeFrom(map);
-                    map.removeLayer(marker2);
+                    map.removeLayer(polyline2);
                 }
 
                 polyline.addTo(map);
@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker != undefined) {
                     map.removeLayer(marker);
                 }
-                map.removeLayer(polyline);
                 polyline.removeFrom(map);
+                map.removeLayer(polyline);
                 p1 = false;
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1
                 if (marker != undefined || placa === '2'){
-                    map.removeLayer(polyline);
                     polyline.removeFrom(map);
+                    map.removeLayer(polyline);
                     map.removeLayer(marker);
                 }         
 
@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
                 }
-                map.removeLayer(polyline2);
                 polyline2.removeFrom(map);
+                map.removeLayer(polyline2);
                 p2 = false;
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
