@@ -63,8 +63,12 @@ document.addEventListener('DOMContentLoaded', function() {
        
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
+                if (marker1 != undefined) {
+                    map.removeLayer(marker1);
+                };
                 marker1 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
                 polyline1 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
@@ -76,18 +80,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (info.placa === 'AAA222') {
             if (placa === '1' || placa === '2') {
+                if (marker1 != undefined) {
+                    map.removeLayer(marker2);
+                };
                 marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 2").openPopup(); 
                 polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
                 if (marker1 != undefined) {
                     map.removeLayer(marker1);
                     polyline.removeFrom(map);
                 };
             }
-            coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
     
-        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        
         polyline.setLatLngs(coord_taxi1);
         polyline2.setLatLngs(coord_taxi2);      
     });
