@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
+                    polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
                     marker2.options.connectedLines.push(polyline2);
                     map.removeLayer(marker2);
                 }
