@@ -75,7 +75,8 @@ label {
 margin: .4rem 0;
 }
 
-#btn-group dropend{
+.btn-group dropend{
+  border: 20px;
   width: 10px;
   height: 10px;
 }
