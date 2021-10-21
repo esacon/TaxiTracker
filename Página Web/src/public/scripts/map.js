@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (info.placa === 'AAA222') {
             if (placa === '1' || placa === '2') {                
 
-                // Si marker 1 existe y placa = AAA222, elimina marker 1.
+                // Si marker 1 existe y placa = AAA222, elimina marker 1
                 if (marker != undefined || placa === '2'){
                     map.removeLayer(polyline);
                     polyline.removeFrom(map);
