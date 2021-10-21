@@ -43,8 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on('change', function(info) {
         
-        // Add Polyline to map.
-        polyline.addTo(map);
 
         // Update HTML content.
         document.getElementById('latitud_text').innerText = info.latitud_text;
@@ -72,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined && placa === '0'){
                     map.removeLayer(marker2);
-                    polyline2.removeFrom(map);
                 }
 
                 // Si ya hay un marker1 en el mapa, elimina marker1.
@@ -87,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si placa = AAA222 y existe marker1, elimina marker1.
                 if (marker1 != undefined) {
                     map.removeLayer(marker1);
-                    polyline.removeFrom(map);
                 }
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
