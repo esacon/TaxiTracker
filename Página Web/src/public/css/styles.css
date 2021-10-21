@@ -47,6 +47,7 @@ html, body, #maphi {
   text-align: center;
 
 }
+select { width: 400px; text-align: center; }
 
 div [class|="borde"]{
   padding: 0.4%;
