@@ -75,9 +75,8 @@ label {
 margin: .4rem 0;
 }
 
-placa{
-  text-align-last: left;
-}
+select { 
+width: 400px; text-align-last:left; }
 .btn-primary2 {
 background-color: #ffffff;
 border-color:#ffffff;
