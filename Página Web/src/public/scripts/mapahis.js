@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 index = $avanzar.value;
-                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                let label = `<b>Taxi ubicado AAA111 en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
 
