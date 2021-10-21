@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p1 = false;
                 console.log("soy p1 falso");
-                polyline.setLatLngs([]); 
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         } 
@@ -117,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p2 = false;
                 console.log("soy p2 falso");
-                polyline2.setLatLngs([]); 
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
