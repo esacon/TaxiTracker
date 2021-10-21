@@ -124,20 +124,24 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
             map.removeLayer(polyline2); 
-            console.log('entré 1');
         } else if (p2 && !p1) {
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
             polyline.removeFrom(map);
             map.removeLayer(polyline);
-            console.log('entré 2');
-        } else {
+        } else if (p1 && p2) {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
-            console.log('entré 3');
-        }       
+        } else if (info.placa === 'AAA111' && placa === '1') {
+            polyline.removeFrom(map);
+            map.removeLayer(polyline);
+        } else if (info.placa === 'AAA222' && placa === '0') {
+            polyline2.removeFrom(map);
+            map.removeLayer(polyline2);
+        }
+
         console.log(p1, p2);
     });
 }); 
