@@ -68,17 +68,17 @@ document.addEventListener('DOMContentLoaded', function() {
             fechas.push(coord.Fecha);
         });  
 
-        let $avanzar = document.querySelector('#rango');        
+        let $avanzar = document.querySelector('#rango');    
+        $avanzar.setAttribute("max", coords.length);
+
         $avanzar.addEventListener('click', ()=> {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
             };
-        
-            if (index != 0) {
-                index--;
-                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-                marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
-            } 
+
+            index = $avanzar.value;
+            let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+            marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
         });
     });
 
