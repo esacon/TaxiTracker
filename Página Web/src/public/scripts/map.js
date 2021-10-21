@@ -138,6 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline2.setLatLngs(coord_taxi2);
             console.log('entré 3');
         }       
-        
+        console.log(p1, p2);
     });
 }); 
