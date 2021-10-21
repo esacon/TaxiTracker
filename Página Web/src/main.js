@@ -100,12 +100,13 @@ server.listen(PORT, function() {
         let latitud = parseFloat(arr[0]).toFixed(4);
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
+        let placa = arr[3];
 
         let fecha = datetime.getDate(timeStamp);
         let hora = datetime.getHour(timeStamp);
 
         if (latitud != 0) {  
-            console.log([latitud, longitud, timeStamp, fecha, hora]); 
+            console.log([latitud, longitud, timeStamp, fecha, hora, placa]); 
 
             io.emit('change', {
                 latitud_text: latitud,
