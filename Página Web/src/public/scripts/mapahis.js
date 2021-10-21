@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fechas.push(coord.Fecha);
         });  
 
-        let $avanzar = document.querySelector('#rango');    
+        let $avanzar = document.querySelector('#customRange3');    
         $avanzar.setAttribute("max", coords.length - 1);
 
         $avanzar.addEventListener('change', ()=> {
