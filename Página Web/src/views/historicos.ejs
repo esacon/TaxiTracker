@@ -24,7 +24,7 @@
             <div class="accordion" id="accordionPanelsStayOpenExample"> 
                 <div class="accordion-item" style= "background-color:#FAE671;">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button btn" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <button class="accordion-button btn" onclick="this.blur();" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                         Seleccione vehículo de preferencia
                     </button>
                     </h2>
@@ -79,7 +79,13 @@
 
                 <div class="accordion-item" style= "background-color:#FAE671;">
                     <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed " style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <button class="accordion-button collapsed " onclick="this.blur();" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <style type="text/css"> 
+                            a {color:#FF1493;} 
+                            a:visited {color:#FF34B3;} 
+                            a:active {color:#FFB6C1;} 
+                            a:hover {color:#FF1493;} 
+                            </style>
                         Seleccione el punto especifico a observar:
                     </button>
                     </h2>
