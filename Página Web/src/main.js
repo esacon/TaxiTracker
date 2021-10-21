@@ -46,8 +46,18 @@ router.post('/historicos', (req, res) => {
     console.log([start_date, start_hour, end_date, end_hour]);
 
     async function retrieve() {
-        let info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
-        let info2 = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
+        let info, info2;
+        if (body.placa === '0'){
+            info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
+            info2 = null;
+        } else if (body.placa === '1'){
+            info == null;
+            info2 = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
+        } else {
+            info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
+            info2 = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
+        }
+
         io.on('connection', function(socket) {
             if (info.length != 0) {
                 socket.emit('getConsulta', {

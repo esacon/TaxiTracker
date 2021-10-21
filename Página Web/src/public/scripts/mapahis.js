@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on("getConsulta", function(data){
         let info = data.info;
         let info2 = data.info2;
-        console.log(placa);
-        if (placa === '0') {                  
+
+        if (info2 === null) {                  
             console.log('AAA111');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
-        } else if (placa === '1') {   
+        } else if (info === null) {   
             console.log('AAA222');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
