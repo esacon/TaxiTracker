@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if(p1) {
             polyline.removeFrom(map);
-            map.removeLayer(polyline1);
+            map.removeLayer(polyline);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1); 
         }
