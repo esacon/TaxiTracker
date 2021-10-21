@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let placa = document.querySelector('#placa').value;  
         console.log(placa, typeof(placa));
 
-        if (prev_placa === undefined && placa === 2) {
+        if (prev_placa === undefined && placa === '2') {
             prev_placa = info.placa;
             prev_lat = parseFloat(info.latitud_text);
             prev_long = parseFloat(info.longitud_text);
             console.log("hola bb");
         }        
 
-        if (placa === 2) {
+        if (placa === '2') {
             let lat_medio = (parseFloat(info.latitud_text) - prev_lat) / 2;
             let lng_medio = (parseFloat(info.longitud_text) - prev_long) / 2;
             prev_lat = parseFloat(info.latitud_text);
@@ -73,12 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
             map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         }
        
-        if (info.placa === 'AAA111' && (placa === 0 || placa === 2)) {
+        if (info.placa === 'AAA111' && (placa === '0' || placa === '2')) {
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             console.log('soy 1');
         } 
-        if (info.placa === 'AAA222' && (placa === 1 || placa === 2)) {
+        if (info.placa === 'AAA222' && (placa === '1' || placa === '2')) {
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             marker2.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             console.log('soy 2');
