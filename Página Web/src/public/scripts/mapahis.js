@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on("getConsulta", function(data){
         let info = data.info;
         let info2 = data.info2;
-        
+        console.log(placa);
         if (placa === '0') {                  
             console.log('AAA111');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
