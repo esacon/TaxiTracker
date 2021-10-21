@@ -25,13 +25,13 @@
                 <form method="post" class="align-self-center" action="/historicos">
                     <div class="borde">
                         <h5><p class="text-dark ">Seleccione la placa(s) del vehículo(s):</p></h5>
-                        <select class="form-select col-md-6 mt-2" id="placa" style="width:300px;height:30px;"/>
+                        <select class="form-select col-md-6 mt-2" id="placa" style="width:150px;height:50px;"/>
                             <option value="0">AAA111</option>
                             <option value="1">AAA222</option>
                             <option value="2">Ambos</option>
                         </select>
+                        <h5><p class="text-dark ">Seleccione el intervalo de datos:</p></h5>
                         <input type="text" name="datetimes" style="width:300px;height:30px;"/>
-                        <input type="submit" id='btn-form' style='display: none'>
                         <script>
                             $(function() {
                                 $('input[name="datetimes"]').daterangepicker({
