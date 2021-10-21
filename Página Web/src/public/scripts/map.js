@@ -59,19 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_long = parseFloat(info.longitud_text);
         }                
        
-       let map_exists1 = null;
-       let map_exists2 = null;
+       polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+       polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
 
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
 
-                polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
-                if (marker2 != undefined && placa === '0'){
+                if (marker2 != undefined || placa === '0'){
+                    polyline2.removeFrom(map);
                     map.removeLayer(marker2);
                 }
-                polyline2.removeFrom(map);
+                
 
                 // Si ya hay un marker en el mapa, elimina marker.
                 if (marker != undefined) {
@@ -92,15 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } 
 
         if (info.placa === 'AAA222') {
-            if (placa === '1' || placa === '2') {
-
-                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            if (placa === '1' || placa === '2') {                
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1.
-                if (marker != undefined && placa === '2'){
+                if (marker != undefined || placa === '2'){
+                    polyline.removeFrom(map);
                     map.removeLayer(marker);
-                }
-                polyline.removeFrom(map);
+                }                
 
                 // Si ya hay un marker2 en el mapa, elimina marker2.
                 if (marker2 != undefined) {
