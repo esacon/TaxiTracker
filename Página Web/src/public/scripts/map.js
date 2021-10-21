@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si marker 1 existe y placa = AAA222, elimina marker 1.
                 if (marker != undefined && placa === '2'){
                     map.removeLayer(marker);
-                    polyline.removeFrom(map);
                 }
 
                 // Si ya hay un marker2 en el mapa, elimina marker2.
@@ -112,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
-                    polyline2.removeFrom(map);
                 }
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
