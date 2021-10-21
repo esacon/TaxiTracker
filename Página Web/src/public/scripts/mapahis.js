@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let $avanzar = document.querySelector('#rango');    
         $avanzar.setAttribute("max", coords.length);
 
-        $avanzar.addEventListener('click', ()=> {
+        $avanzar.addEventListener('change', ()=> {
             if (marker3 != undefined) {
                 maphi.removeLayer(marker3);
             };
