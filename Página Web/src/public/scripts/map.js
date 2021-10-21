@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined || placa === '0'){
+                    polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
                     marker2.options.connectedLines.push(polyline2);
                     map.removeLayer(marker2);
                 }
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1
                 if (marker != undefined || placa === '2'){
+                    polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
                     marker.options.connectedLines.push(polyline);
                     map.removeLayer(marker);
                 }         
