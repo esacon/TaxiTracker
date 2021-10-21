@@ -59,17 +59,17 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_long = parseFloat(info.longitud_text);
         }                
        
-       let p1 = false;
-       let p2 = false;
+        polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
+        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
+        let p1 = false;
+        let p2 = false;
 
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
 
-                polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
-
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined || placa === '0'){
-                    polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
+                    marker2.options.connectedLines.push(polyline2);
                     map.removeLayer(marker2);
                 }
 
@@ -88,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Si placa = AAA222 y existe marker, elimina marker.
                 if (marker != undefined) {
+                    marker.options.connectedLines.push(polyline);
                     map.removeLayer(marker);
                 }
-                polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
                 p1 = false;
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
@@ -99,11 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (info.placa === 'AAA222') {
             if (placa === '1' || placa === '2') {      
 
-                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
-
                 // Si marker 1 existe y placa = AAA222, elimina marker 1
                 if (marker != undefined || placa === '2'){
-                    polyline = L.polyline([], {color: '#41b611', smoothFactor:3});
+                    marker.options.connectedLines.push(polyline);
                     map.removeLayer(marker);
                 }         
 
@@ -121,9 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
+                    marker2.options.connectedLines.push(polyline2);
                     map.removeLayer(marker2);
                 }
-                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3});
                 p2 = false;
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
