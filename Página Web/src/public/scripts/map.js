@@ -1,9 +1,15 @@
     
 var socket = io();
 let marker;
-let circle;
+let marker2;
+var coord_taxi1 = [];
+var coord_taxi2 = [];
+let prev_lat;
+let prev_long;
+let prev_placa;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() {
@@ -45,9 +51,35 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('hora_text').innerText = info.hora_text;
 
         // Initialize map.
-        map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-        marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);                       
-        polyline.addLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-     
+        let placa = document.querySelector('#placa').value;  
+        console.log(placa);
+
+        if (prev_placa === undefined && placa === 'Ambos') {
+            prev_placa = info.placa;
+            prev_lat = parseFloat(info.latitud_text);
+            prev_long = parseFloat(info.longitud_text);
+        }        
+
+        if (placa === 'Ambos') {
+            let lat_medio = (parseFloat(info.latitud_text) - prev_lat) / 2;
+            let lng_medio = (parseFloat(info.longitud_text) - prev_long) / 2;
+            prev_lat = parseFloat(info.latitud_text);
+            prev_long = parseFloat(info.longitud_text);
+            map.setView([lat_medio, lng_medio]);
+        } else {
+            map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        }
+       
+        if (info.placa === 'AAA111' && (placa === 'AAA111' || placa === 'Ambos')) {
+            coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        } 
+        if (info.placa === 'AAA222' && (placa === 'AAA22' || placa === 'Ambos')) {
+            coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            marker2.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        }
+
+        polyline.setLatLngs(coord_taxi1);
+        polyline2.setLatLngs(coord_taxi2);      
     });
 }); 

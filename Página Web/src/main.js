@@ -114,7 +114,8 @@ server.listen(PORT, function() {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
-                hora_text: hora
+                hora_text: hora,
+                placa: placa
             });
 
             io.on('connection', function(socket) {
@@ -122,7 +123,8 @@ server.listen(PORT, function() {
                     latitud_text: latitud,
                     longitud_text: longitud,
                     fecha_text: fecha,
-                    hora_text: hora
+                    hora_text: hora,
+                    placa: placa
                 });
             });
 
