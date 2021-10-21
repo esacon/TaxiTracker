@@ -61,15 +61,32 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_long = parseFloat(info.longitud_text);
         }                
        
-        if (info.placa === 'AAA111' && (placa === '0' || placa === '2')) {
+        if (info.placa === 'AAA111') {
+            if (placa === '0' || placa === '2') {
+                marker1 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
+                polyline1 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            } else {
+                if (marker2 != undefined) {
+                    map.removeLayer(marker2);
+                    polyline.removeFrom(map);
+                }
+            }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-            marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         } 
-        if (info.placa === 'AAA222' && (placa === '1' || placa === '2')) {
-            coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-            marker2.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
-        }
 
+        if (info.placa === 'AAA222') {
+            if (placa === '1' || placa === '2') {
+                marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 2").openPopup(); 
+                polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            } else {
+                if (marker1 != undefined) {
+                    map.removeLayer(marker1);
+                    polyline.removeFrom(map);
+                };
+            }
+            coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+        }
+    
         map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         polyline.setLatLngs(coord_taxi1);
         polyline2.setLatLngs(coord_taxi2);      
