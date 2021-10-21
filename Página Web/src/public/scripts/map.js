@@ -61,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
        
        polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+       let p1 = false;
+       let p2 = false;
 
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
@@ -71,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker2);
                 }
                 
+                p1 = true;
 
                 // Si ya hay un marker en el mapa, elimina marker.
                 if (marker != undefined) {
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker);
                 }
                 polyline.removeFrom(map);
+                p1 = false;
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
         } 
@@ -97,7 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker != undefined || placa === '2'){
                     polyline.removeFrom(map);
                     map.removeLayer(marker);
-                }                
+                }         
+
+                p2 = true;       
 
                 // Si ya hay un marker2 en el mapa, elimina marker2.
                 if (marker2 != undefined) {
@@ -113,11 +119,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker2);
                 }
                 polyline2.removeFrom(map);
+                p2 = false;
             }
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
-
-        polyline.setLatLngs(coord_taxi1);     
-        polyline2.setLatLngs(coord_taxi1);
+        
+        if(p1) {
+            polyline.setLatLngs(coord_taxi1); 
+        }
+        if(p2) {
+            polyline2.setLatLngs(coord_taxi2); 
+        }  
     });
 }); 
