@@ -21,7 +21,6 @@
     <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
             <div class="row justify-content-center" style= "background-color:#FAE671;">
-                <div class="borde">
                     <div class="dropdown">
                         <h5><p class="text-dark ">Seleccione el vehículo de preferencia:</p></h5>
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -33,7 +32,6 @@
                         <li><a class="dropdown-item" href="#">Ambos</a></li>
                         </ul>
                     </div>
-                </div>
                 <form method="post" class="align-self-center" action="/historicos">
                     <div class="borde">
                         <h5><p class="text-dark ">Seleccione intervalo de datos:</p></h5>
@@ -59,13 +57,12 @@
                         </script>
                     </div>
                 </form>
-                <div class="borde">
-                    <div class="avanzar buttons">
-                        <h5><p class="text-dark ">Seleccione el punto especifico a observar:</p></h5>
-                        <input type="range" id="rango" min="0" value="0" step="0.5" />                
-                    </div>
+                <div class="avanzar buttons">
+                    <h5><p class="text-dark ">Seleccione el punto especifico a observar:</p></h5>
+                    <input type="range" id="rango" min="0" value="0" step="0.5" />                
                 </div>
             </div>
+             </div>
             <!-- Map section -->
             <section class="map">
                 <div class="container-fluid text-center my-4" id ="maphi"></div>
