@@ -122,25 +122,22 @@ document.addEventListener('DOMContentLoaded', function() {
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
         
-        if(p1) {
+        if(p1 && !p2) {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-            polyline.setLatLngs(coord_taxi1); 
-        } 
-
-        if(p2) {
+            polyline.setLatLngs(coord_taxi1);
+            polyline2.removeFrom(map);
+            map.removeLayer(polyline2); 
+        } else if (p2 && !p1) {
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-            polyline2.setLatLngs(coord_taxi2); 
-        }
-
-        if (!(p1 && p2)) {
-            if(!p1) {
-                polyline.removeFrom(map);
-                map.removeLayer(polyline);
-            } 
-            if (!p2) {
-                polyline2.removeFrom(map);
-                map.removeLayer(polyline2);
-            } 
-        }
+            polyline2.setLatLngs(coord_taxi2);
+            polyline.removeFrom(map);
+            map.removeLayer(polyline);
+        } else {
+            polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline.setLatLngs(coord_taxi1);
+            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2.setLatLngs(coord_taxi2);
+        }       
+        
     });
 }); 
