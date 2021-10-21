@@ -46,13 +46,13 @@ router.post('/historicos', (req, res) => {
     console.log([start_date, start_hour, end_date, end_hour]);
 
     async function retrieve() {
-        let info, info2;
+        let info;
+        let info2 = null;
+        
         if (body.placa === '0'){
-            info2 = null;
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
         } else if (body.placa === '1'){
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
-            info2 = null;
         } else {
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
             info2 = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
