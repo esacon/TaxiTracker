@@ -123,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if(p1) {
-            polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1); 
         } else {
@@ -132,13 +131,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if(p2) {
-            polyline2.removeFrom(map);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2); 
         } else {
             polyline2.removeFrom(map);
             map.removeLayer(polyline2);
-
         }
     });
 }); 
