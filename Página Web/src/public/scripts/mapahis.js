@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let placa = document.querySelector('#placa').value; 
 
         if (placa === '0') {   
+            console.log('AAA111');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
             // Initialize map.
@@ -92,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
         } else if (placa === '1') {   
+            console.log('AAA222');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
             // Initialize map.
