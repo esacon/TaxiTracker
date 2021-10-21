@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let info = data.info;
         let info2 = data.info2;
 
-        if (info2 === null) {                  
+        if (info2 != null && info != null) {                  
             console.log('AAA111');
             maphi.removeLayer([marker1, marker2, marker3, polyline]);
 
@@ -90,67 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
-        } else if (info === null) {   
-            console.log('AAA222');
-            maphi.removeLayer([marker1, marker2, marker3, polyline]);
-
-            // Initialize map.
-            const inicio = [parseFloat(info2[0].Latitud), parseFloat(info2[0].Longitud)];
-            const fin = [parseFloat(info2[info2.length - 1].Latitud), parseFloat(info2[info2.length - 1].Longitud)];
-            const medio = [parseFloat(info2[Math.floor(info2.length/2)].Latitud), parseFloat(info2[Math.floor(info2.length/2)].Longitud)];
-            
-            // Load Map
-            maphi.setView(medio); 
-            
-            L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
-                attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-                maxZoom: 20,
-                center: medio,
-                tileSize: 512,
-                zoomOffset: -1
-            }).addTo(maphi);    
-
-            // Place markers
-            if (marker1 != undefined) {
-                maphi.removeLayer(marker1);
-            };
-            if (marker2 != undefined) {
-                maphi.removeLayer(marker2);
-            };
-            if (marker3 != undefined) {
-                maphi.removeLayer(marker3);
-            };
-
-            marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup();             
-            marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
-            polyline.removeFrom(maphi);
-            polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-
-            let fechas = [];
-            let horas = [];
-            let coords = [];
-            info2.forEach(coord => {  
-                polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
-                coords.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
-                horas.push(coord.Hora);
-                fechas.push(coord.Fecha);
-            });  
-
-            let $avanzar = document.querySelector('#rango');    
-            $avanzar.setAttribute("max", coords.length - 1);
-
-            $avanzar.addEventListener('change', ()=> {
-                if (marker3 != undefined) {
-                    maphi.removeLayer(marker3);
-                };
-
-                index = $avanzar.value;
-                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
-                marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
-            });
-        } else {
-
-        }
+        } 
     });
 
     socket.on('noData', function(data){
