@@ -39,54 +39,54 @@
                       </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading2">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <h2 class="accordion-header" id="headingTwo">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Seleccione intervalo de datos:
-                        </button>
+                          </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="heading2" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form method="post" class="align-self-center" action="/historicos">
-                                    <div class="borde">
-                                        <input type="text" name="datetimes" style="width:300px;height:30px;"/>
-                                        <input type="submit" id='btn-form' style='display: none; width:300px;height: 30px;'>
-                                        <script>
-                                            $(function() {
-                                                $('input[name="datetimes"]').daterangepicker({
-                                                    timePicker: true,
-                                                    timePicker24Hour: true,
-                                                    timePickerSeconds: true,
-                                                    startDate: moment().startOf('hour'),
-                                                    endDate: moment().startOf('hour'),
-                                                    locale: {
-                                                        format: 'YY-M-DD H:mm:ss'
-                                                    }
-                                                });
-                                                $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-                                                    //do something, like clearing an input
-                                                    $('#btn-form').click();
-                                                });
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <form method="post" class="align-self-center" action="/historicos">
+                                <div class="borde">
+                                    <input type="text" name="datetimes" style="width:300px;height:30px;"/>
+                                    <input type="submit" id='btn-form' style='display: none; width:300px;height: 30px;'>
+                                    <script>
+                                        $(function() {
+                                            $('input[name="datetimes"]').daterangepicker({
+                                                timePicker: true,
+                                                timePicker24Hour: true,
+                                                timePickerSeconds: true,
+                                                startDate: moment().startOf('hour'),
+                                                endDate: moment().startOf('hour'),
+                                                locale: {
+                                                    format: 'YY-M-DD H:mm:ss'
+                                                }
                                             });
-                                        </script>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading3">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Seleccione el punto especifico a observar:
-                        </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="heading3" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div class="avanzar buttons">
-                                    <input type="range" id="rango" min="0" value="0" step="0.5" />                
+                                            $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+                                                //do something, like clearing an input
+                                                $('#btn-form').click();
+                                            });
+                                        });
+                                    </script>
                                 </div>
-                            </div>
+                            </form>
+                          </div>
                         </div>
-                    </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Seleccione el punto especifico a observar:
+                          </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            <div class="avanzar buttons">
+                                <input type="range" id="rango" min="0" value="0" step="0.5" />                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
             <!-- Map section -->
