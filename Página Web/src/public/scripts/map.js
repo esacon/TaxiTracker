@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p1 = false;
                 console.log("soy p1 falso");
+                polyline.setLatLngs([]); 
                 polyline.removeFrom(map);
                 map.removeLayer(polyline);
             }
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 p2 = false;
                 console.log("soy p2 falso");
+                polyline2.setLatLngs([]); 
                 polyline2.removeFrom(map);
                 map.removeLayer(polyline2);
             }
