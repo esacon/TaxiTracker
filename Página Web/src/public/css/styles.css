@@ -76,7 +76,8 @@ margin: .4rem 0;
 }
 
 #btn-group dropend{
-  margin: 20cm;
+  width: 10px;
+  height: 10px;
 }
 
 .btn-primary2 {
