@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });  
 
         let $avanzar = document.querySelector('#rango');    
-        $avanzar.setAttribute("max", coords.length);
+        $avanzar.setAttribute("max", coords.length - 1);
 
         $avanzar.addEventListener('change', ()=> {
             if (marker3 != undefined) {
