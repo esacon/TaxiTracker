@@ -134,10 +134,9 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.setLatLngs(coord_taxi1);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
-        } else if (info.placa === 'AAA111' && placa === '1') {
+        } else {
             polyline.removeFrom(map);
             map.removeLayer(polyline);
-        } else if (info.placa === 'AAA222' && placa === '0') {
             polyline2.removeFrom(map);
             map.removeLayer(polyline2);
         }
