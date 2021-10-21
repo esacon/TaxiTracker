@@ -72,18 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     map.removeLayer(marker2);
                 }
 
-                // Si ya hay un marker1 en el mapa, elimina marker1.
-                if (marker1 != undefined) {
-                    map.removeLayer(marker1);
+                // Si ya hay un marker en el mapa, elimina marker.
+                if (marker != undefined) {
+                    map.removeLayer(marker);
                 };                
                 
-                // Crea marker1
-                marker1 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
+                // Crea marker
+                marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
                 map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
-                // Si placa = AAA222 y existe marker1, elimina marker1.
-                if (marker1 != undefined) {
-                    map.removeLayer(marker1);
+                // Si placa = AAA222 y existe marker, elimina marker.
+                if (marker != undefined) {
+                    map.removeLayer(marker);
                 }
             }
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1.
-                if (marker1 != undefined && placa === '2'){
-                    map.removeLayer(marker1);
+                if (marker != undefined && placa === '2'){
+                    map.removeLayer(marker);
                     polyline.removeFrom(map);
                 }
 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 2").openPopup(); 
                 map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
-                // Si placa = AAA111 y existe marker2, elimina marker1.
+                // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
                     polyline2.removeFrom(map);
