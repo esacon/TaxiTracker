@@ -7,6 +7,8 @@ var coord_taxi2 = [];
 let prev_lat;
 let prev_long;
 let prev_placa;
+let p1 = false;
+let p2 = false;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
 let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
@@ -57,10 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_placa = info.placa;
             prev_lat = parseFloat(info.latitud_text);
             prev_long = parseFloat(info.longitud_text);
-        }                
-       
-        let p1 = false;
-        let p2 = false;
+        }                      
 
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
@@ -125,16 +124,19 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
             map.removeLayer(polyline2); 
+            console.log('entré 1');
         } else if (p2 && !p1) {
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
             polyline.removeFrom(map);
             map.removeLayer(polyline);
+            console.log('entré 2');
         } else {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
+            console.log('entré 3');
         }       
         
     });
