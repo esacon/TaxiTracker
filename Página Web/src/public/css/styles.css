@@ -75,6 +75,10 @@ label {
 margin: .4rem 0;
 }
 
+.btn-group dropend{
+  margin: 10cm;
+}
+
 .btn-primary2 {
 background-color: #ffffff;
 border-color:#ffffff;
