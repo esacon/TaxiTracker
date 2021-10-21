@@ -58,9 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
             prev_lat = parseFloat(info.latitud_text);
             prev_long = parseFloat(info.longitud_text);
         }                
-
-        polyline = null;
-        polyline2 = null;
        
         if (info.placa === 'AAA111') {
             if (placa === '0' || placa === '2') {
@@ -70,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined && placa === '0'){
                     map.removeLayer(marker2);
+                    polyline2.removeFrom(map);
                 }
 
                 // Si ya hay un marker en el mapa, elimina marker.
@@ -97,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si marker 1 existe y placa = AAA222, elimina marker 1.
                 if (marker != undefined && placa === '2'){
                     map.removeLayer(marker);
+                    polyline.removeFrom(map);
                 }
 
                 // Si ya hay un marker2 en el mapa, elimina marker2.
@@ -116,11 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);            
         }
 
-        if (polyline != null) {
+        if (polyline != undefined) {
             polyline.setLatLngs(coord_taxi1);
         }
         
-        if (polyline2 != null) {
+        if (polyline2 != undefined) {
             polyline2.setLatLngs(coord_taxi2);
         }     
     });
