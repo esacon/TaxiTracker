@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Si marker 2 existe y placa = AAA111, elimina marker 2.
                 if (marker2 != undefined || placa === '0'){
+                    map.removeLayer(polyline2);
                     polyline2.removeFrom(map);
                     map.removeLayer(marker2);
                 }
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker != undefined) {
                     map.removeLayer(marker);
                 }
+                map.removeLayer(polyline);
                 polyline.removeFrom(map);
                 p1 = false;
             }
@@ -99,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // Si marker 1 existe y placa = AAA222, elimina marker 1.
                 if (marker != undefined || placa === '2'){
+                    map.removeLayer(polyline);
                     polyline.removeFrom(map);
                     map.removeLayer(marker);
                 }         
@@ -118,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (marker2 != undefined) {
                     map.removeLayer(marker2);
                 }
+                map.removeLayer(polyline2);
                 polyline2.removeFrom(map);
                 p2 = false;
             }
