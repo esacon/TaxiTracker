@@ -75,10 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (info.placa === 'AAA111' && (placa === 0 || placa === 2)) {
             coord_taxi1.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             marker.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            console.log('soy 1');
         } 
         if (info.placa === 'AAA222' && (placa === 1 || placa === 2)) {
             coord_taxi2.push([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             marker2.setLatLng([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+            console.log('soy 2');
         }
 
         polyline.setLatLngs(coord_taxi1);
