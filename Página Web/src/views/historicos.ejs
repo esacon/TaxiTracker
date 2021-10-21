@@ -21,17 +21,12 @@
     <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
             <div class="row justify-content-center" style= "background-color:#FAE671;">
-                <div class="dropdown">
-                    <h5><p class="text-dark ">Seleccione el vehículo de preferencia:</p></h5>
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Taxis
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">AAA111</a></li>
-                        <li><a class="dropdown-item" href="#">AAA222</a></li>
-                        <li><a class="dropdown-item" href="#">Ambos</a></li>
-                    </ul>
-                </div>
+                <h5><p class="text-dark ">Seleccione la placa(s) del vehículo(s):</p></h5>
+                    <select class="form-select mt-2" id="placa" name="placa" style="width:150px;height:35px;"/>
+                        <option value="0">AAA111</option>
+                        <option value="1">AAA222</option>
+                        <option value="2">Ambos</option>
+                    </select>
                 <form method="post" class="align-self-center" action="/historicos">
                     <div class="borde">
                         <h5><p class="text-dark ">Seleccione intervalo de datos:</p></h5>
