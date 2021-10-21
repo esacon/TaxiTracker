@@ -48,9 +48,11 @@ router.post('/historicos', (req, res) => {
     async function retrieve() {
         let info, info2;
         if (body.placa === '0'){
+            info2 = null;
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
         } else if (body.placa === '1'){
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
+            info2 = null;
         } else {
             info = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA111'`);
             info2 = await database.getData(`SELECT * FROM datos WHERE str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') >= str_to_date(concat('${start_date}', ' ', '${start_hour}'),'%Y-%m-%d %H:%i:%s') AND str_to_date(concat(fecha, ' ', hora),'%Y-%m-%d %H:%i:%s') <= str_to_date(concat('${end_date}', ' ', '${end_hour}'),'%Y-%m-%d %H:%i:%s') and placa = 'AAA222'`); 
@@ -59,7 +61,6 @@ router.post('/historicos', (req, res) => {
         io.on('connection', function(socket) {
             if (info != null) {
                 if (info.length != 0) {
-                    console.log('Envío de AAA111');
                     socket.emit('getConsulta', {
                         info: info,
                         info2: null
@@ -69,20 +70,7 @@ router.post('/historicos', (req, res) => {
                         info: info
                     });
                 }
-            } else if (info2 != null) {
-                if (info2.length != 0) {
-                    console.log('Envío de AAA222');
-                    socket.emit('getConsulta', {
-                        info: info,
-                        info2: null
-                    });
-                } else {
-                    socket.emit('noData', {
-                        info: info2
-                    });
-                }
-            }
-            
+            } 
         });        
     }; 
 
