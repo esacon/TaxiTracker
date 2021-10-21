@@ -42,8 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });              
 
     socket.on('change', function(info) {
-        console.log('Info:');
-        console.log(info);
+        
         // Add Polyline to map.
         polyline.addTo(map);
 
@@ -55,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Initialize map.
         let placa = document.querySelector('#placa').value;  
-        console.log(placa);
+        console.log(placa, typeof(placa));
 
         if (prev_placa === undefined && placa === 2) {
             prev_placa = info.placa;
