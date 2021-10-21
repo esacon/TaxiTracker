@@ -49,7 +49,8 @@
                         </script>
                     </div>
                 </form>
-            
+           
+                <!--
                 <div class="DESP">
                 <select name="my_html_select_box">
                     <option selected="yes">CARRO1</option>
@@ -68,6 +69,59 @@
 
                     <input type="checkbox" id="cbox2" value="second_checkbox"> <label for="cbox2">Este es mi segundo checkbox</label></p>
                 </div>
+            -->
+
+            <style>
+                .accordion {
+                  background-color: #eee;
+                  color: #444;
+                  cursor: pointer;
+                  padding: 18px;
+                  width: 100%;
+                  border: none;
+                  text-align: left;
+                  outline: none;
+                  font-size: 15px;
+                  transition: 0.4s;
+                }
+                
+                .active, .accordion:hover {
+                  background-color: #ccc; 
+                }
+                
+                .panel {
+                  padding: 0 18px;
+                  display: none;
+                  background-color: white;
+                  overflow: hidden;
+                }
+                </style>
+            <h2>Accordion</h2>
+            <button class="accordion">Vehiculos</button>
+            <div class="panel">
+            <p>
+                <label><input type="checkbox" id="cbox1" value="first_checkbox"> SSG556</label><br>
+                <input type="checkbox" id="cbox2" value="second_checkbox"> <label for="cbox2">FAL762</label>
+            </p>
+            </div>
+
+            <script>
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                panel.style.display = "none";
+                } else {
+                panel.style.display = "block";
+                }
+            });
+            }
+            </script>
+
 
             <div class="avanzar buttons">
                 <button  class="btn btn-primary2 text-dark fw-bold" id="anterior">ERRE</button>
