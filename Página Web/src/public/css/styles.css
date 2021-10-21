@@ -75,8 +75,6 @@ label {
 margin: .4rem 0;
 }
 
-select { 
-width: 400px; text-align-last:left; }
 .btn-primary2 {
 background-color: #ffffff;
 border-color:#ffffff;
@@ -99,4 +97,10 @@ margin: 0.6%;
 .btn-primary:hover {
 background-color: var(--bs-light);
 border-color:var(--bs-light) ;
+}
+
+select{
+  text-align-last:right;
+  padding-right: 29px;
+  direction: rtl;
 }
