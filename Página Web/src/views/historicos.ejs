@@ -20,31 +20,34 @@
     </div>
     <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
-                <div class="accordion" id="accordionPanelsStayOpenExample"> 
-                    <div class="accordion-item" style= "background-color:#FAE671;">
-                      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button class="accordion-button" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                         Seleccione vehículo de preferencia
-                        </button>
-                      </h2>
-                      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion" id="accordionPanelsStayOpenExample"> 
+                <div class="accordion-item" style= "background-color:#FAE671;">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        Seleccione vehículo de preferencia
+                    </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                         <div class="accordion-body">
                             <select class="form-select mt-2 btn btn-primary2 text-dark fw-bold" id="placa" name="placa" style="width:150px;height:35px;"/>
-                            <option value="0">AAA111</option>
-                            <option value="1">AAA222</option>
-                            <option value="2">Ambos</option>
-                        </select>
+                                <option value="0">AAA111</option>
+                                <option value="1">AAA222</option>
+                                <option value="2">Ambos</option>
+                            </select>
                         </div>
-                      </div>
                     </div>
-                    <div class="accordion-item" style= "background-color:#FAE671;">
-                        <h2 class="accordion-header" id="headingTwo">
-                          <button class="accordion-button collapsed" style= "background-color:#FAE671;"type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Seleccione intervalo de datos:
-                          </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
+                </div>
+            </div>
+
+            <div class="accordion" id="accordionExample"></div>
+                <div class="accordion-item" style= "background-color:#FAE671;">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" style= "background-color:#FAE671;"type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Seleccione intervalo de datos:
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
                             <form method="post" class="align-self-center" action="/historicos">
                                 <div class="borde">
                                     <input type="text" class="btn btn-primary2 text-dark fw-bold" name="datetimes" style="width:300px;height:30px;"/>
@@ -69,24 +72,25 @@
                                     </script>
                                 </div>
                             </form>
-                          </div>
                         </div>
                     </div>
-                        <div class="accordion-item" style= "background-color:#FAE671;">
-                            <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Seleccione el punto especifico a observar:
-                            </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="avanzar buttons">
-                                        <input type="range" id="rango" min="0" value="0" step="1">                
-                                    </div>
-                                </div>
+                </div>
+
+                <div class="accordion-item" style= "background-color:#FAE671;">
+                    <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" style= "background-color:#FAE671;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Seleccione el punto especifico a observar:
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="avanzar buttons">
+                                <input type="range" id="rango" min="0" value="0" step="1">                
                             </div>
                         </div>
-            </div>  
+                    </div>
+                </div>
+             </div>  
             <!-- Map section -->
             <section class="map">
                 <div class="container-fluid text-center my-4" id ="maphi"></div>
