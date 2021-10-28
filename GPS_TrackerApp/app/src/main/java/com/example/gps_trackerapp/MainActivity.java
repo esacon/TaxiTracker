@@ -2,26 +2,46 @@ package com.example.gps_trackerapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.github.pires.obd.commands.engine.RPMCommand;
+import com.github.pires.obd.commands.protocol.EchoOffCommand;
+import com.github.pires.obd.commands.protocol.LineFeedOffCommand;
+import com.github.pires.obd.commands.protocol.SelectProtocolCommand;
+import com.github.pires.obd.commands.protocol.TimeoutCommand;
+import com.github.pires.obd.enums.ObdProtocols;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
-    private EditText ipEditText;
     private TextView latitudeText;
     private TextView longitudeText;
     private Handler handler;
-    private String destIP;
+    private String deviceAddress;
     private GpsTracker gpsTracker;
-    private MessageSenderUDP msg_udp;
+    private MessageSenderUDP msg_udp1;
+    private MessageSenderUDP msg_udp2;
+    private MessageSenderUDP msg_udp3;
+    private MessageSenderUDP msg_udp4;
+    private MessageSenderUDP msg_udp5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +53,39 @@ public class MainActivity extends AppCompatActivity {
         requestPermissions();
 
         // Get information for sending the message.
-        ipEditText = findViewById(R.id.ipEditText);
         latitudeText = findViewById(R.id.latitudeText);
         longitudeText = findViewById(R.id.longitudeText);
+
+        ArrayList deviceStrs = new ArrayList();
+        final ArrayList devices = new ArrayList();
+
+        BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            for (BluetoothDevice device : pairedDevices) {
+                deviceStrs.add(device.getName() + "\n" + device.getAddress());
+                devices.add(device.getAddress());
+            }
+        }
+
+        // show list
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.select_dialog_singlechoice,
+                deviceStrs.toArray(new String[deviceStrs.size()]));
+
+        alertDialog.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+                deviceAddress = (String) devices.get(position);
+                // TODO save deviceAddress
+            }
+        });
+
+        alertDialog.setTitle("Choose Bluetooth device");
+        alertDialog.show();
     }
 
     public void iniciar(View view) {
@@ -54,16 +104,14 @@ public class MainActivity extends AppCompatActivity {
 
     public Runnable runnable = new Runnable() {
         public void run() {
-            destIP = ipEditText.getText().toString().trim();
-
-            if (!destIP.equals("")) {
-                // Initialize UDP protocols.
-                msg_udp = new MessageSenderUDP(destIP, 8888);
-                sendMsg();
-                handler.postDelayed(runnable, 5000); // 5 seconds.
-            } else {
-                Toast.makeText(getApplicationContext(), "Ha ocurrido un error, por favor revise los datos.", Toast.LENGTH_LONG).show();
-            }
+            // Initialize UDP protocols.
+            msg_udp1 = new MessageSenderUDP("taxi-app.ddns.net", 8888);
+            msg_udp2 = new MessageSenderUDP("taxiapp.ddns.net", 8888);
+            msg_udp3 = new MessageSenderUDP("taxitrackerapp.ddns.net", 8888);
+            msg_udp4 = new MessageSenderUDP("taxiappt2.ddns.net", 8888);
+            msg_udp5 = new MessageSenderUDP("taxi-tracker.ddns.net", 8888);
+            sendMsg();
+            handler.postDelayed(runnable, 5000); // 5 seconds.
         }
     };
 
@@ -82,13 +130,33 @@ public class MainActivity extends AppCompatActivity {
                 double longitude = gpsTracker.getLongitude();
                 long timeStamp = gpsTracker.getTimeStamp();
 
-                // Send Message.
-                @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s", latitude, longitude, timeStamp);
-                latitudeText.setText(String.format("Latitud:\t%s", latitude));
-                longitudeText.setText(String.format("Longitud:\t%s", longitude));
+                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+                BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
+                UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-                // Send the message.
-                msg_udp.execute(message);
+                BluetoothSocket socket = null;
+                try {
+                    socket = device.createInsecureRfcommSocketToServiceRecord(uuid);
+                    socket.connect();
+                    new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
+                    new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
+                    new TimeoutCommand(125).run(socket.getInputStream(), socket.getOutputStream());
+                    new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
+                    RPMCommand engineRpmCommand = new RPMCommand();
+                    engineRpmCommand.run(socket.getInputStream(), socket.getOutputStream());
+                    // Send Message.
+                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s", latitude, longitude, timeStamp,engineRpmCommand.getFormattedResult());
+                    latitudeText.setText(String.format("Latitud:\t%s", latitude));
+                    longitudeText.setText(String.format("Longitud:\t%s", longitude));
+                    // Send the message.
+                    msg_udp1.execute(message);
+                    msg_udp2.execute(message);
+                    msg_udp3.execute(message);
+                    msg_udp4.execute(message);
+                    msg_udp5.execute(message);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else {
                 gpsTracker.showSettingsAlert();
             }
