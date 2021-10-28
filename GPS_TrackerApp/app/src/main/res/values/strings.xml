@@ -1,12 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Taxi Tracker App</string>
     <string name="button">Button</string>
     <string name="name">Name</string>
     <string name="sus_coordenadas_son">Sus coordenadas son:</string>
-    <string name="n_mero_de_ip">Número de IP</string>
-    <string name="n_mero_de_puerto">Número de puerto:</string>
-    <string name="ip_190_84_119_158">IP: 190.84.119.158</string>
-    <string name="digite_su_direcci_n_ip_p_blica">Digite su dirección IP pública:</string>
     <string name="iniciar">Iniciar</string>
     <string name="detener">Detener</string>
+    <string name="digite_la_placa_de_su_veh_culo">Digite la placa de su vehículo:</string>
+    <string name="aaa111" tools:ignore="Typos">AAA111</string>
 </resources>

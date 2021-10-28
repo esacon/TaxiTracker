@@ -15,8 +15,8 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="643dp"
-        android:contentDescription="@string/digite_su_direcci_n_ip_p_blica"
-        android:text="@string/digite_su_direcci_n_ip_p_blica"
+        android:contentDescription="@string/digite_la_placa_de_su_veh_culo"
+        android:text="@string/digite_la_placa_de_su_veh_culo"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#616161"
@@ -28,19 +28,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.148"
-        tools:text="Digite su dirección IP pública:" />
+        tools:text="Digite la placa de su vehículo:" />
 
     <EditText
-        android:id="@+id/ipEditText"
+        android:id="@+id/placaEditText"
         android:layout_width="219dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="583dp"
-        android:autofillHints="190.84.119.158"
+        android:autofillHints="AAA111"
         android:ems="10"
-        android:hint="@string/ip_190_84_119_158"
+        android:hint="@string/aaa111"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textSize="16sp"
         android:visibility="visible"
@@ -94,6 +95,24 @@
         tools:ignore="HardcodedText" />
 
     <TextView
+        android:id="@+id/rpmText"
+        android:layout_width="379dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="371dp"
+        android:text="RPM:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
         android:id="@+id/latitudeText"
         android:layout_width="379dp"
         android:layout_height="38dp"
@@ -112,34 +131,12 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/startServer"
-        android:layout_width="139dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="348dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginBottom="332dp"
-        android:background="#009688"
-        android:backgroundTint="#009688"
-        android:contentDescription="@string/iniciar"
-        android:onClick="iniciar"
-        android:text="@string/iniciar"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Iniciar" />
-
-    <Button
         android:id="@+id/stopServer"
         android:layout_width="139dp"
         android:layout_height="51dp"
         android:layout_marginStart="216dp"
-        android:layout_marginTop="348dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="332dp"
+        android:layout_marginBottom="280dp"
         android:background="#009688"
         android:backgroundTint="#009688"
         android:contentDescription="@string/detener"
@@ -149,8 +146,28 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="Detener" />
+
+    <Button
+        android:id="@+id/startServer"
+        android:layout_width="139dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="280dp"
+        android:background="#009688"
+        android:backgroundTint="#009688"
+        android:contentDescription="@string/iniciar"
+        android:onClick="iniciar"
+        android:text="@string/iniciar"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Iniciar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

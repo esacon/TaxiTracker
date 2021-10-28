@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView latitudeText;
     private TextView longitudeText;
+    private TextView placaText;
+    private TextView rpmText;
     private Handler handler;
     private String deviceAddress;
     private GpsTracker gpsTracker;
@@ -55,7 +57,14 @@ public class MainActivity extends AppCompatActivity {
         // Get information for sending the message.
         latitudeText = findViewById(R.id.latitudeText);
         longitudeText = findViewById(R.id.longitudeText);
+        placaText = findViewById(R.id.placaEditText);
+        rpmText = findViewById(R.id.rpmText);
 
+        // Initialize Bluetooth.
+        showBluettothConfig();
+    }
+
+    public void showBluettothConfig() {
         ArrayList deviceStrs = new ArrayList();
         final ArrayList devices = new ArrayList();
 
@@ -80,11 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
                 int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
                 deviceAddress = (String) devices.get(position);
-                // TODO save deviceAddress
+                Toast.makeText(getApplicationContext(), "Dispositivo OBDII emparejado.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        alertDialog.setTitle("Choose Bluetooth device");
+        alertDialog.setTitle("Escoja el dispositivo Bluetooth:");
         alertDialog.show();
     }
 
@@ -130,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 double longitude = gpsTracker.getLongitude();
                 long timeStamp = gpsTracker.getTimeStamp();
 
+                // Conexión Bluetooth.
                 BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
                 BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
                 UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -138,23 +148,30 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     socket = device.createInsecureRfcommSocketToServiceRecord(uuid);
                     socket.connect();
+                    // Iniciar OBDII.
                     new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
                     new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
                     new TimeoutCommand(125).run(socket.getInputStream(), socket.getOutputStream());
                     new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
+                    // Obtener revoluciones por minuto.
                     RPMCommand engineRpmCommand = new RPMCommand();
                     engineRpmCommand.run(socket.getInputStream(), socket.getOutputStream());
                     // Send Message.
-                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s", latitude, longitude, timeStamp,engineRpmCommand.getFormattedResult());
+                    String rpm = engineRpmCommand.getFormattedResult().replace("RPM", "");
+                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s;%s", latitude, longitude, timeStamp, placaText.getText().toString().trim(), rpm);
                     latitudeText.setText(String.format("Latitud:\t%s", latitude));
                     longitudeText.setText(String.format("Longitud:\t%s", longitude));
+                    rpmText.setText(String.format("RPM:\t%s", rpm));
                     // Send the message.
                     msg_udp1.execute(message);
                     msg_udp2.execute(message);
                     msg_udp3.execute(message);
                     msg_udp4.execute(message);
                     msg_udp5.execute(message);
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
+                    Toast.makeText(getApplicationContext(), "Ha ocurrido un error con el dispositivo seleccionado.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             } else {
