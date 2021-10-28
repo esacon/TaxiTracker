@@ -103,12 +103,6 @@ public class MainActivity extends AppCompatActivity {
         gpsTracker = new GpsTracker(MainActivity.this);
         // Success notification.
         Toast.makeText(getApplicationContext(), "La aplicación ha iniciado.", Toast.LENGTH_LONG).show();
-        // Initialize UDP protocols.
-        msg_udp1 = new MessageSenderUDP("taxi-app.ddns.net", PORT);
-        msg_udp2 = new MessageSenderUDP("taxiapp.ddns.net", PORT);
-        msg_udp3 = new MessageSenderUDP("taxitrackerapp.ddns.net", PORT);
-        msg_udp4 = new MessageSenderUDP("taxiappt2.ddns.net", PORT);
-        msg_udp5 = new MessageSenderUDP("taxi-tracker.ddns.net", PORT);
         runnable.run();
     }
 
@@ -120,6 +114,12 @@ public class MainActivity extends AppCompatActivity {
 
     public Runnable runnable = new Runnable() {
         public void run() {
+            // Initialize UDP protocols.
+            msg_udp1 = new MessageSenderUDP("taxi-app.ddns.net", PORT);
+            msg_udp2 = new MessageSenderUDP("taxiapp.ddns.net", PORT);
+            msg_udp3 = new MessageSenderUDP("taxitrackerapp.ddns.net", PORT);
+            msg_udp4 = new MessageSenderUDP("taxiappt2.ddns.net", PORT);
+            msg_udp5 = new MessageSenderUDP("taxi-tracker.ddns.net", PORT);
             sendMsg();
             handler.postDelayed(runnable, 5000); // 5 seconds.
         }
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     // Iniciar OBDII.
                     new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
                     new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
-                    new TimeoutCommand(30).run(socket.getInputStream(), socket.getOutputStream());
+                    new TimeoutCommand(60).run(socket.getInputStream(), socket.getOutputStream());
                     new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
                     // Obtener revoluciones por minuto.
                     RPMCommand engineRpmCommand = new RPMCommand();
