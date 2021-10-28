@@ -129,7 +129,7 @@ server.listen(PORT, function() {
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
         let placa = arr[3];
-        let rpm = arr[4].replace("RPM", "");
+        let rpm = arr[4];
 
         let fecha = datetime.getDate(timeStamp);
         let hora = datetime.getHour(timeStamp);
