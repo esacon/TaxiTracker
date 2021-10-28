@@ -127,19 +127,21 @@ server.listen(PORT, function() {
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
         let placa = arr[3];
+        let rpm = arr[4];
 
         let fecha = datetime.getDate(timeStamp);
         let hora = datetime.getHour(timeStamp);
 
         if (latitud != 0) {  
-            console.log([latitud, longitud, timeStamp, fecha, hora, placa]); 
+            console.log([latitud, longitud, timeStamp, fecha, hora, placa, rpm]); 
 
             io.emit('change', {
                 latitud_text: latitud,
                 longitud_text: longitud,
                 fecha_text: fecha,
                 hora_text: hora,
-                placa: placa
+                placa: placa,
+                RPM_text: rpm
             });
 
             io.on('connection', function(socket) {
@@ -148,12 +150,13 @@ server.listen(PORT, function() {
                     longitud_text: longitud,
                     fecha_text: fecha,
                     hora_text: hora,
-                    placa: placa
+                    placa: placa,
+                    RPM_text: rpm
                 });
             });
 
             // Insertar datos en la db.
-            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString(), placa.toString()]]);         
+            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString(), placa.toString(), rpm.toString]]);         
         }
     });
 
