@@ -129,7 +129,7 @@ server.listen(PORT, function() {
         let longitud = parseFloat(arr[1]).toFixed(4);
         let timeStamp = arr[2];
         let placa = arr[3];
-        let rpm = arr[4];
+        let rpm = arr[4].replace("RPM", "");
 
         let fecha = datetime.getDate(timeStamp);
         let hora = datetime.getHour(timeStamp);
@@ -158,7 +158,7 @@ server.listen(PORT, function() {
             });
 
             // Insertar datos en la db.
-            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString(), placa.toString(), rpm.toString]]);         
+            database.insertData([[null, latitud.toString(), longitud.toString(), fecha.toString(), hora.toString(), placa.toString(), rpm.toString()]]);         
         }
     });
 
