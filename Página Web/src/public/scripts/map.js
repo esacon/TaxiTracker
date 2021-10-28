@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('longitud_text').innerText = info.longitud;
         document.getElementById('fecha_text').innerText = info.fecha;
         document.getElementById('hora_text').innerText = info.hora; 
+        document.getElementById('RPM_text').innerText = info.rpm;
 
         // Load Map
         map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 

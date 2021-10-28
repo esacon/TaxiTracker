@@ -97,12 +97,13 @@ server.listen(PORT, function() {
     
 
     async function retrieve() {
-        const info = await database.getData("Select latitud, longitud, fecha, hora, placa from datos where placa = 'AAA111' order by id desc limit 1;");
+        const info = await database.getData("Select latitud, longitud, fecha, hora, placa, rpm from datos where placa = 'AAA111' order by id desc limit 1;");
         let latitud = info[0]['latitud'];
         let longitud = info[0]['longitud'];
         let fecha = info[0]['fecha'];
         let hora = info[0]['hora'];
         let placa = info[0]['placa'];
+        let rpm = info[0]['RPM'];
 
         io.on('connection', function(socket) {
             socket.emit('getData', {
@@ -110,7 +111,8 @@ server.listen(PORT, function() {
                 longitud: longitud,
                 fecha: fecha,
                 hora: hora,
-                placa: placa
+                placa: placa,
+                rpm: rpm
             });
         });
     };
