@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     // Iniciar OBDII.
                     new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
                     new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
-                    new TimeoutCommand(125).run(socket.getInputStream(), socket.getOutputStream());
+                    new TimeoutCommand(30).run(socket.getInputStream(), socket.getOutputStream());
                     new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
                     // Obtener revoluciones por minuto.
                     RPMCommand engineRpmCommand = new RPMCommand();
@@ -168,10 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     msg_udp3.execute(message);
                     msg_udp4.execute(message);
                     msg_udp5.execute(message);
-                } catch (IOException e) {
-                    Toast.makeText(getApplicationContext(), "Ha ocurrido un error con el dispositivo seleccionado.", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             } else {
