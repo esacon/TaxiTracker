@@ -81,11 +81,13 @@ document.addEventListener('DOMContentLoaded', function() {
             let fechas = [];
             let horas = [];
             let coords = [];
+            let rpms = [];
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 coords.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 horas.push(coord.Hora);
                 fechas.push(coord.Fecha);
+                rpms.push(coord.RPM);
             });  
 
             let $avanzar = document.querySelector('#rango');    
@@ -97,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 index = $avanzar.value;
-                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                let label = `<b>Taxi ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}<br/>RPM: ${rpms[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
         } else {
@@ -153,21 +155,25 @@ document.addEventListener('DOMContentLoaded', function() {
             let fechas = [];
             let horas = [];
             let coords = [];
+            let rpms = [];
             info.forEach(coord => {  
                 polyline.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 coords.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 horas.push(coord.Hora);
                 fechas.push(coord.Fecha);
+                rpms.push(coord.RPM);
             });  
 
             let fechas2 = [];
             let horas2 = [];
             let coords2 = [];
+            let rpms2 = [];
             info2.forEach(coord => {  
                 polyline2.addLatLng([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 coords2.push([parseFloat(coord.Latitud), parseFloat(coord.Longitud)]);
                 horas2.push(coord.Hora);
                 fechas2.push(coord.Fecha);
+                rpms2.push(coord.RPM);
             });
 
             let $avanzar = document.querySelector('#rango');    
@@ -179,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 index = $avanzar.value;
-                let label = `<b>Taxi AAA111 ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}`
+                let label = `<b>Taxi AAA111 ubicado en:</b><br/>Latitud: ${coords[index][0]}<br/>Longitud: ${coords[index][1]}<br/>Fecha: ${fechas[index]}<br/>Hora: ${horas[index]}<br/>RPM: ${rpms[index]}`
                 marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label).openPopup();
             });
 
@@ -192,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
 
                 index2 = $avanzar2.value;
-                let label2 = `<b>Taxi AAA222 ubicado en:</b><br/>Latitud: ${coords2[index2][0]}<br/>Longitud: ${coords2[index2][1]}<br/>Fecha: ${fechas2[index2]}<br/>Hora: ${horas2[index2]}`
+                let label2 = `<b>Taxi AAA222 ubicado en:</b><br/>Latitud: ${coords2[index2][0]}<br/>Longitud: ${coords2[index2][1]}<br/>Fecha: ${fechas2[index2]}<br/>Hora: ${horas2[index2]}<br/>RPM: ${rpms2[index]}`
                 marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label2).openPopup();
             });
         }
