@@ -22,22 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
         map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
 
         // Update HTML
-        if (info.placa === 'AAA111') {
-            document.getElementById('latitud_text').innerText = info.latitud_text;
-            document.getElementById('longitud_text').innerText = info.longitud_text;
-            document.getElementById('fecha_text').innerText = info.fecha_text;
-            document.getElementById('hora_text').innerText = info.hora_text;
-            document.getElementById('RPM_text').innerText = info.RPM_text;
-            document.getElementById('Placa_text').innerText = info.placa;
-        }
-        if (info.placa === 'AAA222') {
-            document.getElementById('latitud_text2').innerText = info.latitud_text;
-            document.getElementById('longitud_text2').innerText = info.longitud_text;
-            document.getElementById('fecha_text2').innerText = info.fecha_text;
-            document.getElementById('hora_text2').innerText = info.hora_text;
-            document.getElementById('RPM_text2').innerText = info.RPM_text;
-            document.getElementById('Placa_text2').innerText = info.placa;
-        }
+        document.getElementById('latitud_text').innerText = info.latitud_text;
+        document.getElementById('longitud_text').innerText = info.longitud_text;
+        document.getElementById('fecha_text').innerText = info.fecha_text;
+        document.getElementById('hora_text').innerText = info.hora_text;
+        document.getElementById('RPM_text').innerText = info.RPM_text;
+        document.getElementById('Placa_text').innerText = info.placa;
+
 
         // Load Map
         map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
@@ -64,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('fecha_text').innerText = info.fecha_text;
             document.getElementById('hora_text').innerText = info.hora_text;
             document.getElementById('RPM_text').innerText = info.RPM_text;
-            document.getElementById('Placa_text').innerText = info.placa;
         }
         if (info.placa === 'AAA222') {
             document.getElementById('latitud_text2').innerText = info.latitud_text;
@@ -72,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('fecha_text2').innerText = info.fecha_text;
             document.getElementById('hora_text2').innerText = info.hora_text;
             document.getElementById('RPM_text2').innerText = info.RPM_text;
-            document.getElementById('Placa_text2').innerText = info.placa;
         }
 
 
