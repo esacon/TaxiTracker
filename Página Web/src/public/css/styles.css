@@ -121,12 +121,12 @@ input[type="range"]::-webkit-slider-thumb {
     width: 10px;
     height: 15px;
 }
-.row-striped:nth-of-type(odd){
-  background-color: #000000;
+table > tr{
+  border-top: black;
 }
 
-.row-striped:nth-of-type(even){
-  background-color: #000000;
+table > tr > td{
+  border: 1px solid red !important;
 }
 
 
