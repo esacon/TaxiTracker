@@ -26,6 +26,8 @@ import com.github.pires.obd.commands.protocol.TimeoutCommand;
 import com.github.pires.obd.enums.ObdProtocols;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView placaText;
     private TextView rpmText;
     private Handler handler;
-    private String deviceAddress;
+    private String deviceAddress = "";
     private GpsTracker gpsTracker;
     private MessageSenderUDP msg_udp1;
     private MessageSenderUDP msg_udp2;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private MessageSenderUDP msg_udp4;
     private MessageSenderUDP msg_udp5;
     private final int PORT = 8888;
+    private BluetoothSocket socket = null;
+    private final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,45 +66,49 @@ public class MainActivity extends AppCompatActivity {
         rpmText = findViewById(R.id.rpmText);
 
         // Initialize Bluetooth.
-        showBluettothConfig();
+        connectBlueTooth();
     }
 
-    public void showBluettothConfig() {
-        ArrayList deviceStrs = new ArrayList();
-        final ArrayList devices = new ArrayList();
+    public void connectBlueTooth() {
 
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         Set<BluetoothDevice> pairedDevices = btAdapter.getBondedDevices();
+
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
-                deviceStrs.add(device.getName() + "\n" + device.getAddress());
-                devices.add(device.getAddress());
+                if (device.getName().equals("OBDII")) {
+                    deviceAddress = device.getAddress();
+                    Toast.makeText(getApplicationContext(), "Dispositivo OBDII emparejado.", Toast.LENGTH_SHORT).show();
+                }
             }
+            if (deviceAddress.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Empareje un dispositivo OBDII.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), "No hay dispositivos emparejados.", Toast.LENGTH_SHORT).show();
         }
 
-        // show list
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.select_dialog_singlechoice,
-                deviceStrs.toArray(new String[deviceStrs.size()]));
-
-        alertDialog.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                int position = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
-                deviceAddress = (String) devices.get(position);
-                Toast.makeText(getApplicationContext(), "Dispositivo OBDII emparejado.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        alertDialog.setTitle("Escoja el dispositivo Bluetooth:");
-        alertDialog.show();
     }
 
     public void iniciar(View view) {
         // Initialize GPS.
         gpsTracker = new GpsTracker(MainActivity.this);
+        try {
+            // Iniciar socket de Bluetooth.
+            BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
+            socket = device.createRfcommSocketToServiceRecord(uuid);
+            socket.connect();
+            InputStream io = socket.getInputStream();
+            OutputStream ou = socket.getOutputStream();
+            // Iniciar OBDII.
+            new EchoOffCommand().run(io, ou);
+            new LineFeedOffCommand().run(io, ou);
+            new TimeoutCommand(60).run(io, ou);
+            new SelectProtocolCommand(ObdProtocols.AUTO).run(io, ou);
+        }  catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
         // Success notification.
         Toast.makeText(getApplicationContext(), "La aplicación ha iniciado.", Toast.LENGTH_LONG).show();
         runnable.run();
@@ -108,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void detener(View view) {
         // Success notification.
+        if (socket != null) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Toast.makeText(getApplicationContext(), "La aplicación se ha detenido.", Toast.LENGTH_LONG).show();
         handler.removeCallbacks(runnable);
     }
@@ -135,30 +150,18 @@ public class MainActivity extends AppCompatActivity {
             // Get GPS Location.
             gpsTracker.getLocation();
 
-            if (gpsTracker.canGetLocation()) {
+            if (gpsTracker.canGetLocation() && socket != null) {
+
+                RPMCommand engineRpmCommand = new RPMCommand();
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
                 long timeStamp = gpsTracker.getTimeStamp();
 
-                // Conexión Bluetooth.
-                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-                BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
-                UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
-                BluetoothSocket socket = null;
                 try {
-                    socket = device.createInsecureRfcommSocketToServiceRecord(uuid);
-                    socket.connect();
-                    // Iniciar OBDII.
-                    new EchoOffCommand().run(socket.getInputStream(), socket.getOutputStream());
-                    new LineFeedOffCommand().run(socket.getInputStream(), socket.getOutputStream());
-                    new TimeoutCommand(60).run(socket.getInputStream(), socket.getOutputStream());
-                    new SelectProtocolCommand(ObdProtocols.AUTO).run(socket.getInputStream(), socket.getOutputStream());
                     // Obtener revoluciones por minuto.
-                    RPMCommand engineRpmCommand = new RPMCommand();
                     engineRpmCommand.run(socket.getInputStream(), socket.getOutputStream());
                     // Send Message.
-                    String rpm = engineRpmCommand.getFormattedResult().replace("RPM", "");
+                    int rpm = engineRpmCommand.getRPM();
                     @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s;%s", latitude, longitude, timeStamp, placaText.getText().toString().trim(), rpm);
                     latitudeText.setText(String.format("Latitud:\t%s", latitude));
                     longitudeText.setText(String.format("Longitud:\t%s", longitude));
