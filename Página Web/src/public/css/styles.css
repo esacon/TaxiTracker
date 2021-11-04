@@ -111,7 +111,7 @@ border-color:var(--bs-light) ;
     -webkit-appearance: none;
     background-color:rgb(255, 255, 255) ;
     width: 200px;
-    height:35px;
+    height:15px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -119,7 +119,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: rgb(0, 0, 0);
     opacity: 0.5;
     width: 10px;
-    height: 15px;
+    height: 10px;
 }
 
 
