@@ -20,49 +20,52 @@
     </div>
     <div class="tab-pane fade show" role="tabpanel" id="Historicos" aria-labelledby="Historicos-tab">
         <main class="main">
-            <div class="row justify-content-center">
-                <div class="col" > <h5><p class="text-dark ">Seleccione la(s) placa(s) del vehículo(s)e intervalo de datos:</p></h5>
-                    <form method="post" class="align-self-center" action="/historicos">
-                        <div class="borde">
-                            <select class="form-select mt-2 btn btn-primary2 text-dark fw-bold" id="placa" name="placa" style="width:150px;height:35px;"/>
-                                <option value="0">AAA111</option>
-                                <option value="1">AAA222</option>
-                                <option value="2">Ambos</option>
-                            </select>
-                            <input type="text" class="btn btn-primary2 text-dark fw-bold" name="datetimes" style="width:300px;height:30px;"/>
-                            <input type="submit" class="btn btn-primary2 text-dark fw-bold" id='btn-form' style='display: none; width:300px;height: 30px;'>
-                            <script>
-                                $(function() {
-                                    $('input[name="datetimes"]').daterangepicker({
-                                        timePicker: true,
-                                        timePicker24Hour: true,
-                                        timePickerSeconds: true,
-                                        startDate: moment().startOf('hour'),
-                                        endDate: moment().startOf('hour'),
-                                        locale: {
-                                            format: 'YY-M-DD H:mm:ss'
-                                        }
+            <div class="container-fluid text-center" style= "background-color:#FAE671;">
+                <div class="row justify-content-center">
+                    <div class="col" > <h5><p class="text-dark ">Seleccione la(s) placa(s) del vehículo(s)e intervalo de datos:</p></h5>
+                        <form method="post" class="align-self-center" action="/historicos">
+                            <div class="borde">
+                                <select class="form-select mt-2 btn btn-primary2 text-dark fw-bold" id="placa" name="placa" style="width:150px;height:35px;"/>
+                                    <option value="0">AAA111</option>
+                                    <option value="1">AAA222</option>
+                                    <option value="2">Ambos</option>
+                                </select>
+                                <input type="text" class="btn btn-primary2 text-dark fw-bold" name="datetimes" style="width:300px;height:30px;"/>
+                                <input type="submit" class="btn btn-primary2 text-dark fw-bold" id='btn-form' style='display: none; width:300px;height: 30px;'>
+                                <script>
+                                    $(function() {
+                                        $('input[name="datetimes"]').daterangepicker({
+                                            timePicker: true,
+                                            timePicker24Hour: true,
+                                            timePickerSeconds: true,
+                                            startDate: moment().startOf('hour'),
+                                            endDate: moment().startOf('hour'),
+                                            locale: {
+                                                format: 'YY-M-DD H:mm:ss'
+                                            }
+                                        });
+                                        $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
+                                            //do something, like clearing an input
+                                            $('#btn-form').click();
+                                        });
                                     });
-                                    $('input[name="datetimes"]').on('apply.daterangepicker', function(ev, picker) {
-                                        //do something, like clearing an input
-                                        $('#btn-form').click();
-                                    });
-                                });
-                            </script>
-                        </div>
-                    </form>
-                </div>
-                <div class="col" > <h5><p class="text-dark ">Seleccione el punto especifico a observar:</p></h5>
-                    <div class="avanzar buttons">
-                        <div>
-                            <h5><p class="text-dark" class="text-center p-2">Taxi AAA111</p></h5>
-                            <input type="range" id="rango" min="0" value="0" step="1"> 
-                        </div><div>
-                            <h5><p class="text-dark" class="text-center p-2">Taxi AAA222</p></h5>
-                            <input type="range" id="rango2" min="0" value="0" step="1"> 
-                        </div>  
+                                </script>
+                            </div>
+                        </form>
                     </div>
-                </div> 
+                    <div class="col" > <h5><p class="text-dark ">Seleccione el punto especifico a observar:</p></h5>
+                        <div class="avanzar buttons row justify-content-center">
+                            <div class="col" >
+                                <h5><p class="text-dark" class="text-center p-2">Taxi AAA111</p></h5>
+                                <input type="range" id="rango" min="0" value="0" step="1"> 
+                            </div>
+                            <div class="col" >
+                                <h5><p class="text-dark" class="text-center p-2">Taxi AAA222</p></h5>
+                                <input type="range" id="rango2" min="0" value="0" step="1"> 
+                            </div>  
+                        </div>
+                    </div> 
+                </div>
             </div>
             <!-- Map section -->
             <section class="map">
