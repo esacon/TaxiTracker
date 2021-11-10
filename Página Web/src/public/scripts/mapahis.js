@@ -130,7 +130,11 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             index2 = $avanzar2.value;
-            let label2 = `<b>Taxi AAA222 ubicado en:</b><br/>Latitud: ${coords2[index2][0]}<br/>Longitud: ${coords2[index2][1]}<br/>Fecha: ${fechas2[index2]}<br/>Hora: ${horas2[index2]}<br/>RPM: ${rpms2[index]}`
+            document.getElementById('1latitud_text2').innerText = coords2[index2][0];
+            document.getElementById('1longitud_text2').innerText = coords2[index2][1];
+            document.getElementById('1fecha_text2').innerText = fechas2[index2];
+            document.getElementById('1hora_text2').innerText = horas2[index2];
+            document.getElementById('1RPM_text2').innerText = rpms2[index2];
             marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label2).openPopup();
         });
     });
