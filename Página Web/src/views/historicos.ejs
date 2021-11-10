@@ -25,11 +25,6 @@
                     <div class="col" > <br><h5><p class="text-dark ">Seleccione la(s) placa(s) del vehículo(s) e intervalo de datos:</p></h5>
                         <form method="post" class="align-self-center" action="/historicos">
                             <div class="borde  justify-content-center">
-                                <select class="form-select mt-2 btn btn-primary2 text-dark fw-bold" id="placa" name="placa" style="width:150px;height:31px;"/>
-                                    <option value="0">AAA111</option>
-                                    <option value="1">AAA222</option>
-                                    <option value="2">Ambos</option>
-                                </select>
                                 <input type="text" class="btn btn-primary2 text-dark fw-bold" name="datetimes" style="width:300px;height:30px;"/>
                                 <input type="submit" class="btn btn-primary2 text-dark fw-bold" id='btn-form' style='display: none; width:300px;height: 30px;'>
                                 <script>
@@ -38,8 +33,6 @@
                                             timePicker: true,
                                             timePicker24Hour: true,
                                             timePickerSeconds: true,
-                                            startDate: moment().startOf('hour'),
-                                            endDate: moment().startOf('hour'),
                                             locale: {
                                                 format: 'YY-M-DD H:mm:ss'
                                             }
@@ -63,6 +56,38 @@
                             </div>  
                         </div>
                     </br></div> 
+                </div>
+                <div class="table-responsive-xxl">
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col" ><h5><p class="Placa"><p class="text-dark">Placa:</p></p></h5></th>
+                                <th class="col" ><h5><p class="latitud"><p class="text-dark">Latitud:</p></p></h5></th>
+                                <th class="col" ><h5><p class="longitud"><p class="text-dark">Longitud:</p></p></h5></th>
+                                <th class="col" ><h5><p class="fecha"><p class="text-dark">Fecha:</p></p></h5></th>
+                                <th class="col" ><h5><p class="hora"><p class="text-dark">Hora:</p></p></h5></th>
+                                <th class="col" ><h5><p class="RPM"><p class="text-dark">RPM: </p></p></h5></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><h5>AAA111</h5></th>
+                                <td class="col" ><h5><p class="latitud"><p class="text-dark"><span id="latitud_text"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="longitud"><p class="text-dark"><span id="longitud_text"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="fecha"><p class="text-dark"><span id="fecha_text"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="hora"><p class="text-dark"> <span id="hora_text"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="RPM"><p class="text-dark"><span id="RPM_text"></span></p></p></h5></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><h5>AAA222</h5></th>
+                                <td class="col" ><h5><p class="latitud"><p class="text-dark"><span id="latitud_text2"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="longitud"><p class="text-dark"><span id="longitud_text2"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="fecha"><p class="text-dark"><span id="fecha_text2"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="hora"><p class="text-dark"> <span id="hora_text2"></span></p></p></h5></td>
+                                <td class="col" ><h5><p class="RPM"><p class="text-dark"><span id="RPM_text2"></span></p></p></h5></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- Map section -->
