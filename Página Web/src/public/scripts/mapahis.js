@@ -118,7 +118,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('1fecha_text').innerText = fechas[index];
             document.getElementById('1hora_text').innerText = horas[index];
             document.getElementById('1RPM_text').innerText = rpms[index];
-            marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi).setView([coords[index][0], coords[index][1]], 15);
+            marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi);
+            map.setView([coords[index][0], coords[index][1]], 15);
         });
 
         let $avanzar2 = document.querySelector('#rango2');    
@@ -135,7 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('1fecha_text2').innerText = fechas2[index2];
             document.getElementById('1hora_text2').innerText = horas2[index2];
             document.getElementById('1RPM_text2').innerText = rpms2[index2];
-            marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi).setView([coords2[index2][0], coords2[index2][1]], 15);;
+            marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi);
+            map.setView([coords2[index2][0], coords2[index2][1]], 15);
         });
         
 
