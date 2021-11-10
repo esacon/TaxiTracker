@@ -136,9 +136,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('1fecha_text2').innerText = fechas2[index2];
             document.getElementById('1hora_text2').innerText = horas2[index2];
             document.getElementById('1RPM_text2').innerText = rpms2[index2];
-            maphi.removeLayer(marker6);
             marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi).bindPopup(label2).openPopup();
+            maphi.removeLayer(marker6);
         });
+        
+
     });
 
     socket.on('noData', function(data){
