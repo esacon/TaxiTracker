@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.on("getConsulta", function(data){
         let placa = document.querySelector('#placa').value;
+        console.log(placa);
         let info = data.info;
         let info2 = data.info2;
 
