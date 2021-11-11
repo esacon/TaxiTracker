@@ -39,6 +39,14 @@ function validateInfo(placa) {
     if (info != null || info2 != null) {
         let data = info;
         let data2 = info2;
+        // Limitar cantidad de datos de búsqueda.
+        if (data.length > 1500) {
+            data = data[(Math.random() * 1500) | 0]
+        }
+        if (data2.length > 1500) {
+            data2 = data2[(Math.random() * 1500) | 0]
+        }
+        // Validar selección de placas.
         if (placa == 0) {
             data2 = null;
         } else if (placa == 1) {
