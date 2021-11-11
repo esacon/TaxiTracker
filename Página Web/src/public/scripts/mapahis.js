@@ -31,6 +31,20 @@ var taxiIcon = new LeafIcon({
 var placaText = document.querySelector('#placa');
 var placa = 0;
 
+function getArraySample(arr, sample_size, return_indexes = false) {
+    if(sample_size > arr.length) return false;
+    const sample_idxs = [];
+    const randomIndex = () => Math.floor(Math.random() * arr.length);
+    while(sample_size > sample_idxs.length){
+        let idx = randomIndex();
+        while(sample_idxs.includes(idx)) idx = randomIndex();
+        sample_idxs.push(idx);
+    }
+    sample_idxs.sort((a, b) => a > b ? 1 : -1);
+    if(return_indexes) return sample_idxs;
+    return sample_idxs.map(i => arr[i]);
+}
+
 placaText.addEventListener('change', () => {
     placa = placaText.value;
     validateInfo(placa);
@@ -40,6 +54,12 @@ function validateInfo(placa) {
     if (info != null || info2 != null) {
         let data = info;
         let data2 = info2;
+        if (info.length > MAX_LENGTH) {
+            data = getArraySample(info, MAX_LENGTH);
+        }
+        if (info2.length > MAX_LENGTH) {
+            data2 = getArraySample(info2, MAX_LENGTH);
+        }
         // Validar selección de placas.
         if (placa == 0) {
             data2 = null;
