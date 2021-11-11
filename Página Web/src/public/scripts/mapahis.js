@@ -248,7 +248,6 @@ function plotMapa(data, data2) {
 document.addEventListener('DOMContentLoaded', function() { 
 
     socket.on("getConsulta", function(data){
-        console.log(placa);
         info = data.info;
         info2 = data.info2;             
         validateInfo(placaText.value);    
