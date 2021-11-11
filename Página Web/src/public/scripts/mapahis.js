@@ -33,7 +33,7 @@ validateInfo(placa);
 
 placaText.addEventListener('change', () => {
     placa = placaText.value;
-    console.log(placa, 1);
+    validateInfo(placa);
 });
 
 function validateInfo(placa) {    
@@ -46,12 +46,15 @@ function validateInfo(placa) {
             data = data2;
             data = null;
         }
+        console.log(placa);
         plotMapa(data, data2);
     }
 }
 
 function plotMapa(info, info2) {
-    if (info2 === null) {                  
+    console.log('Plotting mapa');
+    if (info2 === null) {    
+        console.log('One car');              
         maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
 
         // Initialize map.
@@ -125,6 +128,7 @@ function plotMapa(info, info2) {
             maphi.setView([coords[index][0], coords[index][1]], 20);
         });
     } else {
+        console.log('Two cars');
         maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
 
         // Initialize map.
