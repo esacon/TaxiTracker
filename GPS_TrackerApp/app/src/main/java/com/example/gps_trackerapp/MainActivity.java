@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             for (BluetoothDevice device : pairedDevices) {
                 if (device.getName().equals("OBDII")) {
                     deviceAddress = device.getAddress();
-                    Toast.makeText(getApplicationContext(), "Dispositivo OBDII emparejado.", Toast.LENGTH_SHORT).show();
                 }
             }
             if (deviceAddress.isEmpty()) {
@@ -93,21 +92,24 @@ public class MainActivity extends AppCompatActivity {
     public void iniciar(View view) {
         // Initialize GPS.
         gpsTracker = new GpsTracker(MainActivity.this);
-        try {
-            // Iniciar socket de Bluetooth.
-            BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-            BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
-            socket = device.createRfcommSocketToServiceRecord(uuid);
-            socket.connect();
-            InputStream io = socket.getInputStream();
-            OutputStream ou = socket.getOutputStream();
-            // Iniciar OBDII.
-            new EchoOffCommand().run(io, ou);
-            new LineFeedOffCommand().run(io, ou);
-            new TimeoutCommand(60).run(io, ou);
-            new SelectProtocolCommand(ObdProtocols.AUTO).run(io, ou);
-        }  catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        if (!deviceAddress.equals("")) {
+            try {
+                // Iniciar socket de Bluetooth.
+                BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+                BluetoothDevice device = btAdapter.getRemoteDevice(deviceAddress);
+                socket = device.createRfcommSocketToServiceRecord(uuid);
+                socket.connect();
+                InputStream io = socket.getInputStream();
+                OutputStream ou = socket.getOutputStream();
+                Toast.makeText(getApplicationContext(), "Dispositivo OBDII emparejado.", Toast.LENGTH_SHORT).show();
+                // Iniciar OBDII.
+                new EchoOffCommand().run(io, ou);
+                new LineFeedOffCommand().run(io, ou);
+                new TimeoutCommand(125).run(io, ou);
+                new SelectProtocolCommand(ObdProtocols.AUTO).run(io, ou);
+            }  catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         // Success notification.
         Toast.makeText(getApplicationContext(), "La aplicación ha iniciado.", Toast.LENGTH_LONG).show();
@@ -150,31 +152,42 @@ public class MainActivity extends AppCompatActivity {
             // Get GPS Location.
             gpsTracker.getLocation();
 
-            if (gpsTracker.canGetLocation() && socket != null) {
+            if (gpsTracker.canGetLocation()) {
 
-                RPMCommand engineRpmCommand = new RPMCommand();
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
                 long timeStamp = gpsTracker.getTimeStamp();
 
-                try {
-                    // Obtener revoluciones por minuto.
-                    engineRpmCommand.run(socket.getInputStream(), socket.getOutputStream());
-                    // Send Message.
-                    int rpm = engineRpmCommand.getRPM();
-                    @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s;%s", latitude, longitude, timeStamp, placaText.getText().toString().trim(), rpm);
-                    latitudeText.setText(String.format("Latitud:\t%s", latitude));
-                    longitudeText.setText(String.format("Longitud:\t%s", longitude));
-                    rpmText.setText(String.format("RPM:\t%s", rpm));
-                    // Send the message.
-                    msg_udp1.execute(message);
-                    msg_udp2.execute(message);
-                    msg_udp3.execute(message);
-                    msg_udp4.execute(message);
-                    msg_udp5.execute(message);
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
+                int rpm = 0;
+
+                if (socket != null) {
+                    RPMCommand engineRpmCommand = new RPMCommand();
+                    try {
+                        // Obtener revoluciones por minuto.
+                        engineRpmCommand.run(socket.getInputStream(), socket.getOutputStream());
+                        rpm = engineRpmCommand.getRPM();
+                    } catch (IOException | InterruptedException e) {
+                        try {
+                            socket.close();
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                        e.printStackTrace();
+                    }
                 }
+
+                // Format Message.
+                @SuppressLint("DefaultLocale") String message = String.format("%s;%s;%s;%s;%s", latitude, longitude, timeStamp, placaText.getText().toString().trim(), rpm);
+                latitudeText.setText(String.format("Latitud:\t%s", latitude));
+                longitudeText.setText(String.format("Longitud:\t%s", longitude));
+                rpmText.setText(String.format("RPM:\t%s", rpm));
+                // Send the message.
+                msg_udp1.execute(message);
+                msg_udp2.execute(message);
+                msg_udp3.execute(message);
+                msg_udp4.execute(message);
+                msg_udp5.execute(message);
+
             } else {
                 gpsTracker.showSettingsAlert();
             }
