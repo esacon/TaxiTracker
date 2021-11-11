@@ -30,6 +30,7 @@ var placa;
 
 placaText.addEventListener('change', () => {
     placa = placaText.value;
+    console.log(placa, 1);
 });
 
 
