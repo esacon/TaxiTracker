@@ -51,11 +51,6 @@ function validateInfo(placa) {
 }
 
 function plotMapa(data, data2) {
-    console.log('Plotting mapa');
-    console.log('Data:');
-    console.log(data);
-    console.log('Data2:');
-    console.log(data2);
     if (data2 === null) {    
         console.log('One car');              
         maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
@@ -128,7 +123,7 @@ function plotMapa(data, data2) {
             document.getElementById('1hora_text').innerText = horas[index];
             document.getElementById('1RPM_text').innerText = rpms[index];
             marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi);
-            maphi.setView([coords[index][0], coords[index][1]], 20);
+            maphi.setView([coords[index][0], coords[index][1]]);
         });
     } else {
         console.log('Two cars');
@@ -193,7 +188,7 @@ function plotMapa(data, data2) {
             document.getElementById('1hora_text').innerText = horas[index];
             document.getElementById('1RPM_text').innerText = rpms[index];
             marker3 = L.marker([coords[index][0], coords[index][1]], {icon: taxiIcon}).addTo(maphi);
-            maphi.setView([coords[index][0], coords[index][1]], 20);
+            maphi.setView([coords[index][0], coords[index][1]]);
         });
 
         // Segundo vehículo.
@@ -242,7 +237,7 @@ function plotMapa(data, data2) {
             document.getElementById('1hora_text2').innerText = horas2[index2];
             document.getElementById('1RPM_text2').innerText = rpms2[index2];
             marker6 = L.marker([coords2[index2][0], coords2[index2][1]], {icon: taxiIcon}).addTo(maphi);
-            maphi.setView([coords2[index2][0], coords2[index2][1]],20);
+            maphi.setView([coords2[index2][0], coords2[index2][1]]);
         });
     }
 }
