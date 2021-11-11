@@ -29,7 +29,6 @@ var taxiIcon = new LeafIcon({
 
 var placaText = document.querySelector('#placa');
 var placa = 0;
-validateInfo(placa);
 
 placaText.addEventListener('change', () => {
     placa = placaText.value;
@@ -41,7 +40,7 @@ function validateInfo(placa) {
         let data = info;
         let data2 = info2;
         if (placa == 0) {
-            data = null;
+            data2 = null;
         } else if (placa == 1) {
             data = data2;
             data2 = null;
@@ -254,8 +253,8 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on("getConsulta", function(data){
         console.log(placa);
         info = data.info;
-        info2 = data.info2;              
-
+        info2 = data.info2;             
+        validateInfo(placaText.value);    
     });
 
     socket.on('noData', function(data){
