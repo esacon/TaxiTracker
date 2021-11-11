@@ -28,18 +28,22 @@ var taxiIcon = new LeafIcon({
 });
 
 var placaText = document.querySelector('#placa');
-var placa;
+var placa = 0;
 
 placaText.addEventListener('change', () => {
     placa = placaText.value;
     console.log(placa, 1);
+    if (info != undefined && info2 != undefined) {
+        console.log(placa, 2);      
+        plotMapa();
+    }
 });
 
-if (info != null && info2 != null) {
 
-    console.log(placa, 2);
-    
-    maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
+
+
+function plotMapa() {
+        maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
 
     // Initialize map.
     const inicio = [parseFloat(info[0].Latitud), parseFloat(info[0].Longitud)];
@@ -152,7 +156,6 @@ if (info != null && info2 != null) {
         maphi.setView([coords2[index2][0], coords2[index2][1]],20);
     });
 }
-
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
