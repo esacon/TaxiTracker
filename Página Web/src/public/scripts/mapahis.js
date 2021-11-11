@@ -44,7 +44,7 @@ function validateInfo(placa) {
             data = null;
         } else if (placa == 1) {
             data = data2;
-            data = null;
+            data2 = null;
         }
         console.log(placa);
         plotMapa(data, data2);
