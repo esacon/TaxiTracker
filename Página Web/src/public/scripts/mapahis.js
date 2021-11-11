@@ -25,11 +25,18 @@ var taxiIcon = new LeafIcon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
 });
 
+var placaText = document.querySelector('#placa');
+var placa;
+
+placaText.addEventListener('change', () => {
+    placa = placaText.value;
+});
+
+
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
 
     socket.on("getConsulta", function(data){
-        let placa = document.querySelector('#placa').value;
         console.log(placa);
         let info = data.info;
         let info2 = data.info2;
