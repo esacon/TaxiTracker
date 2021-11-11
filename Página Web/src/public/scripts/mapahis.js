@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         validateInfo(placaText.value);    
     });
 
-    socket.on('noData', function(data){
+    socket.on('noData', function(){
         maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
         polyline.removeFrom(maphi);
         maphi.removeLayer(marker1);
