@@ -1,62 +1,4 @@
-
-var socket = io();
-var marker1;
-var marker2;
-var marker3;
-var marker4;
-var marker5;
-var marker6;
-let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
-let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-var popup = L.popup();
-var popup2 = L.popup();
-var index = 0;
-var index2 = 0;
-var info = null;
-var info2 = null;
-
-var LeafIcon = L.Icon.extend({
-    options: {
-       iconSize:     [20, 25],
-       shadowSize:   [20, 14]
-    }
-});
-
-var taxiIcon = new LeafIcon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
-});
-
-var placaText = document.querySelector('#placa');
-var placa = 0;
-validateInfo(placa);
-
-placaText.addEventListener('change', () => {
-    placa = placaText.value;
-    validateInfo(placa);
-});
-
-function validateInfo(placa) {    
-    if (info != null || info2 != null) {
-        let data = info;
-        let data2 = info2;
-        if (placa == 0) {
-            data = null;
-        } else if (placa == 1) {
-            data = data2;
-            data = null;
-        }
-        console.log(placa);
-        plotMapa(data, data2);
-    }
-}
-
-function plotMapa(data, data2) {
     console.log('Plotting mapa');
-    console.log('Data:');
-    console.log(data);
-    console.log('Data2:');
-    console.log(data2);
     if (data2 === null) {    
         console.log('One car');              
         maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
@@ -246,26 +188,3 @@ function plotMapa(data, data2) {
             maphi.setView([coords2[index2][0], coords2[index2][1]],20);
         });
     }
-}
-
-// Update HTML content
-document.addEventListener('DOMContentLoaded', function() { 
-
-    socket.on("getConsulta", function(data){
-        console.log(placa);
-        info = data.info;
-        info2 = data.info2;              
-
-    });
-
-    socket.on('noData', function(data){
-        maphi.removeLayer([marker1, marker2, marker3, marker4, marker5, marker6, polyline, polyline2]);
-        polyline.removeFrom(maphi);
-        maphi.removeLayer(marker1);
-        maphi.removeLayer(marker2);
-        polyline2.removeFrom(maphi);
-        maphi.removeLayer(marker4);
-        maphi.removeLayer(marker5);
-        alert("La búsqueda no arrojó ningún resultado, intente nuevamente.");
-    });
-}); 
