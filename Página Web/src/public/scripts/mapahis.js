@@ -31,6 +31,7 @@ var taxiIcon = new LeafIcon({
 var placaText = document.querySelector('#placa');
 var placa = 0;
 
+// Ref: https://stackoverflow.com/questions/11935175/sampling-a-random-subset-from-an-array
 function getArraySample(arr, sample_size, return_indexes = false) {
     if(sample_size > arr.length) return false;
     const sample_idxs = [];
