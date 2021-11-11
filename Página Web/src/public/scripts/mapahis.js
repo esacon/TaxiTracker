@@ -15,6 +15,7 @@ var index = 0;
 var index2 = 0;
 var info = null;
 var info2 = null;
+const MAX_LENGTH = 1000;
 
 var LeafIcon = L.Icon.extend({
     options: {
@@ -40,11 +41,11 @@ function validateInfo(placa) {
         let data = info;
         let data2 = info2;
         // Limitar cantidad de datos de búsqueda.
-        if (data.length > 1500) {
-            data = data[(Math.random() * 1500) | 0]
+        if (info.length > MAX_LENGTH) {
+            data = info[(Math.random() * MAX_LENGTH) | 0]
         }
-        if (data2.length > 1500) {
-            data2 = data2[(Math.random() * 1500) | 0]
+        if (info2.length > MAX_LENGTH) {
+            data2 = info2[(Math.random() * MAX_LENGTH) | 0]
         }
         // Validar selección de placas.
         if (placa == 0) {
