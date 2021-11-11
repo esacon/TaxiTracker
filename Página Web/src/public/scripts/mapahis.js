@@ -29,20 +29,26 @@ var taxiIcon = new LeafIcon({
 
 var placaText = document.querySelector('#placa');
 var placa = 0;
+validateInfo(placa);
 
 placaText.addEventListener('change', () => {
     placa = placaText.value;
     console.log(placa, 1);
-    if (info != null || info2 != null) {
-        if (placa == 0) {
-            info2 = null;
-        } else if (placa == 1) {
-            info = info2;
-            info2 = null;
-        }
-        plotMapa(info, info2);
-    }
 });
+
+function validateInfo(placa) {    
+    if (info != null || info2 != null) {
+        let data = info;
+        let data2 = info2;
+        if (placa == 0) {
+            data = null;
+        } else if (placa == 1) {
+            data = data2;
+            data = null;
+        }
+        plotMapa(data, data2);
+    }
+}
 
 function plotMapa(info, info2) {
     if (info2 === null) {                  
