@@ -25,7 +25,7 @@ var Leaf1Icon = L.Icon.extend({
 });
 var LeafIcon = L.Icon.extend({
     options: {
-       iconSize:     [40, 45],
+        shadowSize:   [60, 54]
     }
 });
 var taxiIcon = new Leaf1Icon({
