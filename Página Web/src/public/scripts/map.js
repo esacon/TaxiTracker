@@ -10,14 +10,7 @@ let p1 = false;
 let p2 = false;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-polyline.setStyle({
-    color: '#41b611'
-  });
 let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(map);
-polyline2.setStyle({
-    color: '#ff0000'
-  });
-
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -97,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crea marker
                 marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
-                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
                 // Si placa = AAA222 y existe marker, elimina marker.
                 if (marker != undefined) {
@@ -126,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crea marker2
                 marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 2").openPopup(); 
-                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
             } else {
                 // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
@@ -143,10 +134,10 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
         } else if (p2 && !p1) {
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
             polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
@@ -155,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
         } else {
             polyline.removeFrom(map);
