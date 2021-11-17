@@ -27,6 +27,19 @@ var LeafIcon = L.Icon.extend({
 var taxiIcon = new LeafIcon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
 });
+var taxi1inicio = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FY6wroQqwmoQazEq-aj0EQ7jRCj24JxI/view?usp=sharing'
+});
+var taxi1fin = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FQoNDxtxj3puv7qoijhHnPOGpbCz0MJz/view?usp=sharing'
+});
+var taxi2inicio = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FNcl3PQt_V-hH1rD79YmAMumd9MkeNSN/view?usp=sharing'
+});
+var taxi2fin = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FKTbm5bdTr8DoVwihAknmj0pPdOPH8Aj/view?usp=sharing'
+});
+
 
 var placaText = document.querySelector('#placa');
 var placa = 0;
@@ -227,7 +240,7 @@ function plotMapa(data, data2) {
             maphi.removeLayer(marker6);
         };
 
-        marker4 = L.marker(inicio2).addTo(maphi).bindPopup("<b>Punto de inicio AAA222</b>").openPopup();             
+        marker4 = L.marker(inicio2, {icon: taxi2inicio}).addTo(maphi);             
         marker5 = L.marker(fin2).addTo(maphi).bindPopup("<b>Punto de fin AAA222</b>").openPopup();
         polyline2.removeFrom(maphi);
         polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
