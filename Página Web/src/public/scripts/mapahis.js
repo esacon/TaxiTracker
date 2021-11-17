@@ -17,14 +17,19 @@ var info = null;
 var info2 = null;
 const MAX_LENGTH = 1000;
 
-var LeafIcon = L.Icon.extend({
+var Leaf1Icon = L.Icon.extend({
     options: {
        iconSize:     [20, 25],
        shadowSize:   [20, 14]
     }
 });
-
-var taxiIcon = new LeafIcon({
+var LeafIcon = L.Icon.extend({
+    options: {
+       iconSize:     [60, 65],
+       shadowSize:   [60, 64]
+    }
+});
+var taxiIcon = new Leaf1Icon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
 });
 var taxi1inicio = new LeafIcon({
