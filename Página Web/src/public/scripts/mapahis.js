@@ -12,9 +12,7 @@ polyline.setStyle({
     color: '#41b611'
   });
 let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(maphi);
-polyline2.setStyle({
-    color: '#ff0000'
-  });
+
 var popup = L.popup();
 var popup2 = L.popup();
 var index = 0;
@@ -144,7 +142,7 @@ function plotMapa(data, data2) {
         };
 
         polyline2.removeFrom(maphi);
-        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+        polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(maphi);
         marker1 = L.marker(inicio,{icon:taxiinicio}).addTo(maphi);             
         marker2 = L.marker(fin,{icon:taxifin}).addTo(maphi);
         polyline.removeFrom(maphi);
@@ -260,7 +258,7 @@ function plotMapa(data, data2) {
         marker4 = L.marker(inicio2, {icon:taxi2inicio}).addTo(maphi);             
         marker5 = L.marker(fin2, {icon:taxi2fin}).addTo(maphi);
         polyline2.removeFrom(maphi);
-        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+        polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(maphi);
 
         let fechas2 = [];
         let horas2 = [];
