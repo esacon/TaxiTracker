@@ -240,7 +240,7 @@ function plotMapa(data, data2) {
             maphi.removeLayer(marker6);
         };
 
-        marker4 = L.marker(inicio2, {icon:taxiIcon}).addTo(maphi);             
+        marker4 = L.marker(inicio2, {icon:taxi2inicio}).addTo(maphi);             
         marker5 = L.marker(fin2).addTo(maphi).bindPopup("<b>Punto de fin AAA222</b>").openPopup();
         polyline2.removeFrom(maphi);
         polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
