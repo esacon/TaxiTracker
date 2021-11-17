@@ -10,7 +10,13 @@ let p1 = false;
 let p2 = false;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+polyline.setStyle({
+    color: '#41b611'
+  });
 let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(map);
+polyline2.setStyle({
+    color: '#ff0000'
+  });
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() {
