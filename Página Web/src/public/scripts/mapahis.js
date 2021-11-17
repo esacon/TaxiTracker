@@ -24,6 +24,18 @@ var LeafIcon = L.Icon.extend({
 var taxiIcon = new LeafIcon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
 });
+var taxi1inicio = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FY6wroQqwmoQazEq-aj0EQ7jRCj24JxI/view?usp=sharing'
+});
+var taxi1fin = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FQoNDxtxj3puv7qoijhHnPOGpbCz0MJz/view?usp=sharing'
+});
+var taxi2inicio = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FNcl3PQt_V-hH1rD79YmAMumd9MkeNSN/view?usp=sharing'
+});
+var taxi2fin = new LeafIcon({
+    iconUrl: 'https://drive.google.com/file/d/1FKTbm5bdTr8DoVwihAknmj0pPdOPH8Aj/view?usp=sharing'
+});
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() { 
@@ -143,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 maphi.removeLayer(marker6);
             };
 
-            marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio AAA111</b>").openPopup();             
+            marker1 = L.marker(inicio, {icon: taxi1inicio}).addTo(maphi);             
             marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin AAA111</b>").openPopup();
             marker4 = L.marker(inicio2).addTo(maphi).bindPopup("<b>Punto de inicio AAA222</b>").openPopup();             
             marker5 = L.marker(fin2).addTo(maphi).bindPopup("<b>Punto de fin AAA222</b>").openPopup();
