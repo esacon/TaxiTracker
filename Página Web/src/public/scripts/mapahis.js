@@ -8,7 +8,7 @@ var marker5;
 var marker6;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(maphi);
 var popup = L.popup();
 var popup2 = L.popup();
 var index = 0;

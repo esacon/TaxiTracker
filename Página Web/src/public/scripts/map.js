@@ -10,7 +10,7 @@ let p1 = false;
 let p2 = false;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(map);
 
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() {
