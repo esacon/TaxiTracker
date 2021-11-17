@@ -26,7 +26,7 @@ var Leaf1Icon = L.Icon.extend({
 });
 var LeafIcon = L.Icon.extend({
     options: {
-        iconSize:     [80, 85],
+        iconSize:     [70, 75],
         shadowSize:   [10, 14]
     }
 });
