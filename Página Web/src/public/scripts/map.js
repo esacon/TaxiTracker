@@ -13,7 +13,7 @@ let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
 let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(map);
 var LeafIcon = L.Icon.extend({
     options: {
-        iconSize:     [70, 75],
+        iconSize:     [40, 45],
         shadowSize:   [10, 14]
     }
 });
