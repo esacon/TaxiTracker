@@ -8,7 +8,8 @@ var marker5;
 var marker6;
 let maphi= L.map('maphi').setView([10.97, -74.65], 15);      
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(maphi);
+
 var popup = L.popup();
 var popup2 = L.popup();
 var index = 0;
@@ -17,16 +18,40 @@ var info = null;
 var info2 = null;
 const MAX_LENGTH = 1000;
 
-var LeafIcon = L.Icon.extend({
+var Leaf1Icon = L.Icon.extend({
     options: {
        iconSize:     [20, 25],
        shadowSize:   [20, 14]
     }
 });
-
-var taxiIcon = new LeafIcon({
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [40, 45],
+        shadowSize:   [10, 14]
+    }
+});
+var taxiIcon = new Leaf1Icon({
     iconUrl: 'https://cdn-icons-png.flaticon.com/512/75/75780.png'
 });
+var taxi1inicio = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/inicioa1.png?raw=true'
+});
+var taxi1fin = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/fina1.png?raw=true'
+});
+var taxi2inicio = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/inicioa2.png?raw=true'
+});
+var taxi2fin = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/fina2.png?raw=true'
+});
+var taxiinicio = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/inicio.png?raw=true'
+});
+var taxifin = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/fin.png?raw=true'
+});
+
 
 var placaText = document.querySelector('#placa');
 var placa = 0;
@@ -115,9 +140,9 @@ function plotMapa(data, data2) {
         };
 
         polyline2.removeFrom(maphi);
-        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
-        marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio</b>").openPopup();             
-        marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin</b>").openPopup();
+        polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(maphi);
+        marker1 = L.marker(inicio,{icon:taxiinicio}).addTo(maphi);             
+        marker2 = L.marker(fin,{icon:taxifin}).addTo(maphi);
         polyline.removeFrom(maphi);
         polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 
@@ -179,8 +204,8 @@ function plotMapa(data, data2) {
             maphi.removeLayer(marker3);
         };
 
-        marker1 = L.marker(inicio).addTo(maphi).bindPopup("<b>Punto de inicio AAA111</b>").openPopup();             
-        marker2 = L.marker(fin).addTo(maphi).bindPopup("<b>Punto de fin AAA111</b>").openPopup();
+        marker1 = L.marker(inicio,{icon:taxi1inicio}).addTo(maphi);             
+        marker2 = L.marker(fin,{icon:taxi1fin}).addTo(maphi);
         polyline.removeFrom(maphi);
         polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
 
@@ -228,10 +253,10 @@ function plotMapa(data, data2) {
             maphi.removeLayer(marker6);
         };
 
-        marker4 = L.marker(inicio2).addTo(maphi).bindPopup("<b>Punto de inicio AAA222</b>").openPopup();             
-        marker5 = L.marker(fin2).addTo(maphi).bindPopup("<b>Punto de fin AAA222</b>").openPopup();
+        marker4 = L.marker(inicio2, {icon:taxi2inicio}).addTo(maphi);             
+        marker5 = L.marker(fin2, {icon:taxi2fin}).addTo(maphi);
         polyline2.removeFrom(maphi);
-        polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(maphi);
+        polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(maphi);
 
         let fechas2 = [];
         let horas2 = [];

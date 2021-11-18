@@ -10,8 +10,19 @@ let p1 = false;
 let p2 = false;
 let map = L.map('mapid');            
 let polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-let polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
-
+let polyline2 = L.polyline([], {color: '#ff0000 ', smoothFactor:3}).addTo(map);
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [40, 45],
+        shadowSize:   [10, 14]
+    }
+});
+var taxi1Icon = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/a1.png?raw=true'
+});
+var taxi2Icon = new LeafIcon({
+    iconUrl: 'https://github.com/esacon/TaxiTracker/blob/marca/P%C3%A1gina%20Web/src/public/a2.png?raw=true'
+});
 // Update HTML content
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -29,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('RPM_text').innerText = info.rpm;
 
         // Load Map
-        map.setView([parseFloat(info.latitud), parseFloat(info.longitud)], 18); 
         L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=mAWo6ZVOwQECEfInDbLo', {
                 attribution:'<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
                 maxZoom: 20,
@@ -90,8 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };                
                 
                 // Crea marker
-                marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 1").openPopup(); 
-                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                marker = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)],{icon:taxi1Icon}).addTo(map); 
             } else {
                 // Si placa = AAA222 y existe marker, elimina marker.
                 if (marker != undefined) {
@@ -119,8 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };                
                 
                 // Crea marker2
-                marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]).addTo(map).bindPopup("Taxi 2").openPopup(); 
-                map.setView([parseFloat(info.latitud_text), parseFloat(info.longitud_text)]);
+                marker2 = L.marker([parseFloat(info.latitud_text), parseFloat(info.longitud_text)],{icon:taxi2Icon}).addTo(map); 
             } else {
                 // Si placa = AAA111 y existe marker2, elimina marker.
                 if (marker2 != undefined) {
@@ -137,10 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
         } else if (p2 && !p1) {
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
             polyline.removeFrom(map);
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
@@ -149,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             polyline = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
             polyline.setLatLngs(coord_taxi1);
             polyline2.removeFrom(map);
-            polyline2 = L.polyline([], {color: '#41b611', smoothFactor:3}).addTo(map);
+            polyline2 = L.polyline([], {color: '#ff0000', smoothFactor:3}).addTo(map);
             polyline2.setLatLngs(coord_taxi2);
         } else {
             polyline.removeFrom(map);
